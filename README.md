@@ -17,7 +17,7 @@ I'll try to add standards modules for fields, tables, buttons and every needed t
 
 Three parts :
 * io-lbapp : loopback application, server side
-* io-ngapp : front end application, building in static pages of loopback
+* io-ngapp : front end application, building in static pages of loopback based on Angular 5 & bootstrap 4 & font-awesome 4
 * io-ngapp/src/app/shared/io-nglib : modules, services, components usefull and reusable for IO Systems Angular applications => this should be object for a different repository.
 
 ## Contributors

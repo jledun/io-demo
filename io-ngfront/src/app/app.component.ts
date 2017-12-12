@@ -19,7 +19,6 @@ export class AppComponent {
   ) {
     LoopBackConfig.setBaseURL( environment.lbApp.ip );
     LoopBackConfig.setApiVersion( environment.lbApp.api );
-    console.log( environment );
   }
 
 }
