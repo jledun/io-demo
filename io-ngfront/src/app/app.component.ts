@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IoRunTimeDatasService } from '../../../io-nglib/src/app';
+import { IoRunTimeDatasService } from './shared/io-nglib';
 import { LoopBackConfig, LoopBackAuth } from './shared/sdk';
 import { User } from './shared/sdk/models/User';
 import { UserApi } from './shared/sdk/services/custom/User';

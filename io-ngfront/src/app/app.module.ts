@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { IoRunTimeDatasService } from '../../../io-nglib/src/app';
+import { IoRunTimeDatasService } from './shared/io-nglib';
 import { SDKBrowserModule } from './shared/sdk/index';
 
 
