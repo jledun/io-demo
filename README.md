@@ -20,6 +20,27 @@ Three parts :
 * io-ngapp : front end application, building in static pages of loopback based on Angular 5 & bootstrap 4 & font-awesome 4
 * io-ngapp/src/app/shared/io-nglib : modules, services, components usefull and reusable for IO Systems Angular applications => this should be object for a different repository.
 
+## Loopback models
+
+Defaults included models :
+* comment.json : all usefull comments for users, built by users themselves. There's no physical models in datasources, comments objects are embedded in all others models
+* users : loopback default authentication engine
+* event.json : description of an generic event. Each event refers to an event type and a topic
+* event-type.json : descriptions of the event types
+* topic.json : descriptions of the topics, each topic can have a parent topic
+* uom.json : units for your application
+* uom-categ.json : category of units (length, weight, ...)
+
+## Loopback install scripts
+
+in io-lbapp/server/scripts/ are a few install script to define a datasource then auto migrate all the models into this datasource.
+
+You can also add default values for models (uom-categ, for example).
+
+## TODO
+
+Add default application view and client authentication management (user creation, user connection, user management).
+
 ## Contributors
 
 * Julien Ledun <j.ledun@iosystems.fr>

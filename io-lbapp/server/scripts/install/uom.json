@@ -1,0 +1,86 @@
+[
+  {
+    "name": "UN",
+    "uomType": "reference",
+    "rounding": 0.01,
+    "factor": 1,
+    "offset": 0,
+    "uomCategsId": 1,
+    "comment": {
+      "title": "Unité",
+      "content": "Unité(s)"
+    }
+  },
+  {
+    "name": "m",
+    "uomType": "reference",
+    "rounding": 0.01,
+    "factor": 1,
+    "offset": 0,
+    "uomCategsId": 2,
+    "comment": {
+      "title": "Unité",
+      "content": "Mètre(s)"
+    }
+  },
+  {
+    "name": "mm",
+    "uomType": "smaller",
+    "rounding": 0.01,
+    "factor": 1000,
+    "offset": 0,
+    "uomCategsId": 2,
+    "comment": {
+      "title": "Unité",
+      "content": "Millimètre(s)"
+    }
+  },
+  {
+    "name": "h",
+    "uomType": "reference",
+    "rounding": 0.1,
+    "factor": 1,
+    "offset": 0,
+    "uomCategsId": 8,
+    "comment": {
+      "title": "Unité",
+      "content": "Heure(s)"
+    }
+  },
+  {
+    "name": "j",
+    "uomType": "bigger",
+    "rounding": 0.01,
+    "factor": 7,
+    "offset": 0,
+    "uomCategsId": 8,
+    "comment": {
+      "title": "Unité",
+      "content": "Jour(s)"
+    }
+  },
+  {
+    "name": "g",
+    "uomType": "reference",
+    "rounding": 0.1,
+    "factor": 1,
+    "offset": 0,
+    "uomCategsId": 6,
+    "comment": {
+      "title": "Unité",
+      "content": "Gramme(s)"
+    }
+  },
+  {
+    "name": "kg",
+    "uomType": "bigger",
+    "rounding": 0.1,
+    "factor": 1000,
+    "offset": 0,
+    "uomCategsId": 6,
+    "comment": {
+      "title": "Unité",
+      "content": "Kilogramme(s)"
+    }
+  }
+]

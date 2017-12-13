@@ -1,0 +1,76 @@
+{
+  "name": "Event",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": false
+  },
+  "mixins": {
+    "TimeStamp": true,
+    "Uid": true
+  },
+  "scope": {
+    "order": "name",
+    "where": {
+      "active": true
+    }
+  },
+  "properties": {
+    "content": {
+      "type": "string",
+      "required": true
+    },
+    "timestamp": {
+      "type": "date",
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "comments": {
+      "type": "embedsOne",
+      "model": "Comment",
+      "property": "comment",
+      "options": {
+        "validate": true,
+        "forceId": true
+      }
+    },
+    "eventTypes": {
+      "type": "belongsTo",
+      "model": "EventType",
+      "foreignKey": ""
+    },
+    "topic": {
+      "type": "belongsTo",
+      "model": "Topic",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

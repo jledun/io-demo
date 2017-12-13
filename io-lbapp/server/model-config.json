@@ -9,6 +9,7 @@
     "mixins": [
       "loopback/common/mixins",
       "loopback/server/mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
       "../common/mixins",
       "./mixins"
     ]
@@ -34,5 +35,29 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Uom": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UomCateg": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Comment": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Event": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Topic": {
+    "dataSource": "db",
+    "public": true
+  },
+  "EventType": {
+    "dataSource": "db",
+    "public": true
   }
 }

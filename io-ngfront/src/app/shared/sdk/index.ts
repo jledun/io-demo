@@ -46,6 +46,12 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
 import { UserApi } from './services/custom/User';
+import { UomApi } from './services/custom/Uom';
+import { UomCategApi } from './services/custom/UomCateg';
+import { CommentApi } from './services/custom/Comment';
+import { EventApi } from './services/custom/Event';
+import { TopicApi } from './services/custom/Topic';
+import { EventTypeApi } from './services/custom/EventType';
 /**
 * @module SDKBrowserModule
 * @description
@@ -76,6 +82,12 @@ export class SDKBrowserModule {
         JSONSearchParams,
         SDKModels,
         UserApi,
+        UomApi,
+        UomCategApi,
+        CommentApi,
+        EventApi,
+        TopicApi,
+        EventTypeApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

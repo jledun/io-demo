@@ -1,0 +1,13 @@
+/* 
+ *
+ * INSTALLATION SCRIPT FOR MARIADB
+ *
+ */
+
+/* PLEASE UPDATE USERNAME AND PASSWORD */
+CREATE USER 'db_username'@'localhost' IDENTIFIED BY 'db_password';
+/* PLEASE REPLACE DATABASE NAME */
+CREATE DATABASE IF NOT EXISTS `db_database` CHARACTER SET = 'utf8';
+GRANT ALL PRIVILEGES ON `db_database`.* TO 'db_username'@'localhost';
+
+FLUSH PRIVILEGES;

@@ -1,0 +1,71 @@
+{
+  "name": "Topic",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": false
+  },
+  "mixins": {
+    "TimeStamp": true,
+    "Uid": true
+  },
+  "scope": {
+    "order": "name",
+    "where": {
+      "active": true
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "tag": {
+      "type": "string",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "comments": {
+      "type": "embedsOne",
+      "model": "Comment",
+      "property": "comment",
+      "options": {
+        "validate": true,
+        "forceId": true
+      }
+    },
+    "parent": {
+      "type": "belongsTo",
+      "model": "Topic",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

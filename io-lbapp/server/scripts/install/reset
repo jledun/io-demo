@@ -1,0 +1,6 @@
+#!/bin/bash
+cp server/datasources.json.bak server/datasources.json
+cp server/model-config.json.bak server/model-config.json
+# cp common/models/uom.json.bak common/models/uom.json
+# cp common/models/uom-categ.json.bak common/models/uom-categ.json
+mysql -u root -p < server/scripts/install/reset.sql

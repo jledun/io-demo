@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "Welcome to io-engine install script !"
+
+# DATABASE SETTINGS
+echo "At first, we set the database settings."
+username='iotest'
+read -e -p "Enter db username [$username]: " readusername
+if [[ ! -z "$readusername" ]]; then
+  username=$readusername
+fi
+password=$username
+read -e -s -p "Enter password [$password]: " readpassword
+if [[ ! -z "$readpassword" ]]; then
+  password=$readpassword
+fi
+echo
+database=$username
+read -e -p "Enter database name [$database]: " readdatabase
+if [[ ! -z "$readdatabase" ]]; then
+  database=$readdatabase
+fi
+host='localhost';
+read -e -p "Enter database url [$host]: " readhost
+if [[ ! -z "$readhost" ]]; then
+  host=$readhost
+fi
+port=3306
+read -e -p "Enter database port number [$port]: " readport
+if [[ ! -z "$readhost" ]]; then
+  port=$readport
+fi
+
+echo "mariadb installation with root privileges"
+sed -e "s/db_username/$username/g" -e "s/db_password/$password/g" -e "s/db_database/$database/g" < ./server/scripts/install/mariadb.sql | mysql -u root -p
+
+echo "mysql connector installation"
+# npm install loopback-connector-mysql --save
+
+echo "loopback datasource creation"
+node ./server/scripts/install/mariadb.js -u $username -P $password -d $database -h $host -p $port
+
+exit 0

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "message",
+    "comment": {
+      "title": "Type d'événement",
+      "content": "Simple message"
+    }
+  },
+  {
+    "name": "warning",
+    "comment": {
+      "title": "Type d'événement",
+      "content": "Avertissement"
+    }
+  },
+  {
+    "name": "danger",
+    "comment": {
+      "title": "Type d'événement",
+      "content": "Alarme"
+    }
+  },
+  {
+    "name": "fault",
+    "comment": {
+      "title": "Type d'événement",
+      "content": "Défaut"
+    }
+  },
+  {
+    "name": "log",
+    "comment": {
+      "title": "Type d'événement",
+      "content": "informations de log"
+    }
+  }
+]

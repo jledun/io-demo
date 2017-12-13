@@ -1,0 +1,84 @@
+{
+  "name": "Uom",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": false
+  },
+  "mixins": {
+    "TimeStamp": true,
+    "Uid": true
+  },
+  "scope": {
+    "order": "name",
+    "where": {
+      "active": true
+    }
+  },
+  "properties": {
+    "uomType": {
+      "type": "string",
+      "required": true,
+      "default": "reference"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "rounding": {
+      "type": "number",
+      "default": 0.01
+    },
+    "factor": {
+      "type": "number",
+      "default": 1
+    },
+    "offset": {
+      "type": "number",
+      "default": 0
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "uomCategs": {
+      "type": "belongsTo",
+      "model": "UomCateg",
+      "foreignKey": "",
+      "required": true
+    },
+    "comments": {
+      "type": "embedsOne",
+      "model": "Comment",
+      "property": "comment",
+      "options": {
+        "validate": true,
+        "forceId": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

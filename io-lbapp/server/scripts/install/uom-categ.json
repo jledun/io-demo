@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Unité",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Unité"
+    }
+  },
+  {
+    "name": "Longueur",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Longueur"
+    }
+  },
+  {
+    "name": "Surface",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Surface"
+    }
+  },
+  {
+    "name": "Volume",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Volume"
+    }
+  },
+  {
+    "name": "Densité",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Densité"
+    }
+  },
+  {
+    "name": "Poids",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Poids"
+    }
+  },
+  {
+    "name": "Température",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Température"
+    }
+  },
+  {
+    "name": "Temps",
+    "comment": {
+      "titre": "Catégorie d'unité",
+      "content": "Temps"
+    }
+  }
+]
