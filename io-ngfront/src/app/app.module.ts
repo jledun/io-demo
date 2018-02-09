@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { IoRunTimeDatasService } from './shared/io-nglib';
 import { SDKBrowserModule } from './shared/sdk/index';
 
+// Import the Animations module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
@@ -13,7 +15,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    SDKBrowserModule.forRoot()
+    SDKBrowserModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [ IoRunTimeDatasService ],
   bootstrap: [AppComponent]
