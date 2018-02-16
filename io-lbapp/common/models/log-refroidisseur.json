@@ -5,10 +5,6 @@
   "options": {
     "validateUpsert": true
   },
-  "mysql": {
-    "schema": "PREMIX",
-    "table": "LOG_REFROIDISSEUR"
-  },
   "properties": {
     "changementTremie": {
       "type": "boolean",
@@ -16,14 +12,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "CHANGEMENT_TREMIE",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "N"
-      },
       "_selectable": false
     },
     "froidOn": {
@@ -32,14 +20,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "FROID_ON",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "id": {
@@ -49,14 +29,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "ID",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "N"
-      },
       "_selectable": false
     },
     "maisOn": {
@@ -65,14 +37,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "MAIS_ON",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "manqueMais": {
@@ -81,14 +45,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "MANQUE_MAIS",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "N"
-      },
       "_selectable": false
     },
     "noMvt": {
@@ -97,14 +53,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "NO_MVT",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "N"
-      },
       "_selectable": false
     },
     "reference": {
@@ -113,14 +61,6 @@
       "length": 3,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "REFERENCE",
-        "dataType": "varchar",
-        "dataLength": 3,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "refroidisseurVide": {
@@ -129,14 +69,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "REFROIDISSEUR_VIDE",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "N"
-      },
       "_selectable": false
     },
     "t1": {
@@ -145,14 +77,6 @@
       "length": null,
       "precision": 12,
       "scale": null,
-      "mysql": {
-        "columnName": "T1",
-        "dataType": "float",
-        "dataLength": null,
-        "dataPrecision": 12,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "t2": {
@@ -161,14 +85,6 @@
       "length": null,
       "precision": 12,
       "scale": null,
-      "mysql": {
-        "columnName": "T2",
-        "dataType": "float",
-        "dataLength": null,
-        "dataPrecision": 12,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "t3": {
@@ -177,14 +93,6 @@
       "length": null,
       "precision": 12,
       "scale": null,
-      "mysql": {
-        "columnName": "T3",
-        "dataType": "float",
-        "dataLength": null,
-        "dataPrecision": 12,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "timestamp": {
@@ -193,14 +101,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "TIMESTAMP",
-        "dataType": "timestamp",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      },
       "_selectable": false
     },
     "vidangeOn": {
@@ -209,14 +109,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "VIDANGE_ON",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "N"
-      },
       "_selectable": false
     },
     "attenteCompresseur": {
@@ -225,14 +117,6 @@
       "length": null,
       "precision": 3,
       "scale": 0,
-      "mysql": {
-        "columnName": "ATTENTE_COMPRESSEUR",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "N"
-      },
       "_selectable": false
     }
   },

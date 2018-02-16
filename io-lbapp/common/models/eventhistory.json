@@ -5,10 +5,6 @@
   "options": {
     "validateUpsert": true
   },
-  "mysql": {
-    "schema": "PREMIX",
-    "table": "EVENTHISTORY"
-  },
   "properties": {
     "evType": {
       "type": "Number",
@@ -16,14 +12,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Ev_Type",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evTime": {
@@ -32,14 +20,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Time",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evTimeMs": {
@@ -48,14 +28,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Ev_Time_ms",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evInfo": {
@@ -64,14 +36,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Info",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evUser": {
@@ -80,14 +44,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_User",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evUserFull": {
@@ -96,14 +52,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_User_Full",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evMessage": {
@@ -112,14 +60,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Message",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evValue": {
@@ -128,14 +68,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Value",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evPrevValue": {
@@ -144,14 +76,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Prev_Value",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evStation": {
@@ -160,14 +84,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Station",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evSource": {
@@ -176,14 +92,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Source",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evDeleted": {
@@ -192,14 +100,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Ev_Deleted",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "lastUpdate": {
@@ -208,14 +108,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Last_Update",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "lastUpdateMs": {
@@ -224,14 +116,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Last_Update_ms",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "bias": {
@@ -240,14 +124,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Bias",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "evComment": {
@@ -256,14 +132,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Ev_Comment",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     }
   },

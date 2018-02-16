@@ -5,10 +5,6 @@
   "options": {
     "validateUpsert": true
   },
-  "mysql": {
-    "schema": "PREMIX",
-    "table": "ALARMHISTORY"
-  },
   "properties": {
     "alStartTime": {
       "type": "Date",
@@ -16,14 +12,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Start_Time",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alStartTimeMs": {
@@ -32,14 +20,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Start_Time_ms",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alTag": {
@@ -48,14 +28,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Tag",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alMessage": {
@@ -64,14 +36,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Message",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alAck": {
@@ -80,14 +44,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Ack",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alActive": {
@@ -96,14 +52,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Active",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alTagValue": {
@@ -112,14 +60,6 @@
       "length": null,
       "precision": 22,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Tag_Value",
-        "dataType": "double",
-        "dataLength": null,
-        "dataPrecision": 22,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alPrevTagValue": {
@@ -128,14 +68,6 @@
       "length": null,
       "precision": 22,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Prev_Tag_Value",
-        "dataType": "double",
-        "dataLength": null,
-        "dataPrecision": 22,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alGroup": {
@@ -144,14 +76,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Group",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alPriority": {
@@ -160,14 +84,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Priority",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alSelection": {
@@ -176,14 +92,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Selection",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alType": {
@@ -192,14 +100,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Type",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alAckReq": {
@@ -208,14 +108,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Ack_Req",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alNormTime": {
@@ -224,14 +116,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Norm_Time",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alNormTimeMs": {
@@ -240,14 +124,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Norm_Time_ms",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alAckTime": {
@@ -256,14 +132,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Ack_Time",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alAckTimeMs": {
@@ -272,14 +140,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Ack_Time_ms",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alUser": {
@@ -288,14 +148,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_User",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alUserComment": {
@@ -304,14 +156,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_User_Comment",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alUserFull": {
@@ -320,14 +164,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_User_Full",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alStation": {
@@ -336,14 +172,6 @@
       "length": 255,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Station",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alDeleted": {
@@ -352,14 +180,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Deleted",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alEventTime": {
@@ -368,14 +188,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Al_Event_Time",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "alEventTimeMs": {
@@ -384,14 +196,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Al_Event_Time_ms",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "lastUpdate": {
@@ -400,14 +204,6 @@
       "length": null,
       "precision": null,
       "scale": null,
-      "mysql": {
-        "columnName": "Last_Update",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
       "_selectable": true
     },
     "lastUpdateMs": {
@@ -416,14 +212,6 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "mysql": {
-        "columnName": "Last_Update_ms",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
       "_selectable": true
     }
   },
