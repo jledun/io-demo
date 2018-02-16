@@ -6,5 +6,8 @@ export * from './Comment';
 export * from './Event';
 export * from './Topic';
 export * from './EventType';
+export * from './Alarmhistory';
+export * from './Eventhistory';
+export * from './LogRefroidisseur';
 export * from './BaseModels';
 

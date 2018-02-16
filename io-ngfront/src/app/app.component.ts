@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IoRunTimeDatasService } from './shared/io-nglib';
 import { LoopBackConfig, LoopBackAuth } from './shared/sdk';
 import { User } from './shared/sdk/models/User';
@@ -10,15 +10,23 @@ import { environment } from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnDestroy {
+  datetime: string = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
+  datetime_interval;
+  loading: boolean = false;
+
+  isClientloading() {
+    return IoRunTimeDatasService.getDataLoading();
+  }
 
   constructor(
-    datasService: IoRunTimeDatasService,
-    userApi: UserApi
+    private datasService: IoRunTimeDatasService,
+    private userApi: UserApi
   ) {
     LoopBackConfig.setBaseURL( environment.lbApp.ip );
     LoopBackConfig.setApiVersion( environment.lbApp.api );
   }
+
+  ngOnDestroy() { }
 
 }

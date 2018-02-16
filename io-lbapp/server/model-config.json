@@ -59,5 +59,17 @@
   "EventType": {
     "dataSource": "db",
     "public": true
+  },
+  "Alarmhistory": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Eventhistory": {
+    "dataSource": "db",
+    "public": true
+  },
+  "LogRefroidisseur": {
+    "dataSource": "db",
+    "public": true
   }
 }

@@ -7,6 +7,9 @@ import { Comment } from '../../models/Comment';
 import { Event } from '../../models/Event';
 import { Topic } from '../../models/Topic';
 import { EventType } from '../../models/EventType';
+import { Alarmhistory } from '../../models/Alarmhistory';
+import { Eventhistory } from '../../models/Eventhistory';
+import { LogRefroidisseur } from '../../models/LogRefroidisseur';
 
 export interface Models { [name: string]: any }
 
@@ -21,6 +24,9 @@ export class SDKModels {
     Event: Event,
     Topic: Topic,
     EventType: EventType,
+    Alarmhistory: Alarmhistory,
+    Eventhistory: Eventhistory,
+    LogRefroidisseur: LogRefroidisseur,
     
   };
 

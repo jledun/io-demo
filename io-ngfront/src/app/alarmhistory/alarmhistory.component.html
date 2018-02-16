@@ -1,0 +1,95 @@
+<div [class]="( client === 'web' ) ? 'no-full-screen-width' : ''">
+    <!-- <button mat-button (click)="toggleInterval()">Toggle interval : {{ interval_status }}</button> -->
+    <div class="filter-card">
+      <mat-card>
+        <mat-card-title>Filtres</mat-card-title>
+        <mat-card-content>
+          <div class="filter-form-container">
+            <mat-form-field>
+              <input matInput [matDatepicker]="dpStart" [(ngModel)]="tmpFilter.datedebut">
+              <mat-datepicker-toggle matSuffix [for]="dpStart"></mat-datepicker-toggle>
+              <mat-datepicker #dpStart></mat-datepicker>
+              <mat-label>Date de début</mat-label>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="dpEnd" [(ngModel)]="tmpFilter.datefin">
+              <mat-datepicker-toggle matSuffix [for]="dpEnd"></mat-datepicker-toggle>
+              <mat-datepicker #dpEnd></mat-datepicker>
+              <mat-label>Date de fin</mat-label>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select [(value)]="tmpFilter.station" >
+                <mat-option [value]="">Aucun</mat-option>
+                <mat-option *ngFor="let station of stationlist" [value]="station">{{ station }}</mat-option>
+              </mat-select>
+              <mat-label>Process</mat-label>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-button (click)="resetFilter()">Reset filters</button>
+          <button mat-button (click)="getData()">Refresh</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="table-container" *ngIf="client === 'web' || client == 'tablet'">
+      <mat-table #table [dataSource]="alarms">
+  
+        <!-- alType Column -->
+        <ng-container matColumnDef="alType">
+          <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.alType }} </mat-cell>
+        </ng-container>
+    
+        <!-- alStartTime Column -->
+        <ng-container matColumnDef="alStartTime">
+          <mat-header-cell *matHeaderCellDef> Horodatage </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ getUserTimestamp(element.alStartTime) }} </mat-cell>
+        </ng-container>
+    
+        <!-- alGroup Column -->
+        <ng-container matColumnDef="alGroup">
+          <mat-header-cell *matHeaderCellDef> Groupe </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.alGroup}} </mat-cell>
+        </ng-container>
+    
+        <!-- alUserFull Column -->      
+        <ng-container matColumnDef="alUserFull">
+          <mat-header-cell *matHeaderCellDef> Utilisateur </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.alUserFull }} </mat-cell>
+        </ng-container>
+        
+        <!-- alStation Column -->
+        <ng-container matColumnDef="alStation">
+          <mat-header-cell *matHeaderCellDef> Poste </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.alStation }} </mat-cell>
+        </ng-container>
+    
+        <!-- alMessage Column -->
+        <ng-container matColumnDef="alMessage">
+          <mat-header-cell *matHeaderCellDef> Message </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.alMessage }} </mat-cell>
+        </ng-container>
+
+        <!-- alarm status column -->
+        <ng-container matColumnDef="alStatus">
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-icon [color]="(element.alNormTime) ? 'primary' : 'warn'">{{ (element.alNormTime) ? 'checked' : 'cancel' }}</mat-icon>
+          </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" mat-color="primary"></mat-row>
+      </mat-table>
+    </div>
+    <div *ngIf="client === 'handset'">
+      <mat-card *ngFor="let alarm of alarms">
+        <mat-card-subtitle><mat-icon [color]="(alarm.alNormTime) ? 'primary' : 'warn'">{{ (alarm.alNormTime) ? 'checked' : 'cancel' }}</mat-icon> {{ getUserTimestamp(alarm.alStartTime) }}</mat-card-subtitle>
+        <mat-card-content>
+          <span [class]="(alarm.alNormTime) ? 'alMessage-primary' : 'alMessage-warn'">{{ alarm.alMessage }}</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <button class="scroll-to-top" mat-fab color="primary" (click)="resetScroll()" *ngIf="displayScrollToTopButton()"><mat-icon>arrow-up</mat-icon></button> -->
+  </div>

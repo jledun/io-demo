@@ -1,0 +1,32 @@
+.mat-row > .mat-column-alStartTime, 
+.mat-row > .mat-column-alStation, 
+.mat-row > .mat-column-alUserFull,
+.mat-row > .mat-column-alStatus {
+  flex: 0 0 auto;
+  margin-right: 25px;
+}
+.mat-row > .mat-column-alMessage {
+  flex: 1 1 auto;
+}
+.mat-header-row > .mat-column-alStartTime {
+  flex: 0 0 140px;
+  margin-right: 25px;
+}
+
+.mat-header-row > .mat-column-alStation {
+  flex: 0 0 88px;
+  margin-right: 25px;
+}
+
+.mat-header-row > .mat-column-alUserFull {
+  flex: 0 0 80px;
+  margin-right: 15px;
+}
+
+.mat-header-row > .mat-column-alStatus {
+  flex: 0 0 50px;
+  margin-right: 5px;
+}
+.mat-header-row > .mat-column-alMessage {
+  flex: 1 1 auto;
+}

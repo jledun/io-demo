@@ -52,6 +52,9 @@ import { CommentApi } from './services/custom/Comment';
 import { EventApi } from './services/custom/Event';
 import { TopicApi } from './services/custom/Topic';
 import { EventTypeApi } from './services/custom/EventType';
+import { AlarmhistoryApi } from './services/custom/Alarmhistory';
+import { EventhistoryApi } from './services/custom/Eventhistory';
+import { LogRefroidisseurApi } from './services/custom/LogRefroidisseur';
 /**
 * @module SDKBrowserModule
 * @description
@@ -88,6 +91,9 @@ export class SDKBrowserModule {
         EventApi,
         TopicApi,
         EventTypeApi,
+        AlarmhistoryApi,
+        EventhistoryApi,
+        LogRefroidisseurApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

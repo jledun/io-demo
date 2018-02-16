@@ -1,0 +1,87 @@
+<div [class]="( client === 'web' ) ? 'no-full-screen-width' : ''">
+  <!-- <button mat-button (click)="toggleInterval()">Toggle interval : {{ interval_status }}</button> -->
+  <div class="filter-card">
+    <mat-card>
+      <mat-card-title>Filtres</mat-card-title>
+      <mat-card-content>
+        <div class="filter-form-container">
+          <mat-form-field>
+            <input matInput [matDatepicker]="dpStart" [(ngModel)]="tmpFilter.datedebut">
+            <mat-datepicker-toggle matSuffix [for]="dpStart"></mat-datepicker-toggle>
+            <mat-datepicker #dpStart></mat-datepicker>
+            <mat-label>Date de début</mat-label>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="dpEnd" [(ngModel)]="tmpFilter.datefin">
+            <mat-datepicker-toggle matSuffix [for]="dpEnd"></mat-datepicker-toggle>
+            <mat-datepicker #dpEnd></mat-datepicker>
+            <mat-label>Date de fin</mat-label>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select [(value)]="tmpFilter.process" >
+              <mat-option>Aucun</mat-option>
+              <mat-option *ngFor="let fil of ProcessList" [value]="fil.filter">{{fil.name}}</mat-option>
+            </mat-select>
+            <mat-label>Process</mat-label>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="resetFilter()">Reset filters</button>
+        <button mat-button (click)="getData()">Refresh</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <!-- <mat-divider></mat-divider> -->
+  <div class="table-container" *ngIf="client === 'web' || client == 'tablet'">
+    <mat-table #table [dataSource]="events">
+
+      <!-- evType Column -->
+      <ng-container matColumnDef="evType">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.evType }} </mat-cell>
+      </ng-container>
+  
+      <!-- evTime Column -->
+      <ng-container matColumnDef="evTime">
+        <mat-header-cell *matHeaderCellDef> Horodatage </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ getUserTimestamp(element.evTime) }} </mat-cell>
+      </ng-container>
+  
+      <!-- evInfo Column -->
+      <ng-container matColumnDef="evInfo">
+        <mat-header-cell *matHeaderCellDef> Info </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.evInfo}} </mat-cell>
+      </ng-container>
+  
+      <!-- evUserFull Column -->
+    
+      <ng-container matColumnDef="evUserFull">
+        <mat-header-cell *matHeaderCellDef> Utilisateur </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.evUserFull }} </mat-cell>
+      </ng-container>
+      
+      <!-- evStation Column -->
+      <ng-container matColumnDef="evStation">
+        <mat-header-cell *matHeaderCellDef> Poste </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.evStation }} </mat-cell>
+      </ng-container>
+  
+      <!-- evMessage Column -->
+      <ng-container matColumnDef="evMessage">
+        <mat-header-cell *matHeaderCellDef> Message </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.evMessage }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <div *ngIf="client === 'handset'">
+    <mat-card *ngFor="let event of events">
+      <mat-card-subtitle>{{ getUserTimestamp(event.evTime) }}</mat-card-subtitle>
+      <mat-card-content>{{ event.evMessage }}</mat-card-content>
+    </mat-card>
+  </div>
+  <!-- <button class="scroll-to-top" mat-fab color="primary" (click)="resetScroll()" *ngIf="displayScrollToTopButton()"><mat-icon>arrow-up</mat-icon></button> -->
+</div>
