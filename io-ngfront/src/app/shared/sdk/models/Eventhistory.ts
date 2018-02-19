@@ -18,6 +18,7 @@ export interface EventhistoryInterface {
   "lastUpdateMs"?: number;
   "bias"?: number;
   "evComment"?: string;
+  "id"?: number;
 }
 
 export class Eventhistory implements EventhistoryInterface {
@@ -37,6 +38,7 @@ export class Eventhistory implements EventhistoryInterface {
   "lastUpdateMs": number;
   "bias": number;
   "evComment": string;
+  "id": number;
   constructor(data?: EventhistoryInterface) {
     Object.assign(this, data);
   }
@@ -68,7 +70,7 @@ export class Eventhistory implements EventhistoryInterface {
       name: 'Eventhistory',
       plural: 'Eventhistories',
       path: 'Eventhistories',
-      idName: 'bias',
+      idName: 'id',
       properties: {
         "evType": {
           name: 'evType',
@@ -133,6 +135,10 @@ export class Eventhistory implements EventhistoryInterface {
         "evComment": {
           name: 'evComment',
           type: 'string'
+        },
+        "id": {
+          name: 'id',
+          type: 'number'
         },
       },
       relations: {

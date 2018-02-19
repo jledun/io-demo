@@ -9,5 +9,6 @@ export * from './EventType';
 export * from './Alarmhistory';
 export * from './Eventhistory';
 export * from './LogRefroidisseur';
+export * from './RuntimeData';
 export * from './SDKModels';
 export * from './logger.service';

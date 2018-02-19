@@ -28,6 +28,7 @@ export interface AlarmhistoryInterface {
   "alEventTimeMs"?: number;
   "lastUpdate"?: Date;
   "lastUpdateMs"?: number;
+  "id"?: number;
 }
 
 export class Alarmhistory implements AlarmhistoryInterface {
@@ -57,6 +58,7 @@ export class Alarmhistory implements AlarmhistoryInterface {
   "alEventTimeMs": number;
   "lastUpdate": Date;
   "lastUpdateMs": number;
+  "id": number;
   constructor(data?: AlarmhistoryInterface) {
     Object.assign(this, data);
   }
@@ -88,7 +90,7 @@ export class Alarmhistory implements AlarmhistoryInterface {
       name: 'Alarmhistory',
       plural: 'Alarmhistories',
       path: 'Alarmhistories',
-      idName: 'alStartTime',
+      idName: 'id',
       properties: {
         "alStartTime": {
           name: 'alStartTime',
@@ -192,6 +194,10 @@ export class Alarmhistory implements AlarmhistoryInterface {
         },
         "lastUpdateMs": {
           name: 'lastUpdateMs',
+          type: 'number'
+        },
+        "id": {
+          name: 'id',
           type: 'number'
         },
       },

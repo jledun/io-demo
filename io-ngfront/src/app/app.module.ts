@@ -28,6 +28,7 @@ import { MatSidenavModule,
   MatNativeDateModule, 
   MatCommonModule,
   MatProgressSpinnerModule,
+  MatListModule,
   MatDatepickerModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -39,12 +40,14 @@ import { AlarmhistoryComponent } from './alarmhistory/alarmhistory.component';
 import { ProcesshistoryComponent } from './processhistory/processhistory.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { BottombarComponent } from './bottombar/bottombar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'eventhistory', component: EventhistoryComponent },
   { path: 'alarmhistory', component: AlarmhistoryComponent },
   { path: 'processhistory', component: ProcesshistoryComponent },
-  { path: '**', component: EventhistoryComponent }
+  { path: '**', component: DashboardComponent }
 ];
 
 @NgModule({
@@ -54,7 +57,8 @@ const appRoutes: Routes = [
     AlarmhistoryComponent,
     ProcesshistoryComponent,
     TopbarComponent,
-    BottombarComponent
+    BottombarComponent,
+    DashboardComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -84,6 +88,7 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     MatCardModule, 
     MatProgressSpinnerModule,
+    MatListModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatCommonModule,

@@ -55,6 +55,7 @@ import { EventTypeApi } from './services/custom/EventType';
 import { AlarmhistoryApi } from './services/custom/Alarmhistory';
 import { EventhistoryApi } from './services/custom/Eventhistory';
 import { LogRefroidisseurApi } from './services/custom/LogRefroidisseur';
+import { RuntimeDataApi } from './services/custom/RuntimeData';
 /**
 * @module SDKBrowserModule
 * @description
@@ -94,6 +95,7 @@ export class SDKBrowserModule {
         AlarmhistoryApi,
         EventhistoryApi,
         LogRefroidisseurApi,
+        RuntimeDataApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

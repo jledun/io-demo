@@ -1,0 +1,24 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dashboard-content {
+  width: 350px;
+  margin: 5px;
+  flex: 0 0 auto;
+}
+
+.dashboard-component {
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// .dashboard-content-fullscreen {
+//   width: 95%;
+//   margin: 0;
+//   flex: 0 0 auto;
+// }
