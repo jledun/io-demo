@@ -9,6 +9,8 @@ export * from './EventType';
 export * from './Alarmhistory';
 export * from './Eventhistory';
 export * from './LogRefroidisseur';
+export * from './Recipe';
+export * from './RecipeComponents';
 export * from './RuntimeData';
 export * from './BaseModels';
 

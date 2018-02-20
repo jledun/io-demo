@@ -7,6 +7,7 @@ module.exports = function(app) {
     '/processhistory',
     '/dashboard',
     '/fullscreendashboard',
+    '/recipe',
   ];
   app.use(routes, function(req, res) {
     res.sendFile('index.html', {root: `${__dirname}/../../client/`});

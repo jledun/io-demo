@@ -71,5 +71,13 @@
   "LogRefroidisseur": {
     "dataSource": "db",
     "public": true
+  },
+  "Recipe": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RecipeComponents": {
+    "dataSource": "db",
+    "public": true
   }
 }

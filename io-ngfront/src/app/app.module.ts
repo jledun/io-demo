@@ -42,6 +42,7 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { BottombarComponent } from './bottombar/bottombar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullscreenDashboardComponent } from './fullscreen-dashboard/fullscreen-dashboard.component';
+import { RecipeEditorComponent } from './recipe-editor/recipe-editor.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
   { path: 'eventhistory', component: EventhistoryComponent },
   { path: 'alarmhistory', component: AlarmhistoryComponent },
   { path: 'processhistory', component: ProcesshistoryComponent },
+  { path: 'recipe', component: RecipeEditorComponent },
   { path: '**', component: DashboardComponent }
 ];
 
@@ -61,7 +63,8 @@ const appRoutes: Routes = [
     TopbarComponent,
     BottombarComponent,
     DashboardComponent,
-    FullscreenDashboardComponent
+    FullscreenDashboardComponent,
+    RecipeEditorComponent
   ],
   imports: [
     RouterModule.forRoot(

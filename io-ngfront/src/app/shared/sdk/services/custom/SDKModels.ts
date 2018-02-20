@@ -10,6 +10,8 @@ import { EventType } from '../../models/EventType';
 import { Alarmhistory } from '../../models/Alarmhistory';
 import { Eventhistory } from '../../models/Eventhistory';
 import { LogRefroidisseur } from '../../models/LogRefroidisseur';
+import { Recipe } from '../../models/Recipe';
+import { RecipeComponents } from '../../models/RecipeComponents';
 import { RuntimeData } from '../../models/RuntimeData';
 
 export interface Models { [name: string]: any }
@@ -28,6 +30,8 @@ export class SDKModels {
     Alarmhistory: Alarmhistory,
     Eventhistory: Eventhistory,
     LogRefroidisseur: LogRefroidisseur,
+    Recipe: Recipe,
+    RecipeComponents: RecipeComponents,
     RuntimeData: RuntimeData,
     
   };
