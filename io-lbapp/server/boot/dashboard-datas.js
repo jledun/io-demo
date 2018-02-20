@@ -64,12 +64,12 @@ module.exports = function(app, cb) {
               value: '250',
               unit: 'lb/h',
               alarms: {
-                setpoint: 5,
+                setpoint: 2,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 10,
+                setpoint: 4,
                 low: false,
                 high: false,
               },
@@ -83,11 +83,13 @@ module.exports = function(app, cb) {
                 name: 'screw speed',
                 value: 1458,
                 unit: 'rpm',
+                scale: 1500,
               },
               {
                 name: 'weight',
                 value: 165.42,
                 unit: 'lb',
+                scale: 165,
               },
             ],
           },
@@ -136,12 +138,12 @@ module.exports = function(app, cb) {
               value: '250',
               unit: 'unit/h',
               alarms: {
-                setpoint: 5,
+                setpoint: 2,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 10,
+                setpoint: 4,
                 low: false,
                 high: false,
               },
@@ -155,11 +157,13 @@ module.exports = function(app, cb) {
                 name: 'available chicken',
                 value: 5410,
                 unit: 'unit',
+                scale: 4022,
               },
               {
                 name: 'chicken performances',
                 value: 65,
                 unit: 'egg/h',
+                scale: 65,
               },
             ],
           },
@@ -196,12 +200,12 @@ module.exports = function(app, cb) {
               value: '250',
               unit: 'unit/h',
               alarms: {
-                setpoint: 5,
+                setpoint: 2,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 10,
+                setpoint: 4,
                 low: false,
                 high: false,
               },
@@ -215,6 +219,7 @@ module.exports = function(app, cb) {
                 name: 'speed',
                 value: 5,
                 unit: 'rpm',
+                scale: 5,
               },
             ],
           },
@@ -287,12 +292,12 @@ module.exports = function(app, cb) {
               value: '250',
               unit: 'unit/h',
               alarms: {
-                setpoint: 5,
+                setpoint: 2,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 10,
+                setpoint: 4,
                 low: false,
                 high: false,
               },
@@ -306,11 +311,13 @@ module.exports = function(app, cb) {
                 name: 'spare',
                 value: 84751,
                 unit: 'stuff',
+                scale: 76435,
               },
               {
                 name: 'yet another spare',
                 value: 2,
                 unit: 'stuff',
+                scale: 2,
               },
             ],
           },
@@ -339,8 +346,28 @@ module.exports = function(app, cb) {
 
   const faults = () => {
     datas.production.components.forEach((comp) => {
-      comp.runtime.flow.alarms.low = !comp.runtime.flow.alarms.low;
+      const rnd = Math.random();
+      // comp.runtime.flow.alarms.low = rnd > 0.2 && rnd <= 0.4;
+      // comp.runtime.flow.alarms.high = rnd > 0.4 && rnd <= 0.6;
+      // comp.runtime.flow.fault.low = rnd > 0.6 && rnd <= 0.8;
+      // comp.runtime.flow.fault.high = rnd > 0.8 && rnd <= 1;
+      if (datas.production.status.fabrication === 'in operation') {
+        const sign = (Math.random > 0.5) ? 1 : -1;
+        comp.runtime.flow.value = Math.round((250 + rnd * 5 * sign) * 100) / 100;
+        comp.runtime.flow.fault.low = comp.runtime.flow.value < 246;
+        comp.runtime.flow.alarms.low = comp.runtime.flow.value < 248 && !comp.runtime.flow.fault.low;
+        comp.runtime.flow.fault.high = comp.runtime.flow.value > 254;
+        comp.runtime.flow.alarms.high = comp.runtime.flow.value > 252 && !comp.runtime.flow.fault.high;
+        comp.runtime.custom.forEach((cust) => {
+          cust.value = Math.round((cust.scale + rnd * 5 * sign) * 100) / 100;
+        });
+      } else {
+        comp.runtime.flow.value = 0;
+      }
     });
+    datas.production.status.mainFlow.real.value = datas.production.components.reduce((acc, value) => {
+      return acc + value.runtime.flow.value;
+    }, 0);
     runtimeData.upsertWithWhere({id: 1}, datas, (err, d) => {
       if (err) console.log(err);
     });
@@ -349,6 +376,6 @@ module.exports = function(app, cb) {
   const runSimulator = () => {
     setInterval(() => {
       faults.call(this);
-    }, 2000);
+    }, 200);
   };
 };

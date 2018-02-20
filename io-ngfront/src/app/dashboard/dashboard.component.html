@@ -43,7 +43,10 @@
         <mat-card-title>{{comp.name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
-            <mat-list-item><strong>Flow:</strong><span class="fill-space"></span>{{comp.runtime.flow.value}} {{comp.runtime.flow.unit}}</mat-list-item>
+            <mat-list-item>
+              <strong>Flow</strong><span class="fill-space"></span>
+              {{comp.runtime.flow.value}} {{comp.runtime.flow.unit}}
+            </mat-list-item>
             <span *ngFor="let cust of comp.runtime.custom">
               <mat-divider></mat-divider>
               <mat-list-item><strong>{{cust.name}}</strong><span class="fill-space"></span>{{cust.value}} {{cust.unit}}</mat-list-item>

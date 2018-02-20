@@ -42,6 +42,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if ( result.matches ) this.client = size;
   }
 
+  getColor(component) {
+    if (component.runtime.flow.fault.low || component.runtime.flow.fault.high) return "warn-color";
+    if (component.runtime.flow.alarms.low || component.runtime.flow.alarms.high) return "accent-color";
+    return "";
+  }
+
   constructor(
     private rtService: RuntimeDataApi,
     private breakpointObserver: BreakpointObserver,
