@@ -6,6 +6,7 @@ module.exports = function(app) {
     '/alarmhistory',
     '/processhistory',
     '/dashboard',
+    '/fullscreendashboard',
   ];
   app.use(routes, function(req, res) {
     res.sendFile('index.html', {root: `${__dirname}/../../client/`});

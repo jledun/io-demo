@@ -41,9 +41,11 @@ import { ProcesshistoryComponent } from './processhistory/processhistory.compone
 import { TopbarComponent } from './topbar/topbar.component';
 import { BottombarComponent } from './bottombar/bottombar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FullscreenDashboardComponent } from './fullscreen-dashboard/fullscreen-dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'fullscreendashboard', component: FullscreenDashboardComponent },
   { path: 'eventhistory', component: EventhistoryComponent },
   { path: 'alarmhistory', component: AlarmhistoryComponent },
   { path: 'processhistory', component: ProcesshistoryComponent },
@@ -58,7 +60,8 @@ const appRoutes: Routes = [
     ProcesshistoryComponent,
     TopbarComponent,
     BottombarComponent,
-    DashboardComponent
+    DashboardComponent,
+    FullscreenDashboardComponent
   ],
   imports: [
     RouterModule.forRoot(
