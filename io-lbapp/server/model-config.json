@@ -79,5 +79,13 @@
   "RecipeComponents": {
     "dataSource": "db",
     "public": true
+  },
+  "MaterialType": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Material": {
+    "dataSource": "db",
+    "public": true
   }
 }

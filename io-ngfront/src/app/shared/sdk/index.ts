@@ -57,6 +57,8 @@ import { EventhistoryApi } from './services/custom/Eventhistory';
 import { LogRefroidisseurApi } from './services/custom/LogRefroidisseur';
 import { RecipeApi } from './services/custom/Recipe';
 import { RecipeComponentsApi } from './services/custom/RecipeComponents';
+import { MaterialTypeApi } from './services/custom/MaterialType';
+import { MaterialApi } from './services/custom/Material';
 import { RuntimeDataApi } from './services/custom/RuntimeData';
 /**
 * @module SDKBrowserModule
@@ -99,6 +101,8 @@ export class SDKBrowserModule {
         LogRefroidisseurApi,
         RecipeApi,
         RecipeComponentsApi,
+        MaterialTypeApi,
+        MaterialApi,
         RuntimeDataApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }

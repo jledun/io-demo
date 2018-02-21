@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Flour",
+    "matnr": "1000003",
+    "description": "wheat flour",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Sugar",
+    "matnr": "1000450",
+    "description": "Sugar Cane",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Butter",
+    "matnr": "1000653",
+    "description": "Fresh handmade butter",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Eggs",
+    "matnr": "1000300",
+    "description": "Egg from my chicken Maggie",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Taco",
+    "matnr": "1000543",
+    "description": "The handmade taco",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Avocado",
+    "matnr": "1000345",
+    "description": "Right from Mexico City",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Shrimps",
+    "matnr": "1000234",
+    "description": "Right from sea",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Sauce",
+    "matnr": "3000533",
+    "description": "An awesome secret sauce",
+    "materialTypeId": 1
+  },
+  {
+    "name": "Yogourt cake",
+    "matnr": "2000543",
+    "description": "An awesome cake",
+    "materialTypeId": 2
+  },
+  {
+    "name": "French Taco",
+    "matnr": "2000567",
+    "description": "An awesome french taco with fresh avocado and shrimps",
+    "materialTypeId": 2
+  }
+]

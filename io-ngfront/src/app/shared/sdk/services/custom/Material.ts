@@ -10,15 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { RecipeComponents } from '../../models/RecipeComponents';
 import { Material } from '../../models/Material';
+import { MaterialType } from '../../models/MaterialType';
 
 
 /**
- * Api services for the `RecipeComponents` model.
+ * Api services for the `Material` model.
  */
 @Injectable()
-export class RecipeComponentsApi extends BaseLoopBackApi {
+export class MaterialApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -31,9 +31,9 @@ export class RecipeComponentsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation material.
+   * Fetches belongsTo relation materialType.
    *
-   * @param {any} id RecipeComponents id
+   * @param {any} id Material id
    *
    * @param {boolean} refresh 
    *
@@ -43,13 +43,13 @@ export class RecipeComponentsApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `RecipeComponents` object.)
+   * This usually means the response is a `Material` object.)
    * </em>
    */
-  public getMaterial(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getMaterialType(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/RecipeComponents/:id/material";
+    "/Materials/:id/materialType";
     let _routeParams: any = {
       id: id
     };
@@ -73,13 +73,13 @@ export class RecipeComponentsApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `RecipeComponents` object.)
+   * This usually means the response is a `Material` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/RecipeComponents";
+    "/Materials";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -92,7 +92,7 @@ export class RecipeComponentsApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id RecipeComponents id
+   * @param {any} id Material id
    *
    * @param {object} data Request data.
    *
@@ -104,13 +104,13 @@ export class RecipeComponentsApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `RecipeComponents` object.)
+   * This usually means the response is a `Material` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/RecipeComponents/:id";
+    "/Materials/:id";
     let _routeParams: any = {
       id: id
     };
@@ -124,9 +124,9 @@ export class RecipeComponentsApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `RecipeComponents`.
+   * i.e. `Material`.
    */
   public getModelName() {
-    return "RecipeComponents";
+    return "Material";
   }
 }

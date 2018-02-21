@@ -1,44 +1,43 @@
 /* tslint:disable */
 import {
-  RecipeComponents,
-  Material
+  MaterialType
 } from '../index';
 
 declare var Object: any;
-export interface RecipeInterface {
+export interface MaterialInterface {
   "name": string;
+  "matnr"?: string;
   "description"?: string;
   "id"?: number;
-  "materialId"?: number;
-  recipeComponents?: RecipeComponents[];
-  material?: Material;
+  "materialTypeId"?: number;
+  materialType?: MaterialType;
 }
 
-export class Recipe implements RecipeInterface {
+export class Material implements MaterialInterface {
   "name": string;
+  "matnr": string;
   "description": string;
   "id": number;
-  "materialId": number;
-  recipeComponents: RecipeComponents[];
-  material: Material;
-  constructor(data?: RecipeInterface) {
+  "materialTypeId": number;
+  materialType: MaterialType;
+  constructor(data?: MaterialInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Recipe`.
+   * i.e. `Material`.
    */
   public static getModelName() {
-    return "Recipe";
+    return "Material";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Recipe for dynamic purposes.
+  * This method creates an instance of Material for dynamic purposes.
   **/
-  public static factory(data: RecipeInterface): Recipe{
-    return new Recipe(data);
+  public static factory(data: MaterialInterface): Material{
+    return new Material(data);
   }
   /**
   * @method getModelDefinition
@@ -49,13 +48,17 @@ export class Recipe implements RecipeInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'Recipe',
-      plural: 'Recipes',
-      path: 'Recipes',
+      name: 'Material',
+      plural: 'Materials',
+      path: 'Materials',
       idName: 'id',
       properties: {
         "name": {
           name: 'name',
+          type: 'string'
+        },
+        "matnr": {
+          name: 'matnr',
           type: 'string'
         },
         "description": {
@@ -66,26 +69,18 @@ export class Recipe implements RecipeInterface {
           name: 'id',
           type: 'number'
         },
-        "materialId": {
-          name: 'materialId',
+        "materialTypeId": {
+          name: 'materialTypeId',
           type: 'number'
         },
       },
       relations: {
-        recipeComponents: {
-          name: 'recipeComponents',
-          type: 'RecipeComponents[]',
-          model: 'RecipeComponents',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'recipeId'
-        },
-        material: {
-          name: 'material',
-          type: 'Material',
-          model: 'Material',
+        materialType: {
+          name: 'materialType',
+          type: 'MaterialType',
+          model: 'MaterialType',
           relationType: 'belongsTo',
-                  keyFrom: 'materialId',
+                  keyFrom: 'materialTypeId',
           keyTo: 'id'
         },
       }

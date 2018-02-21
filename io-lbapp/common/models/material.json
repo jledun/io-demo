@@ -1,5 +1,5 @@
 {
-  "name": "Recipe",
+  "name": "Material",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -10,26 +10,20 @@
       "type": "string",
       "required": true
     },
+    "matnr": {
+      "type": "string"
+    },
     "description": {
       "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "recipeComponents": {
-      "type": "hasMany",
-      "model": "RecipeComponents",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
-      }
-    },
-    "material": {
+    "materialType": {
       "type": "belongsTo",
-      "model": "Material",
+      "model": "MaterialType",
       "foreignKey": ""
     }
-  
   },
   "acls": [],
   "methods": {}

@@ -1,0 +1,16 @@
+<span *ngIf="selected">
+  <mat-form-field *ngIf="!selected.name">
+    <mat-select [(value)]="selected">
+      <mat-option *ngFor="let material of materialList" [value]="material">{{material.matnr}} - {{material.name}}</mat-option>
+      <mat-divider></mat-divider>
+      <mat-option (click)="createMatnr()">New material</mat-option>
+    </mat-select>
+    <mat-placeholder>Select a material</mat-placeholder>
+  </mat-form-field>
+  <span *ngIf="selected.name">
+    <button mat-icon-button (click)="resetSelected()">
+      <mat-icon>close</mat-icon>
+    </button>
+    {{selected.matnr}} - {{selected.name}}
+  </span>
+</span>

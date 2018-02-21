@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Julien Specials",
+    "description": "Yogourt cake",
+    "materialId": 9
+  },
+  {
+    "name": "French tacos",
+    "description": "An awesome tacos with fresh avocados and shrimps",
+    "materialId": 10
+  }
+]

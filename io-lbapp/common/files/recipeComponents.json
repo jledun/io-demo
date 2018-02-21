@@ -1,0 +1,54 @@
+[
+  {
+    "materialId": 1,
+    "quantity": 25,
+    "unit": "%",
+    "recipeId": 1,
+    "order": 1
+  },
+  {
+    "materialId": 2,
+    "quantity": 25,
+    "unit": "%",
+    "recipeId": 1,
+    "order": 3
+  },
+  {
+    "materialId": 3,
+    "quantity": 25,
+    "unit": "%",
+    "recipeId": 1,
+    "order": 7
+  },
+  {
+    "materialId": 4,
+    "quantity": 25,
+    "unit": "%",
+    "recipeId": 1,
+    "order": 2
+  },
+  {
+    "materialId": 5,
+    "quantity": 25,
+    "unit": "unit",
+    "recipeId": 2
+  },
+  {
+    "materialId": 6,
+    "quantity": 75,
+    "unit": "lb",
+    "recipeId": 2
+  },
+  {
+    "materialId": 7,
+    "quantity": 35,
+    "unit": "lb",
+    "recipeId": 2
+  },
+  {
+    "materialId": 8,
+    "quantity": 99,
+    "unit": "l",
+    "recipeId": 2
+  }
+]

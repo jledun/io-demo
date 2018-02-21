@@ -11,6 +11,8 @@ export * from './Eventhistory';
 export * from './LogRefroidisseur';
 export * from './Recipe';
 export * from './RecipeComponents';
+export * from './MaterialType';
+export * from './Material';
 export * from './RuntimeData';
 export * from './SDKModels';
 export * from './logger.service';

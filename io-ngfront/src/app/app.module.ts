@@ -43,6 +43,7 @@ import { BottombarComponent } from './bottombar/bottombar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullscreenDashboardComponent } from './fullscreen-dashboard/fullscreen-dashboard.component';
 import { RecipeEditorComponent } from './recipe-editor/recipe-editor.component';
+import { MaterialSelectorComponent } from './material-selector/material-selector.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
     BottombarComponent,
     DashboardComponent,
     FullscreenDashboardComponent,
-    RecipeEditorComponent
+    RecipeEditorComponent,
+    MaterialSelectorComponent
   ],
   imports: [
     RouterModule.forRoot(

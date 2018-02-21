@@ -6,10 +6,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "matnr": {
-      "type": "string",
-      "required": true
-    },
     "quantity": {
       "type": "number",
       "required": true
@@ -17,10 +13,21 @@
     "unit": {
       "type": "string",
       "required": true
+    },
+    "order": {
+      "type": "number",
+      "required": false,
+      "default": 0
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "material": {
+      "type": "belongsTo",
+      "model": "Material",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

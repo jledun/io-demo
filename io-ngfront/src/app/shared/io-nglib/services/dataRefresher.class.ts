@@ -111,10 +111,14 @@ export class DataRefresher {
   public run() {
     this._autorisation = true;
   }
+  public refresh() {
+    this._getData();
+  }
   public suspend() {
     this._autorisation = false;
   }
   public destroy() {
+    this.suspend();
     if (this._iSequence) clearInterval(this._iSequence);
   }
 

@@ -1,20 +1,27 @@
 /* tslint:disable */
+import {
+  Material
+} from '../index';
 
 declare var Object: any;
 export interface RecipeComponentsInterface {
-  "matnr": string;
   "quantity": number;
   "unit": string;
+  "order"?: number;
   "id"?: number;
   "recipeId"?: number;
+  "materialId"?: number;
+  material?: Material;
 }
 
 export class RecipeComponents implements RecipeComponentsInterface {
-  "matnr": string;
   "quantity": number;
   "unit": string;
+  "order": number;
   "id": number;
   "recipeId": number;
+  "materialId": number;
+  material: Material;
   constructor(data?: RecipeComponentsInterface) {
     Object.assign(this, data);
   }
@@ -48,10 +55,6 @@ export class RecipeComponents implements RecipeComponentsInterface {
       path: 'RecipeComponents',
       idName: 'id',
       properties: {
-        "matnr": {
-          name: 'matnr',
-          type: 'string'
-        },
         "quantity": {
           name: 'quantity',
           type: 'number'
@@ -59,6 +62,11 @@ export class RecipeComponents implements RecipeComponentsInterface {
         "unit": {
           name: 'unit',
           type: 'string'
+        },
+        "order": {
+          name: 'order',
+          type: 'number',
+          default: 0
         },
         "id": {
           name: 'id',
@@ -68,8 +76,20 @@ export class RecipeComponents implements RecipeComponentsInterface {
           name: 'recipeId',
           type: 'number'
         },
+        "materialId": {
+          name: 'materialId',
+          type: 'number'
+        },
       },
       relations: {
+        material: {
+          name: 'material',
+          type: 'Material',
+          model: 'Material',
+          relationType: 'belongsTo',
+                  keyFrom: 'materialId',
+          keyTo: 'id'
+        },
       }
     }
   }

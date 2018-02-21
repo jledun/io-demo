@@ -12,6 +12,8 @@ import { Eventhistory } from '../../models/Eventhistory';
 import { LogRefroidisseur } from '../../models/LogRefroidisseur';
 import { Recipe } from '../../models/Recipe';
 import { RecipeComponents } from '../../models/RecipeComponents';
+import { MaterialType } from '../../models/MaterialType';
+import { Material } from '../../models/Material';
 import { RuntimeData } from '../../models/RuntimeData';
 
 export interface Models { [name: string]: any }
@@ -32,6 +34,8 @@ export class SDKModels {
     LogRefroidisseur: LogRefroidisseur,
     Recipe: Recipe,
     RecipeComponents: RecipeComponents,
+    MaterialType: MaterialType,
+    Material: Material,
     RuntimeData: RuntimeData,
     
   };

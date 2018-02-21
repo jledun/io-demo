@@ -19,6 +19,26 @@ module.exports = function(app, cb) {
       model: 'LogRefroidisseur',
       id: '',
     },
+    {
+      input: './common/files/materialtype.json',
+      model: 'MaterialType',
+      id: '',
+    },
+    {
+      input: './common/files/material.json',
+      model: 'Material',
+      id: '',
+    },
+    {
+      input: './common/files/recipe.json',
+      model: 'Recipe',
+      id: '',
+    },
+    {
+      input: './common/files/recipeComponents.json',
+      model: 'RecipeComponents',
+      id: '',
+    },
   ];
 
   const fromFile = (file) => {
