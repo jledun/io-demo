@@ -19,8 +19,35 @@
   // align-content: flex-start;
 }
 .component-card {
-  min-width: 300px;
-  max-width: 450px;
-  margin: 5px;
-  flex: 0 0 auto;
+  // min-width: 300px;
+  // max-width: 450px;
+  margin: 5px!important;
+  flex: 1 0 auto;
+}
+.edit-general {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+.edit-general-form {
+  display: flex;
+  flex-direction: column;
+}
+.edit-component {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.edit-component-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.edit-component-card {
+  flex: 1 0 auto;
+  min-width: 210px;
 }

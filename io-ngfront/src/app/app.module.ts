@@ -29,6 +29,8 @@ import { MatSidenavModule,
   MatCommonModule,
   MatProgressSpinnerModule,
   MatListModule,
+  MatTabsModule,
+  MatSnackBarModule,
   MatDatepickerModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -99,6 +101,8 @@ const appRoutes: Routes = [
     MatListModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
+    MatSnackBarModule,
     MatCommonModule,
     LayoutModule,
     ScrollDispatchModule,

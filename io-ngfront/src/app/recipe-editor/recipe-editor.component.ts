@@ -48,14 +48,17 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     ]
   }
   columnsToDisplay = ['name', 'matnr', 'description', 'componentCount','actions'];
-  editorColumnsToDisplay = ['matnr', 'name', 'description', 'quantity', 'unit', 'order'];
-  editing: any = {};
+  editorColumnsToDisplay = ['matnr', 'quantity', 'unit', 'order'];
+  displayMode: number = 0;
+
   selectedRecipe: RecipeInterface = {
     name: ""
   };
+  editing: any = {};
   defaultComponent: RecipeComponentsInterface = {quantity: 0, unit: 'lb', order: 0};
   materialList: MaterialInterface[] = [];
   newComponent: RecipeComponents;
+  newRecipe: Recipe = this.getNewRecipe();
   editedRecipe: Recipe;
 
   recipeDataService: DataRefresher;
@@ -65,13 +68,36 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     if ( result.matches ) this.client = size;
   }
 
+  refreshDatas() {
+    this.recipeDataService.refresh();
+    this.materialDataService.refresh();
+  }
+  toggleAutoRefresh() {
+    if (this.recipeDataService.status.autorisation) {
+      this.recipeDataService.suspend();
+    }else{
+      this.recipeDataService.run();
+    }
+  }
+
+  getNewRecipe(): Recipe {
+    return <Recipe>{
+      name: "",
+      description: "",
+      material: this.getNewMaterial(),
+      recipeComponents: []
+    }
+  }
+  getNewMaterial(): Material {
+    return <Material>{
+      name: "",
+      matnr: "",
+      description: ""
+    }
+  }
   getNewComponent(): RecipeComponents {
     return <RecipeComponents>{
-      material: {
-        name: "",
-        matnr: "",
-        description: ""
-      },
+      material: this.getNewMaterial(),
       quantity: 0,
       unit: "",
       order: 0
@@ -82,11 +108,18 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     this.editing[recipe.material.matnr] = !this.editing[recipe.material.matnr];
     if (!this.editing[recipe.material.matnr]) {
       this.recipeDataService.run();
+      this.displayMode = 0;
     }else{
       this.recipeDataService.suspend();
+      console.log(this.editedRecipe === this.newRecipe);
       this.editedRecipe = recipe;
       this.newComponent = this.getNewComponent();
+      this.displayMode = 1;
     }
+  }
+  createRecipe() {
+    this.newRecipe = this.getNewRecipe();
+    this.editRecipe(this.newRecipe);
   }
   getEditedMatnr(): string {
     let matnr;
@@ -115,11 +148,6 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   deleteRecipe(recipe) {
     this.selectedRecipe = recipe;
   }
-  createRecipe() {
-    this.selectedRecipe = new Recipe();
-    this.selectedRecipe.material = new Material();
-    this.editing = !this.editing;
-  }
   cancelEditing() {
     this.editing = !this.editing;
   }
@@ -134,6 +162,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   getRecipeList(data) {
     data.forEach(element => this.editing[element.material.matnr] = false);
     this.runtime = data;
+    console.log('refreshed');
   }
 
   constructor(
@@ -155,7 +184,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     this.recipeDataService.filter = this.filter;
     this.recipeDataService.dataService = this.recipeService;
     this.recipeDataService.data.subscribe(data => this.getRecipeList(data));
-    this.recipeDataService.run();
+    this.recipeDataService.refresh();
 
     this.materialDataService = new DataRefresher();
     this.materialDataService.filter = {

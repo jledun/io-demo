@@ -1,17 +1,27 @@
 <mat-toolbar color="primary" role="header" class="app-toolbar">
-  <a mat-icon-button (click)="test()">
+  <button mat-icon-button *ngIf="client === 'handset'" [matMenuTriggerFor]="mainMenu">
     <mat-icon>menu</mat-icon>
-  </a>
-  <a mat-button href="/dashboard">Dashboard</a>
-  <a mat-button href="/fullscreendashboard">Another dashboard</a>
-  <a mat-button href="/eventhistory">Events</a>
-  <a mat-button href="/alarmhistory">Alarms</a>
-  <a mat-button href="/processhistory">Process</a>
-  <a mat-button href="/recipe">Recipe management</a>
-
+  </button>
+  <mat-menu #mainMenu="matMenu">
+    <a mat-menu-item href="/dashboard">Dashboard</a>
+    <a mat-menu-item href="/fullscreendashboard">Another dashboard</a>
+    <a mat-menu-item href="/eventhistory">Events</a>
+    <a mat-menu-item href="/alarmhistory">Alarms</a>
+    <a mat-menu-item href="/processhistory">Process</a>
+    <a mat-menu-item href="/recipe">Recipe management</a>
+    <!-- <mat-divider></mat-divider> -->
+    <!-- <button mat-menu-item><span>{{ actualdatetime }}</span></button> -->
+    <!-- <button mat-menu-item><mat-icon>mailbox</mat-icon></button> -->
+    <!-- <button mat-menu-item>Login</button> -->
+  </mat-menu>
+  <a mat-button href="/dashboard" *ngIf="client !== 'handset'">Dashboard</a>
+  <a mat-button href="/fullscreendashboard" *ngIf="client !== 'handset'">Another dashboard</a>
+  <a mat-button href="/eventhistory" *ngIf="client !== 'handset'">Events</a>
+  <a mat-button href="/alarmhistory" *ngIf="client !== 'handset'">Alarms</a>
+  <a mat-button href="/processhistory" *ngIf="client !== 'handset'">Process</a>
+  <a mat-button href="/recipe" *ngIf="client !== 'handset'">Recipe management</a>
   <span class="fill-space"></span>
-
-  <button mat-button><span>{{ actualdatetime }}</span></button>
+  <button mat-button *ngIf="client === 'web'"><span>{{ actualdatetime }}</span></button>
   <button mat-button><mat-icon>mailbox</mat-icon></button>
   <button mat-button>Login</button>
 </mat-toolbar>

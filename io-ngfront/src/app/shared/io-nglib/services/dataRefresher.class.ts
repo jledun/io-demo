@@ -8,10 +8,11 @@ export class DataRefresher {
   private _tUpdate: number = 5000;
   private _tRetry: number = 10000;
   private _crtExec: number = 0;
+  private _crtExecMax: number = 999999;
   private _iSequence: any;
 
   private _initialized: boolean = false;
-  private _autorisation: boolean = true;
+  private _autorisation: boolean = false;
   private _running: boolean = false;
   private _fault: boolean = true;
   private _pending: boolean = false;
@@ -81,7 +82,7 @@ export class DataRefresher {
     if (TimeRetry) this._tRetry = TimeRetry;
     this._iSequence = setInterval(() => {
       this._mainSequence.call(this);
-      this._crtExec += this._tSequence;
+      if (this._crtExec < this._crtExecMax) this._crtExec += this._tSequence;
     }, this._tSequence);
     this.newData = {};
   }
@@ -105,7 +106,8 @@ export class DataRefresher {
     pending: this._pending,
     fault: this._fault,
     mode: this._sequence,
-    status: ''
+    autorisation: this._autorisation,
+    status: (this._autorisation) ? 'active' : 'inactive'
   }}
 
   public run() {
