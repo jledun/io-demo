@@ -9,9 +9,9 @@
       <mat-icon>add</mat-icon> Create a new recipe
     </button>
   </span>
-  <span *ngIf="displayMode === 1">
+  <span *ngIf="displayMode >= 1 && displayMode <= 2">
     <button mat-raised-button color="primary" (click)="editRecipe(editedRecipe)">
-      <mat-icon>view_list</mat-icon> Back
+      <mat-icon>view_list</mat-icon> Save and go back to recipe list
     </button>
   </span>
 </mat-toolbar>
@@ -25,14 +25,14 @@
             <mat-icon>menu</mat-icon>
           </button>
           <mat-menu #recipeEditionMenu="matMenu">
-            <button mat-menu-item (click)="editRecipe(recipe)">Edit recipe</button>
+            <button mat-menu-item (click)="actionEditRecipe(recipe)">Edit recipe</button>
             <button mat-menu-item (click)="deleteRecipe(recipe)">Delete recipe</button>
           </mat-menu>
           <span *ngIf="client !== 'handset'">Material #{{recipe.material.matnr}} - {{recipe.name}}</span>
           <span *ngIf="client === 'handset'">Material #{{recipe.material.matnr}}</span>
           <span class="fill-space"></span>
           <span *ngIf="client === 'tablet' || client === 'web'">
-            <button mat-button color="primary" (click)="editRecipe(recipe)">
+            <button mat-button color="primary" (click)="actionEditRecipe(recipe)">
               <mat-icon>edit</mat-icon> Edit recipe
             </button>
             <button mat-button color="warn" (click)="deleteRecipe(recipe)">
@@ -72,7 +72,7 @@
   </mat-card-content>
   <!-- RECIPE CARDS -->
   <!-- RECIPE EDIT -->
-  <mat-card-content *ngIf="runtime && displayMode === 1">
+  <mat-card-content *ngIf="runtime && (displayMode >= 1 && displayMode <= 2)">
     <!-- GENERAL INFORMATIONS -->
     <mat-card class="edit-general">
       <mat-toolbar>
@@ -85,7 +85,7 @@
           </mat-card-title>
           <mat-card-content>
             <mat-form-field style="width: 100%;">
-              <input matInput [(ngModel)]="editedRecipe.name" (change)="editChange()">
+              <input matInput [(ngModel)]="editedRecipe.name">
               <!-- <mat-placeholder>Recipe name</mat-placeholder> -->
             </mat-form-field>
           </mat-card-content>
@@ -96,8 +96,8 @@
           </mat-card-title>
           <mat-card-content>
             <mat-form-field style="width: 100%;">
-              <textarea matInput [(ngModel)]="editedRecipe.description" (change)="editChange()">{{editedRecipe.description}}</textarea>
-              <!-- <mat-placeholder>Recipe description</mat-placeholder> -->
+              <textarea matInput
+                [(ngModel)]="editedRecipe.description">{{editedRecipe.description}}</textarea>
             </mat-form-field>
           </mat-card-content>
         </mat-card>
@@ -106,7 +106,9 @@
             <span class="mat-subheading-2">Material number</span>
           </mat-card-title>
           <mat-card-content>
-            <app-material-selector [(selected)]="editedRecipe.material"></app-material-selector>
+            <app-material-selector
+              [(selected)]="editedRecipe.material"
+              [typeName]="'SF1'"></app-material-selector>
           </mat-card-content>
         </mat-card>
         
@@ -119,14 +121,21 @@
         <!-- COMPONENT LIST EDITOR -->
         <mat-tab label="Component list">
           <!-- COMPONENT LIST -->
-          <mat-card-content class="edit-component-list" *ngFor="let component of editedRecipe.recipeComponents">
+          <mat-card-content class="edit-component-list" *ngFor="let component of editedRecipe.recipeComponents; index as key">
             <mat-card class="edit-component-card">
               <mat-card-title>
                 <span class="mat-subheading-2">Material number</span>
               </mat-card-title>
               <mat-card-content>
-                <app-material-selector [(selected)]="component.material"></app-material-selector>
+                <app-material-selector
+                  [(selected)]="component.material"
+                  [typeName]="'RM1'"></app-material-selector>
               </mat-card-content>
+              <mat-card-actions>
+                <button mat-button (click)="deleteComponent(component, key)">
+                  <mat-icon>delete</mat-icon> Delete component
+                </button>
+              </mat-card-actions>
             </mat-card>
             <mat-card class="edit-component-card">
               <mat-card-title>
@@ -134,7 +143,7 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-form-field style="width: 100%;">
-                  <input matInput [(ngModel)]="component.quantity" (change)="editChange()">
+                  <input matInput [(ngModel)]="component.quantity">
                 </mat-form-field>
               </mat-card-content>
             </mat-card>
@@ -144,7 +153,7 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-form-field style="width: 100%;">
-                  <input matInput [(ngModel)]="component.unit" (change)="editChange()">
+                  <input matInput [(ngModel)]="component.unit">
                 </mat-form-field>
               </mat-card-content>
             </mat-card>
@@ -154,7 +163,7 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-form-field style="width: 100%;">
-                  <input matInput [(ngModel)]="component.order" (change)="editChange()">
+                  <input matInput [(ngModel)]="component.order">
                 </mat-form-field>
               </mat-card-content>
             </mat-card>
@@ -165,7 +174,7 @@
             <mat-toolbar>
               <span>New component</span>
               <span class="fill-space"></span>
-              <button mat-button color="primary">
+              <button mat-button color="primary" (click)="addComponent()">
                 <mat-icon>add</mat-icon> Add new component to recipe
               </button>
             </mat-toolbar>
@@ -174,7 +183,9 @@
                 <span class="mat-subheading-2">Material number</span>
               </mat-card-title>
               <mat-card-content>
-                <app-material-selector [(selected)]="newComponent.material"></app-material-selector>
+                <app-material-selector
+                  [(selected)]="newComponent.material"
+                  [typeName]="'RM1'"></app-material-selector>
               </mat-card-content>
             </mat-card>
             <mat-card class="edit-component-card">
@@ -183,7 +194,7 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-form-field style="width: 100%;">
-                  <input matInput [(ngModel)]="newComponent.quantity" (change)="editChange()">
+                  <input matInput [(ngModel)]="newComponent.quantity">
                 </mat-form-field>
               </mat-card-content>
             </mat-card>
@@ -193,7 +204,7 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-form-field style="width: 100%;">
-                  <input matInput [(ngModel)]="newComponent.unit" (change)="editChange()">
+                  <input matInput [(ngModel)]="newComponent.unit">
                 </mat-form-field>
               </mat-card-content>
             </mat-card>
@@ -203,7 +214,7 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-form-field style="width: 100%;">
-                  <input matInput [(ngModel)]="newComponent.order" (change)="editChange()">
+                  <input matInput [(ngModel)]="newComponent.order">
                 </mat-form-field>
               </mat-card-content>
             </mat-card>

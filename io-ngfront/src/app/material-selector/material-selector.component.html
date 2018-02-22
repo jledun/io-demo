@@ -1,5 +1,4 @@
 <span *ngIf="selected">
-  <!-- <span>Material number :<br></span> -->
   <mat-form-field *ngIf="!selected.name">
     <mat-select [(value)]="selected">
       <mat-option *ngFor="let material of materialList" [value]="material">{{material.matnr}} - {{material.name}}</mat-option>

@@ -32,8 +32,17 @@ export class MaterialSelectorComponent implements OnInit, OnDestroy {
     this.selectedChange.emit(value);
   }
 
+  @Input() typeName: string = "";
+
   refreshMaterialList(): Observable<MaterialInterface[]> {
-    return this.materialService.find({include: "materialType"});
+    let where = {}
+    if (this.typeName) {
+      where = {materialTypeId: this.materialTypeList.find((matt) => matt.name === this.typeName).id}
+    }
+    return this.materialService.find({
+      where: where,
+      include: "materialType"
+    });
   }
   refreshMaterialTypeList(): Observable<MaterialTypeInterface[]> {
     return this.materialTypeService.find({});
@@ -41,11 +50,11 @@ export class MaterialSelectorComponent implements OnInit, OnDestroy {
   refreshAll() {
     if (this.busy) return;
     this.loading = true;
-    this.refreshMaterialList().concatMap( data => {
-      this.materialList = <MaterialInterface[]>data;
-      return this.refreshMaterialTypeList();
+    this.refreshMaterialTypeList().concatMap( data => {
+      this.materialTypeList = <MaterialTypeInterface[]>data;
+      return this.refreshMaterialList();
     }).subscribe(
-      data => this.materialTypeList = <MaterialTypeInterface[]>data,
+      data => this.materialList = <MaterialInterface[]>data,
       err => console.log(err),
       () => this.loading = false
     )
@@ -53,7 +62,6 @@ export class MaterialSelectorComponent implements OnInit, OnDestroy {
 
   resetSelected() {
     this.selected = new Material();
-    console.log(this._selected);
   }
   createMatnr() {
     alert('not implemented yet :-(');

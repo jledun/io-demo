@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Recipe,
   RecipeComponents,
@@ -16,6 +17,13 @@ import {
 import { IoRunTimeDatasService, DataRefresher } from '../shared/io-nglib/';
 import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../shared/sdk';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/defaultIfEmpty';
+import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/combineLatest';
+import 'rxjs/add/observable/concat';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/forkJoin';
 
 enum clientsize {
   handset = 'handset',
@@ -50,16 +58,14 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   columnsToDisplay = ['name', 'matnr', 'description', 'componentCount','actions'];
   editorColumnsToDisplay = ['matnr', 'quantity', 'unit', 'order'];
   displayMode: number = 0;
+  mDisplayMode: number = 0;
 
-  selectedRecipe: RecipeInterface = {
-    name: ""
-  };
   editing: any = {};
-  defaultComponent: RecipeComponentsInterface = {quantity: 0, unit: 'lb', order: 0};
   materialList: MaterialInterface[] = [];
   newComponent: RecipeComponents;
   newRecipe: Recipe = this.getNewRecipe();
   editedRecipe: Recipe;
+  componentsToDelete: RecipeComponents[] = [];
 
   recipeDataService: DataRefresher;
   materialDataService: DataRefresher;
@@ -81,45 +87,38 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   }
 
   getNewRecipe(): Recipe {
-    return <Recipe>{
+    return new Recipe({
       name: "",
       description: "",
       material: this.getNewMaterial(),
       recipeComponents: []
-    }
+    });
   }
   getNewMaterial(): Material {
-    return <Material>{
+    return new Material({
       name: "",
       matnr: "",
       description: ""
-    }
+    });
   }
   getNewComponent(): RecipeComponents {
-    return <RecipeComponents>{
+    return new RecipeComponents({
       material: this.getNewMaterial(),
       quantity: 0,
       unit: "",
       order: 0
-    }
-  }
-  editRecipe(recipe) {
-    for (const edit of this.editing) {this.editing[edit] = false;}
-    this.editing[recipe.material.matnr] = !this.editing[recipe.material.matnr];
-    if (!this.editing[recipe.material.matnr]) {
-      this.recipeDataService.run();
-      this.displayMode = 0;
-    }else{
-      this.recipeDataService.suspend();
-      console.log(this.editedRecipe === this.newRecipe);
-      this.editedRecipe = recipe;
-      this.newComponent = this.getNewComponent();
-      this.displayMode = 1;
-    }
+    });
   }
   createRecipe() {
     this.newRecipe = this.getNewRecipe();
-    this.editRecipe(this.newRecipe);
+    this.newComponent = this.getNewComponent();
+    this.editedRecipe = this.newRecipe;
+    this.displayMode = 2;
+  }
+  actionEditRecipe(recipe){
+    this.editedRecipe = recipe;
+    this.newComponent = this.getNewComponent();
+    this.displayMode = 1;
   }
   getEditedMatnr(): string {
     let matnr;
@@ -132,37 +131,121 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     let matnr = this.getEditedMatnr();
     return this.runtime.find(recipe => recipe.material.matnr === matnr);
   }
+  editRecipe(recipe) {
+
+    switch(this.displayMode) {
+      case 1:
+      // editing existing recipe
+      // update recipe general details
+      this.recipeService.upsert(this.editedRecipe).concatMap(
+        (data: Recipe) => {
+          // update recipe components details, one upsert for each component
+          return Observable.forkJoin(
+            this.editedRecipe.recipeComponents.map(
+              (component) => {
+                if (!component.recipeId) component.recipeId = data.id;
+                return this.recipeComponentService.upsert(component);
+              }
+            )
+          );
+        }
+      ).concatMap(data => {
+        // manage components to delete in loopback
+        return Observable.forkJoin(
+          this.componentsToDelete.map(
+            component => this.recipeComponentService.deleteById(component.id)
+          )
+        );
+
+      }).defaultIfEmpty('NO_EFFECT').concatMap((data) => {
+        // init list of components to delete
+        this.componentsToDelete = [];
+
+        // update recipe list
+        return this.recipeService.find(this.filter);
+
+      }).subscribe(
+        data => this.getRecipeList(data),
+        err => console.log(err),
+        () => this.displayMode = 0
+
+      );
+      break;
+
+      case 2:
+      // creating a new recipe
+      // if it has been modified, of course
+      if (!this.editedRecipe.name) {
+        this.recipeDataService.refresh();
+        this.displayMode = 0;
+        break;
+      }
+
+      // create recipe general details
+      this.recipeService.create(this.editedRecipe).concatMap(
+        (data: Recipe) => {
+          console.log(data);
+          // update recipe components details, one upsert for each component
+          return Observable.forkJoin( this.editedRecipe.recipeComponents.map((component) => {
+            if (!component.recipeId) component.recipeId = data.id;
+            return this.recipeComponentService.create(component);
+          }));
+        }
+      ).concatMap((data) => {
+        // init list of components to delete
+        this.componentsToDelete = [];
+
+        // update recipe list
+        return this.recipeService.find(this.filter);
+
+      }).subscribe(
+        data => this.getRecipeList(data),
+        err => console.log(err),
+        () => this.displayMode = 0
+      );
+      break;
+
+      default:
+      this.recipeDataService.refresh();
+      this.displayMode = 0;
+      break;
+    }
+
+  }
   addComponent() {
     this.newComponent.materialId = this.newComponent.material.id;
-    this.newComponent.recipeId = this.editedRecipe.id;
-    this.recipeComponentService.create(this.newComponent).subscribe(
-      data => console.log(data),
-      err => console.log(err),
-      () => console.log('done')
-    );
-    return this.refreshEditedComponent();
-  }
-  refreshEditedComponent() {
-    this.recipeService.findById(this.editedRecipe.id, this.filter).subscribe(data => this.editedRecipe = <Recipe>data);
+    this.editedRecipe.recipeComponents.push(Object.assign({}, this.newComponent));
+    this.newComponent = this.getNewComponent();
+    this.alertUser('new component added :-)');
   }
   deleteRecipe(recipe) {
-    this.selectedRecipe = recipe;
+    if (!confirm(`Do you really want to delete ${recipe.material.matnr} ?`)) return;
+    this.recipeService.deleteById(recipe.id)
+    .concatMap(data => this.recipeService.find(this.filter))
+    .subscribe(
+      data => this.getRecipeList(data),
+      err => console.log(err),
+      () => this.alertUser(`${recipe.name} destroyed`)
+    );
   }
-  cancelEditing() {
-    this.editing = !this.editing;
+  deleteComponent(component: RecipeComponents, key: number) {
+    if (!confirm(`Do you really want to delete ${component.material.matnr} ?`)) return;
+    this.componentsToDelete.push(Object.assign({}, component));
+    this.editedRecipe.recipeComponents.splice(key);
+    this.alertUser('component deleted.');
   }
-  saveEditing() {
-    this.editing = !this.editing;
-  }
-  editChange() {
-    console.log(this.selectedRecipe);
-  }
-  changeComponentMaterial() {}
 
   getRecipeList(data) {
     data.forEach(element => this.editing[element.material.matnr] = false);
     this.runtime = data;
-    console.log('refreshed');
+    this.alertUser();
+  }
+
+  alertUser(msg: string = 'Data refreshed') {
+    this.snackBar.open(msg);
+    setTimeout(() => {
+      this.snackBar.dismiss();
+    }, 4000);
   }
 
   constructor(
@@ -171,6 +254,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     private materialService: MaterialApi,
     private materialTypeService: MaterialTypeApi,
     private breakpointObserver: BreakpointObserver,
+    public snackBar: MatSnackBar,
   ) {
     LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
     LoopBackConfig.setApiVersion( environment.lbApp.api );

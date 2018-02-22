@@ -31,6 +31,7 @@ import { MatSidenavModule,
   MatListModule,
   MatTabsModule,
   MatSnackBarModule,
+  MatSnackBar,
   MatDatepickerModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -108,7 +109,7 @@ const appRoutes: Routes = [
     ScrollDispatchModule,
     ChartsModule
   ],
-  providers: [ IoRunTimeDatasService ],
+  providers: [ IoRunTimeDatasService, MatSnackBar ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
