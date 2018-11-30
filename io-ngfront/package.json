@@ -31,9 +31,9 @@
     "ng2-charts": "^1.6.0",
     "popper.js": "^1.13.0",
     "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "^0.8.20",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "zone.js": "^0.8.20"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.11.0",

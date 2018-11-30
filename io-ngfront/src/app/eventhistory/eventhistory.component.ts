@@ -38,7 +38,7 @@ export class EventhistoryComponent implements OnInit, OnDestroy {
     skip: 0,
     order: ['evTime DESC', 'evTimeMs DESC']
   };
-  events: EventhistoryInterface[];
+  events: EventhistoryInterface[] = [];
   displayedColumns = [
     'evTime',
     'evStation',

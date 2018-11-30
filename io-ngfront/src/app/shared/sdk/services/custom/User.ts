@@ -1,15 +1,14 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
 import { LoopBackAuth } from '../core/auth.service';
 import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
-import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { User } from '../../models/User';
 
 
@@ -20,21 +19,20 @@ import { User } from '../../models/User';
 export class UserApi extends BaseLoopBackApi {
 
   constructor(
-    @Inject(Http) protected http: Http,
+    @Inject(HttpClient) protected http: HttpClient,
     @Inject(SDKModels) protected models: SDKModels,
     @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
-    super(http,  models, auth, searchParams, errorHandler);
+    super(http,  models, auth, errorHandler);
   }
 
   /**
-   * Find a related item by id for accessTokens.
+   * Recherchez un élément lié par id pour accessTokens.
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for accessTokens
+   * @param {any} fk Clé externe pour accessTokens
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -60,11 +58,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for accessTokens.
+   * Supprimez un élément lié par id pour accessTokens.
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for accessTokens
+   * @param {any} fk Clé externe pour accessTokens
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -87,11 +85,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for accessTokens.
+   * Mettez à jour un élément lié par id pour accessTokens.
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for accessTokens
+   * @param {any} fk Clé externe pour accessTokens
    *
    * @param {object} data Request data.
    *
@@ -123,7 +121,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries accessTokens of User.
+   * Demandes accessTokens de User.
    *
    * @param {any} id User id
    *
@@ -153,7 +151,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in accessTokens of this model.
+   * Crée une instance dans accessTokens de ce modèle.
    *
    * @param {any} id User id
    *
@@ -186,7 +184,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all accessTokens of this model.
+   * Supprime tous les accessTokens de ce modèle.
    *
    * @param {any} id User id
    *
@@ -210,7 +208,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts accessTokens of User.
+   * Compte accessTokens de User.
    *
    * @param {any} id User id
    *
@@ -336,13 +334,15 @@ export class UserApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     if (typeof include !== 'undefined' && include !== null) _urlParams.include = include;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders)
-      .map(
+      .pipe(
+        map(
         (response: any) => {
           response.ttl = parseInt(response.ttl);
           response.rememberMe = rememberMe;
           this.auth.setToken(response);
           return response;
         }
+      )
       );
       return result;
       
@@ -517,7 +517,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in accessTokens of this model.
+   * Crée une instance dans accessTokens de ce modèle.
    *
    * @param {any} id User id
    *

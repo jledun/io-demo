@@ -34,7 +34,7 @@ export class AlarmhistoryComponent implements OnInit, OnDestroy {
     skip: 0,
     order: ['alStartTime DESC', 'alStartTimeMs DESC']
   };
-  alarms: AlarmhistoryInterface[];
+  alarms: AlarmhistoryInterface[] = [];
   stationlist: string[];
   displayedColumns = [
     'alStartTime',

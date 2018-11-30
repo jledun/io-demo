@@ -17,13 +17,10 @@ import {
 import { IoRunTimeDatasService, DataRefresher } from '../shared/io-nglib/';
 import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../shared/sdk';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { Observable, forkJoin } from 'rxjs';
 import 'rxjs/add/operator/defaultIfEmpty';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/combineLatest';
-import 'rxjs/add/observable/concat';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/observable/forkJoin';
 
 enum clientsize {
   handset = 'handset',
@@ -140,7 +137,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
       this.recipeService.upsert(this.editedRecipe).concatMap(
         (data: Recipe) => {
           // update recipe components details, one upsert for each component
-          return Observable.forkJoin(
+          return forkJoin(
             this.editedRecipe.recipeComponents.map(
               (component) => {
                 if (!component.recipeId) component.recipeId = data.id;
@@ -151,7 +148,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
         }
       ).concatMap(data => {
         // manage components to delete in loopback
-        return Observable.forkJoin(
+        return forkJoin(
           this.componentsToDelete.map(
             component => this.recipeComponentService.deleteById(component.id)
           )
@@ -166,7 +163,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
 
       }).subscribe(
         data => this.getRecipeList(data),
-        err => console.log(err),
+        err => console.error(err),
         () => this.displayMode = 0
 
       );
@@ -186,7 +183,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
         (data: Recipe) => {
           console.log(data);
           // update recipe components details, one upsert for each component
-          return Observable.forkJoin( this.editedRecipe.recipeComponents.map((component) => {
+          return forkJoin(this.editedRecipe.recipeComponents.map(component => {
             if (!component.recipeId) component.recipeId = data.id;
             return this.recipeComponentService.create(component);
           }));
@@ -194,6 +191,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
       ).concatMap((data) => {
         // init list of components to delete
         this.componentsToDelete = [];
+          console.log(data);
 
         // update recipe list
         return this.recipeService.find(this.filter);

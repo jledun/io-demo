@@ -1,15 +1,14 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
 import { LoopBackAuth } from '../core/auth.service';
 import { LoopBackFilter,  } from '../../models/BaseModels';
-import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Recipe } from '../../models/Recipe';
 import { RecipeComponents } from '../../models/RecipeComponents';
 import { Material } from '../../models/Material';
@@ -22,21 +21,20 @@ import { Material } from '../../models/Material';
 export class RecipeApi extends BaseLoopBackApi {
 
   constructor(
-    @Inject(Http) protected http: Http,
+    @Inject(HttpClient) protected http: HttpClient,
     @Inject(SDKModels) protected models: SDKModels,
     @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
-    super(http,  models, auth, searchParams, errorHandler);
+    super(http,  models, auth, errorHandler);
   }
 
   /**
-   * Find a related item by id for recipeComponents.
+   * Recherchez un élément lié par id pour recipeComponents.
    *
    * @param {any} id Recipe id
    *
-   * @param {any} fk Foreign key for recipeComponents
+   * @param {any} fk Clé externe pour recipeComponents
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -62,11 +60,11 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for recipeComponents.
+   * Supprimez un élément lié par id pour recipeComponents.
    *
    * @param {any} id Recipe id
    *
-   * @param {any} fk Foreign key for recipeComponents
+   * @param {any} fk Clé externe pour recipeComponents
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -89,11 +87,11 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for recipeComponents.
+   * Mettez à jour un élément lié par id pour recipeComponents.
    *
    * @param {any} id Recipe id
    *
-   * @param {any} fk Foreign key for recipeComponents
+   * @param {any} fk Clé externe pour recipeComponents
    *
    * @param {object} data Request data.
    *
@@ -125,7 +123,7 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation material.
+   * Extrait la relation belongsTo material.
    *
    * @param {any} id Recipe id
    *
@@ -155,7 +153,7 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries recipeComponents of Recipe.
+   * Demandes recipeComponents de Recipe.
    *
    * @param {any} id Recipe id
    *
@@ -185,7 +183,7 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in recipeComponents of this model.
+   * Crée une instance dans recipeComponents de ce modèle.
    *
    * @param {any} id Recipe id
    *
@@ -218,7 +216,7 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all recipeComponents of this model.
+   * Supprime tous les recipeComponents de ce modèle.
    *
    * @param {any} id Recipe id
    *
@@ -242,7 +240,7 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts recipeComponents of Recipe.
+   * Compte recipeComponents de Recipe.
    *
    * @param {any} id Recipe id
    *
@@ -333,7 +331,7 @@ export class RecipeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in recipeComponents of this model.
+   * Crée une instance dans recipeComponents de ce modèle.
    *
    * @param {any} id Recipe id
    *

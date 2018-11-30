@@ -1,15 +1,14 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
 import { LoopBackAuth } from '../core/auth.service';
 import { LoopBackFilter,  } from '../../models/BaseModels';
-import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Event } from '../../models/Event';
 import { Comment } from '../../models/Comment';
 import { Topic } from '../../models/Topic';
@@ -23,17 +22,16 @@ import { EventType } from '../../models/EventType';
 export class EventApi extends BaseLoopBackApi {
 
   constructor(
-    @Inject(Http) protected http: Http,
+    @Inject(HttpClient) protected http: HttpClient,
     @Inject(SDKModels) protected models: SDKModels,
     @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
-    super(http,  models, auth, searchParams, errorHandler);
+    super(http,  models, auth, errorHandler);
   }
 
   /**
-   * Fetches hasOne relation comments.
+   * Extrait la relation hasOne comments.
    *
    * @param {any} id Event id
    *
@@ -63,7 +61,7 @@ export class EventApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in comments of this model.
+   * Crée une instance dans comments de ce modèle.
    *
    * @param {any} id Event id
    *
@@ -96,7 +94,7 @@ export class EventApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update comments of this model.
+   * Mettez à jour comments de ce modèle.
    *
    * @param {any} id Event id
    *
@@ -129,7 +127,7 @@ export class EventApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes comments of this model.
+   * Supprime comments de ce modèle.
    *
    * @param {any} id Event id
    *
@@ -153,7 +151,7 @@ export class EventApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation topic.
+   * Extrait la relation belongsTo topic.
    *
    * @param {any} id Event id
    *
@@ -183,7 +181,7 @@ export class EventApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation eventTypes.
+   * Extrait la relation belongsTo eventTypes.
    *
    * @param {any} id Event id
    *
@@ -275,7 +273,7 @@ export class EventApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in comments of this model.
+   * Crée une instance dans comments de ce modèle.
    *
    * @param {any} id Event id
    *
