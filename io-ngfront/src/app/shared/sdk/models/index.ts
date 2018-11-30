@@ -13,6 +13,7 @@ export * from './Recipe';
 export * from './RecipeComponents';
 export * from './MaterialType';
 export * from './Material';
+export * from './IoUser';
 export * from './RuntimeData';
 export * from './BaseModels';
 

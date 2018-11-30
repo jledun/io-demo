@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from './shared/sdk';
 import {
+  IoUser,
+  IoUserInterface,
   LogRefroidisseurInterface,
   MaterialInterface,
   MaterialTypeInterface
@@ -8,6 +10,7 @@ import {
 import { 
   AlarmhistoryApi,
   EventhistoryApi,
+  IoUserApi,
   LogRefroidisseurApi,
   MaterialApi,
   MaterialTypeApi,
@@ -36,6 +39,24 @@ export class LbdataService {
     LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
     LoopBackConfig.setApiVersion( environment.lbApp.api );
   }
+
+  /*
+   * USER MANAGEMENT
+   * */
+  private crtUser: IoUserInterface = new IoUser();
+  getCrtUser(): IoUserInterface {
+    return this.crtUser;
+  }
+  userLogIn(cred: IoUserInterface) {}
+  userLogOut() {}
+  getUsers() {}
+  userRetrieve(id: number) {}
+  userCreate(user: IoUserInterface) {}
+  userUpdate(user: IoUserInterface) {}
+  userDelete(user: IoUserInterface) {}
+  /*
+   * USER MANAGEMENT
+   * */
 
   /* 
    * ALARM HISTORY API

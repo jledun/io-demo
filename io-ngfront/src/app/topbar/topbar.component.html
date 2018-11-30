@@ -21,7 +21,8 @@
   <a mat-button href="/processhistory" *ngIf="client !== 'handset'">Process</a>
   <a mat-button href="/recipe" *ngIf="client !== 'handset'">Recipe management</a>
   <span class="fill-space"></span>
+  <app-loader [status]="loading"></app-loader>
   <button mat-button *ngIf="client === 'web'"><span>{{ actualdatetime }}</span></button>
   <button mat-button><mat-icon>mailbox</mat-icon></button>
-  <button mat-button>Login</button>
+  <app-user-connection></app-user-connection>
 </mat-toolbar>

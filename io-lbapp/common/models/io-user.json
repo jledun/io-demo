@@ -1,0 +1,31 @@
+{
+  "name": "ioUser",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+  {
+    "accessType": "*",
+    "principalType": "$unauthenticated",
+    "permission": "DENY"
+  },
+  {
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "admin",
+    "permission": "ALLOW"
+  }
+],
+  "methods": {}
+}

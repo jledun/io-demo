@@ -47,6 +47,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullscreenDashboardComponent } from './fullscreen-dashboard/fullscreen-dashboard.component';
 import { RecipeEditorComponent } from './recipe-editor/recipe-editor.component';
 import { MaterialSelectorComponent } from './material-selector/material-selector.component';
+import { LoaderComponent } from './shared/io-nglib/component/loader/loader.component';
+import { UserConnectionComponent } from './user-connection/user-connection.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -69,7 +72,10 @@ const appRoutes: Routes = [
     DashboardComponent,
     FullscreenDashboardComponent,
     RecipeEditorComponent,
-    MaterialSelectorComponent
+    MaterialSelectorComponent,
+    LoaderComponent,
+    UserConnectionComponent,
+    UserManagementComponent
   ],
   imports: [
     RouterModule.forRoot(

@@ -1,0 +1,6 @@
+<ng-container *ngIf="crtUser.realm && crtUser.realm.length > 0">
+  {{crtUser.realm}}
+</ng-container>
+<ng-container *ngIf="!crtUser.realm || crtUser.realm.length <= 0">
+  <button mat-button>Login</button>
+</ng-container>

@@ -14,6 +14,7 @@ import { Recipe } from '../../models/Recipe';
 import { RecipeComponents } from '../../models/RecipeComponents';
 import { MaterialType } from '../../models/MaterialType';
 import { Material } from '../../models/Material';
+import { IoUser } from '../../models/IoUser';
 import { RuntimeData } from '../../models/RuntimeData';
 
 export interface Models { [name: string]: any }
@@ -36,6 +37,7 @@ export class SDKModels {
     RecipeComponents: RecipeComponents,
     MaterialType: MaterialType,
     Material: Material,
+    IoUser: IoUser,
     RuntimeData: RuntimeData,
     
   };
