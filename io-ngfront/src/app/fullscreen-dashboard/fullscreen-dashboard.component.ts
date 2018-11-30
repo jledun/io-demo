@@ -1,10 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { RuntimeData } from '../shared/sdk/models';
-import { RuntimeDataApi } from '../shared/sdk/services';
-import { IoRunTimeDatasService, DataRefresher } from '../shared/io-nglib/';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../shared/sdk';
-import { environment } from '../../environments/environment';
+import { LbdataService } from '../lbdata.service';
+import { DataRefresher } from '../shared/io-nglib/';
 
 enum clientsize {
   handset = 'handset',
@@ -62,12 +59,9 @@ export class FullscreenDashboardComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private rtService: RuntimeDataApi,
+    private lbdata: LbdataService,
     private breakpointObserver: BreakpointObserver,
-  ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
-    
+  ) {    
     // responsive breakpoints integration
     breakpointObserver.observe( Breakpoints.Handset ).subscribe( result => this.setClient( clientsize.handset, result ) );
     breakpointObserver.observe( Breakpoints.Tablet ).subscribe( result => this.setClient( clientsize.tablet, result ) );
@@ -75,7 +69,7 @@ export class FullscreenDashboardComponent implements OnInit, OnDestroy {
     
     this.refresher = new DataRefresher();
     this.refresher.updateTime = this.intervalTime;
-    this.refresher.dataService = this.rtService;
+    this.refresher.dataService = this.lbdata.rtService;
     this.refresher.run();
     this.refresher.data.subscribe(data => this.runtime = data[0]);
   }

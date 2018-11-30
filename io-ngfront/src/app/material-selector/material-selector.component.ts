@@ -1,15 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import {
-  Material,
-  MaterialType,
-  MaterialInterface,
-  MaterialTypeInterface } from '../shared/sdk/models';
-import {
-  MaterialApi,
-  MaterialTypeApi } from '../shared/sdk/services';
+import { LbdataService } from '../lbdata.service';
+import { Material, MaterialInterface, MaterialTypeInterface } from '../shared/sdk/models';
 import { IoRunTimeDatasService } from '../shared/io-nglib/';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter, RecipeComponents } from '../shared/sdk';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/concatMap';
 
@@ -39,13 +31,13 @@ export class MaterialSelectorComponent implements OnInit, OnDestroy {
     if (this.typeName) {
       where = {materialTypeId: this.materialTypeList.find((matt) => matt.name === this.typeName).id}
     }
-    return this.materialService.find({
+    return this.lbdata.getMaterial({
       where: where,
       include: "materialType"
     });
   }
   refreshMaterialTypeList(): Observable<MaterialTypeInterface[]> {
-    return this.materialTypeService.find({});
+    return this.lbdata.getMaterialType({});
   }
   refreshAll() {
     if (this.busy) return;
@@ -69,12 +61,8 @@ export class MaterialSelectorComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private materialService: MaterialApi,
-    private materialTypeService: MaterialTypeApi
-  ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
-  }
+    private lbdata: LbdataService
+  ) { }
 
   set loading(value) {
     this.busy = value;

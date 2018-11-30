@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../shared/sdk';
-import { LogRefroidisseur, LogRefroidisseurInterface } from '../shared/sdk/models';
-import { LogRefroidisseurApi } from '../shared/sdk/services';
+import { LbdataService } from '../lbdata.service';
+import { LoopBackFilter } from '../shared/sdk';
+import { LogRefroidisseurInterface } from '../shared/sdk/models';
 import { IoRunTimeDatasService } from '../shared/io-nglib/';
-import { environment } from '../../environments/environment';
 
 enum clientsize {
   handset = 'handset',
@@ -49,7 +48,7 @@ export class ProcesshistoryComponent implements OnInit, OnDestroy {
     this.load = true;
     IoRunTimeDatasService.setDataLoading( true );
     this.lbFilter.where = this.parseFilter( this.tmpFilter );
-    this.logApi.find( this.lbFilter ).subscribe(
+    this.lbdata.getLogData( this.lbFilter ).subscribe(
       ( data: LogRefroidisseurInterface[] ) => {
         if ( !data ) return;
         if ( data.length <= 0 ) return;
@@ -158,12 +157,9 @@ export class ProcesshistoryComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private logApi: LogRefroidisseurApi,
+    private lbdata: LbdataService,
     private breakpointObserver: BreakpointObserver
   ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
-
     this.lineChartLabels = [];
     for ( let i = 0; i < 24; i++ ) this.lineChartLabels.push(i);
     

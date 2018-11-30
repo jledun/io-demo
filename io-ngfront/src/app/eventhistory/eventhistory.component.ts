@@ -2,10 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { IoRunTimeDatasService } from '../shared/io-nglib';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../shared/sdk';
-import { Eventhistory, EventhistoryInterface } from '../shared/sdk/models';
-import { EventhistoryApi } from '../shared/sdk/services';
-import { environment } from '../../environments/environment';
+import { LbdataService } from '../lbdata.service';
+import { LoopBackFilter } from '../shared/sdk';
+import { EventhistoryInterface } from '../shared/sdk/models';
 
 enum clientsize {
   handset = 'handset',
@@ -66,7 +65,7 @@ export class EventhistoryComponent implements OnInit, OnDestroy {
     this.filter.where = this.parseFilter( this.tmpFilter );
 
     // console.log( this.filter.skip );
-    this.eventhistoryApi.find( this.filter ).subscribe(
+    this.lbdata.getEventHistory( this.filter ).subscribe(
       ( data ) => {
         if ( this.filter.skip <= 0 ) {
           this.events = data;
@@ -134,13 +133,10 @@ export class EventhistoryComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private eventhistoryApi: EventhistoryApi,
+    private lbdata: LbdataService,
     private breakpointObserver: BreakpointObserver,
     private scroll: ScrollDispatcher
   ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
-
     // responsive breakpoints integration
     breakpointObserver.observe( Breakpoints.Handset ).subscribe( result => this.setClient( clientsize.handset, result ) );
     breakpointObserver.observe( Breakpoints.Tablet ).subscribe( result => this.setClient( clientsize.tablet, result ) );

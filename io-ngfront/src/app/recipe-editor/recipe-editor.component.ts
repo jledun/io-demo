@@ -1,22 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Recipe,
-  RecipeComponents,
-  Material,
-  MaterialType,
-  RecipeInterface,
-  RecipeComponentsInterface,
-  MaterialInterface,
-  MaterialTypeInterface } from '../shared/sdk/models';
-import { 
-  RecipeApi,
-  RecipeComponentsApi,
-  MaterialApi,
-  MaterialTypeApi } from '../shared/sdk/services';
+import { LbdataService } from '../lbdata.service';
+import { Recipe, RecipeComponents, Material, MaterialInterface } from '../shared/sdk/models';
 import { IoRunTimeDatasService, DataRefresher } from '../shared/io-nglib/';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../shared/sdk';
-import { environment } from '../../environments/environment';
+import { LoopBackFilter } from '../shared/sdk';
 import { Observable, forkJoin } from 'rxjs';
 import 'rxjs/add/operator/defaultIfEmpty';
 import 'rxjs/add/operator/concatMap';
@@ -134,14 +122,14 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
       case 1:
       // editing existing recipe
       // update recipe general details
-      this.recipeService.upsert(this.editedRecipe).concatMap(
+      this.lbdata.upsertRecipe(this.editedRecipe).concatMap(
         (data: Recipe) => {
           // update recipe components details, one upsert for each component
           return forkJoin(
             this.editedRecipe.recipeComponents.map(
               (component) => {
                 if (!component.recipeId) component.recipeId = data.id;
-                return this.recipeComponentService.upsert(component);
+                return this.lbdata.upsertComponent(component);
               }
             )
           );
@@ -150,7 +138,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
         // manage components to delete in loopback
         return forkJoin(
           this.componentsToDelete.map(
-            component => this.recipeComponentService.deleteById(component.id)
+            component => this.lbdata.deleteComponentById(component.id)
           )
         );
 
@@ -159,7 +147,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
         this.componentsToDelete = [];
 
         // update recipe list
-        return this.recipeService.find(this.filter);
+        return this.lbdata.getRecipeList(this.filter);
 
       }).subscribe(
         data => this.getRecipeList(data),
@@ -179,22 +167,20 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
       }
 
       // create recipe general details
-      this.recipeService.create(this.editedRecipe).concatMap(
+      this.lbdata.createRecipe(this.editedRecipe).concatMap(
         (data: Recipe) => {
-          console.log(data);
           // update recipe components details, one upsert for each component
           return forkJoin(this.editedRecipe.recipeComponents.map(component => {
             if (!component.recipeId) component.recipeId = data.id;
-            return this.recipeComponentService.create(component);
+            return this.lbdata.createComponent(component);
           }));
         }
       ).concatMap((data) => {
         // init list of components to delete
         this.componentsToDelete = [];
-          console.log(data);
 
         // update recipe list
-        return this.recipeService.find(this.filter);
+        return this.lbdata.getRecipeList(this.filter);
 
       }).subscribe(
         data => this.getRecipeList(data),
@@ -218,8 +204,8 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   }
   deleteRecipe(recipe) {
     if (!confirm(`Do you really want to delete ${recipe.material.matnr} ?`)) return;
-    this.recipeService.deleteById(recipe.id)
-    .concatMap(data => this.recipeService.find(this.filter))
+    this.lbdata.deleteRecipeById(recipe.id)
+    .concatMap(data => this.lbdata.getRecipeList(this.filter))
     .subscribe(
       data => this.getRecipeList(data),
       err => console.log(err),
@@ -247,16 +233,10 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private recipeService: RecipeApi,
-    private recipeComponentService: RecipeComponentsApi,
-    private materialService: MaterialApi,
-    private materialTypeService: MaterialTypeApi,
+    private lbdata: LbdataService,
     private breakpointObserver: BreakpointObserver,
     public snackBar: MatSnackBar,
   ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
-    
     // responsive breakpoints integration
     breakpointObserver.observe( Breakpoints.Handset ).subscribe( result => this.setClient( clientsize.handset, result ) );
     breakpointObserver.observe( Breakpoints.Tablet ).subscribe( result => this.setClient( clientsize.tablet, result ) );
@@ -264,7 +244,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
     
     this.recipeDataService = new DataRefresher();
     this.recipeDataService.filter = this.filter;
-    this.recipeDataService.dataService = this.recipeService;
+    this.recipeDataService.dataService = this.lbdata.recipeApi;
     this.recipeDataService.data.subscribe(data => this.getRecipeList(data));
     this.recipeDataService.refresh();
 
@@ -273,7 +253,7 @@ export class RecipeEditorComponent implements OnInit, OnDestroy {
       where: {},
       include: "materialType"
     }
-    this.materialDataService.dataService = this.materialService;
+    this.materialDataService.dataService = this.lbdata.materialApi;
     this.materialDataService.data.subscribe(data => this.materialList = data);
     this.materialDataService.refresh();
   }
