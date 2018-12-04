@@ -10,6 +10,7 @@ import {
   MatFormFieldModule, 
   MatIconModule,
   MatInputModule, 
+  MatNativeDateModule,
   MatSelectModule, 
   MatTableModule
 } from '@angular/material';
@@ -38,6 +39,7 @@ import { ProcesshistoryComponent } from './processhistory/processhistory.compone
     MatFormFieldModule, 
     MatIconModule,
     MatInputModule, 
+    MatNativeDateModule,
     MatSelectModule, 
     MatTableModule,
     ChartsModule

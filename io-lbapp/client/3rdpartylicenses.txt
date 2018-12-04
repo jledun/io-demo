@@ -469,7 +469,10 @@ THE SOFTWARE.
 @angular/common
 MIT
 
-@angular/animations
+@angular/platform-browser
+MIT
+
+@angular/router
 MIT
 
 @angular/cdk
@@ -522,30 +525,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/platform-browser
-MIT
-
-@angular/material/dialog
-
-@angular/forms
-MIT
-
-@angular/material/button
-
-@angular/material/datepicker
-
-@angular/material/snack-bar
-
-@angular/router
-MIT
-
 @angular/material/icon
 
 @angular/material/divider
 
+@angular/forms
+MIT
+
+@angular/animations
+MIT
+
 @angular/material/core
 
 @angular/material/list
+
+@angular/material/button
 
 @angular/material/card
 
@@ -553,7 +547,13 @@ MIT
 
 @angular/material/table
 
+@angular/material/dialog
+
+@angular/material/datepicker
+
 @angular/material/select
+
+@angular/material/snack-bar
 
 @angular/material/toolbar
 

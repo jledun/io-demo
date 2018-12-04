@@ -5,7 +5,7 @@ export const environment = {
     // ip: "ec2-52-47-151-127.eu-west-3.compute.amazonaws.com:3000",  // aws ec2 France
     // ip: "ec2-18-219-235-189.us-east-2.compute.amazonaws.com",  // aws ec2 East US
     // ip: "localhost:3000",
-    ip: "localhost:3000",
+    ip: "192.168.1.109:3000",
     api: 'api'
   }
 };

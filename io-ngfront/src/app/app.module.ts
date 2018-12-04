@@ -6,30 +6,11 @@ import { SDKBrowserModule } from './shared/sdk/index';
 // Import the Animations module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { 
-  MatButtonModule, 
-  MatButtonToggleModule,
-  MatCardModule, 
-  MatCheckboxModule, 
-  MatCommonModule,
-  MatDatepickerModule,
-  MatDividerModule,
-  MatFormFieldModule, 
-  MatGridListModule,
+  MatButtonModule,
   MatIconModule,
-  MatInputModule, 
-  MatListModule,
-  MatMenuModule, 
-  MatNativeDateModule,
+  MatMenuModule,
   MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule, 
-  MatSelectModule, 
-  MatSidenavModule,
-  MatSliderModule, 
-  MatSlideToggleModule,
-  MatSnackBarModule, MatSnackBar,
-  MatTableModule,
-  MatTabsModule,
+  MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -67,30 +48,10 @@ import { NomenclatureModule } from './shared/nomenclature/nomenclature.module';
     BrowserAnimationsModule,
 
     // Angular Material
-    MatButtonModule, 
-    MatButtonToggleModule,
-    MatCardModule, 
-    MatCheckboxModule, 
-    MatCommonModule,
-    MatDatepickerModule,
-    MatDividerModule,
-    MatFormFieldModule, 
-    MatGridListModule,
+    MatButtonModule,
     MatIconModule,
-    MatInputModule, 
-    MatListModule,
-    MatMenuModule, 
-    MatNativeDateModule,
+    MatMenuModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule, 
-    MatSelectModule, 
-    MatSidenavModule,
-    MatSliderModule, 
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatTabsModule,
     MatToolbarModule,
 
     // Angular cdk
@@ -109,7 +70,7 @@ import { NomenclatureModule } from './shared/nomenclature/nomenclature.module';
     MaterialModule,
     NomenclatureModule
   ],
-  providers: [ MatSnackBar ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

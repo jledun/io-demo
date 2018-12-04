@@ -12,6 +12,7 @@ import {
   MatListModule,
   MatMenuModule, 
   MatSelectModule,
+  MatSnackBarModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -37,6 +38,7 @@ import { NomenclatureEditorComponent } from  './nomenclature-editor/nomenclature
     MatListModule,
     MatMenuModule, 
     MatSelectModule,
+    MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
 
