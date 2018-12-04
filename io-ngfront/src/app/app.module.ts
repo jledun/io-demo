@@ -1,121 +1,115 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { IoRunTimeDatasService } from './shared/io-nglib';
 import { SDKBrowserModule } from './shared/sdk/index';
 
 // Import the Animations module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule, 
-  MatToolbarModule, 
-  MatIconModule, 
-  MatMenuModule, 
+import { 
   MatButtonModule, 
   MatButtonToggleModule,
-  MatTableModule,
-  MatGridListModule,
-  MatProgressBarModule,
-  MatDividerModule, 
-  MatFormFieldModule, 
-  MatInputModule, 
+  MatCardModule, 
   MatCheckboxModule, 
-  MatSelectModule, 
-  MatSliderModule, 
-  MatRadioModule, 
-  MatSlideToggleModule, 
-  MatCardModule,
-  MatNativeDateModule, 
   MatCommonModule,
-  MatProgressSpinnerModule,
+  MatDatepickerModule,
+  MatDividerModule,
+  MatFormFieldModule, 
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule, 
   MatListModule,
+  MatMenuModule, 
+  MatNativeDateModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule, 
+  MatSelectModule, 
+  MatSidenavModule,
+  MatSliderModule, 
+  MatSlideToggleModule,
+  MatSnackBarModule, MatSnackBar,
+  MatTableModule,
   MatTabsModule,
-  MatSnackBarModule,
-  MatSnackBar,
-  MatDatepickerModule } from '@angular/material';
+  MatToolbarModule
+} from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { ChartsModule } from 'ng2-charts';
 
+// main application
 import { AppComponent } from './app.component';
-import { EventhistoryComponent } from './eventhistory/eventhistory.component';
-import { AlarmhistoryComponent } from './alarmhistory/alarmhistory.component';
-import { ProcesshistoryComponent } from './processhistory/processhistory.component';
+
+// routing module
+import { AppRoutingModule } from './app-routing.module';
+
+// app components and app modules
 import { TopbarComponent } from './topbar/topbar.component';
 import { BottombarComponent } from './bottombar/bottombar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { FullscreenDashboardComponent } from './fullscreen-dashboard/fullscreen-dashboard.component';
-import { RecipeEditorComponent } from './recipe-editor/recipe-editor.component';
-import { MaterialSelectorComponent } from './material-selector/material-selector.component';
-import { LoaderComponent } from './shared/io-nglib/component/loader/loader.component';
-import { UserConnectionComponent } from './user-connection/user-connection.component';
-import { UserManagementComponent } from './user-management/user-management.component';
 
-const appRoutes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'fullscreendashboard', component: FullscreenDashboardComponent },
-  { path: 'eventhistory', component: EventhistoryComponent },
-  { path: 'alarmhistory', component: AlarmhistoryComponent },
-  { path: 'processhistory', component: ProcesshistoryComponent },
-  { path: 'recipe', component: RecipeEditorComponent },
-  { path: '**', component: DashboardComponent }
-];
+import { LibModule } from './shared/lib/lib.module';
+import { UserManagementModule } from './shared/user-management/user-management.module';
+import { DashboardModule } from './shared/dashboard/dashboard.module';
+import { HistoryModule } from './shared/history/history.module';
+import { MaterialModule } from './shared/material/material.module';
+import { NomenclatureModule } from './shared/nomenclature/nomenclature.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventhistoryComponent,
-    AlarmhistoryComponent,
-    ProcesshistoryComponent,
     TopbarComponent,
-    BottombarComponent,
-    DashboardComponent,
-    FullscreenDashboardComponent,
-    RecipeEditorComponent,
-    MaterialSelectorComponent,
-    LoaderComponent,
-    UserConnectionComponent,
-    UserManagementComponent
+    BottombarComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false }
-    ),
+    // angular
     FormsModule,
     BrowserModule,
     SDKBrowserModule.forRoot(),
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule, 
+
+    // Angular Material
     MatButtonModule, 
     MatButtonToggleModule,
-    MatTableModule,
-    MatGridListModule,
-    MatProgressBarModule,
+    MatCardModule, 
+    MatCheckboxModule, 
+    MatCommonModule,
+    MatDatepickerModule,
     MatDividerModule,
     MatFormFieldModule, 
+    MatGridListModule,
+    MatIconModule,
     MatInputModule, 
-    MatCheckboxModule, 
-    MatSelectModule, 
-    MatSliderModule, 
-    MatRadioModule, 
-    MatSlideToggleModule,
-    MatCardModule, 
-    MatProgressSpinnerModule,
     MatListModule,
-    MatDatepickerModule,
+    MatMenuModule, 
     MatNativeDateModule,
-    MatTabsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule, 
+    MatSelectModule, 
+    MatSidenavModule,
+    MatSliderModule, 
+    MatSlideToggleModule,
     MatSnackBarModule,
-    MatCommonModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+
+    // Angular cdk
     LayoutModule,
     ScrollDispatchModule,
-    ChartsModule
+
+    // charts
+    ChartsModule,
+
+    // local modules
+    AppRoutingModule,
+    LibModule,
+    UserManagementModule,
+    DashboardModule,
+    HistoryModule,
+    MaterialModule,
+    NomenclatureModule
   ],
-  providers: [ IoRunTimeDatasService, MatSnackBar ],
+  providers: [ MatSnackBar ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IoRunTimeDatasService } from '../shared/io-nglib';
+import { IoRunTimeDatasService } from '../shared/lib';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 enum clientsize {

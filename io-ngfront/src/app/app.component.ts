@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { IoRunTimeDatasService } from './shared/io-nglib';
+import { IoRunTimeDatasService } from './shared/lib';
 import { LoopBackConfig, LoopBackAuth } from './shared/sdk';
 import { User } from './shared/sdk/models/User';
 import { UserApi } from './shared/sdk/services/custom/User';

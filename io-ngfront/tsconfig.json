@@ -17,6 +17,14 @@
       "dom"
     ],
     "module": "es2015",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "dashboards": [
+        "dist/dashboards"
+      ],
+      "dashboards/*": [
+        "dist/dashboards/*"
+      ]
+    }
   }
 }

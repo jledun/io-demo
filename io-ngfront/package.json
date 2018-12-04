@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start109": "ng serve --host 192.168.1.109",
     "build:prod": "ng build --prod && rsync -a --delete ./dist/ ../io-lbapp/client/",
     "build:dev": "ng build --dev && rsync -a --delete ./dist/ ../io-lbapp/client/",
     "test": "ng test",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.11.0",
+    "@angular-devkit/build-ng-packagr": "~0.11.0",
     "@angular/cli": "^7.1.0",
     "@angular/compiler-cli": "^7.1.1",
     "@angular/language-service": "^7.1.1",
@@ -52,8 +54,11 @@
     "karma-coverage-istanbul-reporter": "^2.0.4",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "ng-packagr": "^4.2.0",
     "protractor": "~5.4.1",
     "ts-node": "~7.0.1",
+    "tsickle": ">=0.29.0",
+    "tslib": "^1.9.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
   }
