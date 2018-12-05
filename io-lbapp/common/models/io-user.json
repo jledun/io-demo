@@ -5,10 +5,23 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true
+  },
   "properties": {
     "active": {
       "type": "boolean",
       "default": true,
+      "required": false
+    },
+    "uuid": {
+      "type": "string",
+      "default": "",
+      "required": false
+    },
+    "lastConnection": {
+      "type": "date",
+      "default": null,
       "required": false
     }
   },
