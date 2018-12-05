@@ -17,12 +17,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
   actualdatetime: string = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`
   actualdatetime_interval;
   client: clientsize = clientsize.web;
-  get loading() {
-    return IoRunTimeDatasService.getDataLoading();
-  }
-  set loading(value) {
-    IoRunTimeDatasService.setDataLoading(value);
-  }
+  loading: boolean = true;
 
   setClient( size: clientsize, result ) {
     if ( result.matches ) this.client = size;
@@ -30,6 +25,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
 
   refreshDateTime() {
     this.actualdatetime = IoRunTimeDatasService.getUserDateTime();
+    this.loading = IoRunTimeDatasService.getDataLoading();
   }
 
   constructor(

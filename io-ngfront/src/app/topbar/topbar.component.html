@@ -3,23 +3,23 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #mainMenu="matMenu">
-    <a mat-menu-item href="/exemple-web">Dashboard</a>
-    <a mat-menu-item href="/exemple-fullscreen">Another dashboard</a>
-    <a mat-menu-item href="/eventhistory">Events</a>
-    <a mat-menu-item href="/alarmhistory">Alarms</a>
-    <a mat-menu-item href="/processhistory">Process</a>
-    <a mat-menu-item href="/recipe">Recipe management</a>
+    <a mat-menu-item routerLink="/exemple-web" routerLinkActive="active">Dashboard</a>
+    <a mat-menu-item routerLink="/exemple-fullscreen" routerLinkActive="active">Another dashboard</a>
+    <a mat-menu-item routerLink="/eventhistory" routerLinkActive="active">Events</a>
+    <a mat-menu-item routerLink="/alarmhistory" routerLinkActive="active">Alarms</a>
+    <a mat-menu-item routerLink="/processhistory" routerLinkActive="active">Process</a>
+    <a mat-menu-item routerLink="/recipe" routerLinkActive="active">Recipe management</a>
     <!-- <mat-divider></mat-divider> -->
     <!-- <button mat-menu-item><span>{{ actualdatetime }}</span></button> -->
     <!-- <button mat-menu-item><mat-icon>mailbox</mat-icon></button> -->
     <!-- <button mat-menu-item>Login</button> -->
   </mat-menu>
-  <a mat-button href="/exemple-web" *ngIf="client !== 'handset'">Dashboard</a>
-  <a mat-button href="/exemple-fullscreen" *ngIf="client !== 'handset'">Another dashboard</a>
-  <a mat-button href="/eventhistory" *ngIf="client !== 'handset'">Events</a>
-  <a mat-button href="/alarmhistory" *ngIf="client !== 'handset'">Alarms</a>
-  <a mat-button href="/processhistory" *ngIf="client !== 'handset'">Process</a>
-  <a mat-button href="/recipe" *ngIf="client !== 'handset'">Recipe management</a>
+  <a mat-button routerLink="/exemple-web" routerLinkActive="active" *ngIf="client !== 'handset'">Dashboard</a>
+  <a mat-button routerLink="/exemple-fullscreen" routerLinkActive="active" *ngIf="client !== 'handset'">Another dashboard</a>
+  <a mat-button routerLink="/eventhistory" routerLinkActive="active" *ngIf="client !== 'handset'">Events</a>
+  <a mat-button routerLink="/alarmhistory" routerLinkActive="active" *ngIf="client !== 'handset'">Alarms</a>
+  <a mat-button routerLink="/processhistory" routerLinkActive="active" *ngIf="client !== 'handset'">Process</a>
+  <a mat-button routerLink="/recipe" routerLinkActive="active" *ngIf="client !== 'handset'">Recipe management</a>
   <span class="fill-space"></span>
   <app-loader [status]="loading"></app-loader>
   <button mat-button *ngIf="client === 'web'"><span>{{ actualdatetime }}</span></button>

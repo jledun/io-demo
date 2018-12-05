@@ -20,7 +20,8 @@ export class IoRunTimeDatasService {
     return this.dataLoading;
   }
   static setDataLoading( value ) {
-    return this.dataLoading = value;
+    if (value) return this.dataLoading = value;
+    setTimeout(() => {this.dataLoading = value;}, 250);
   }
 
 }
