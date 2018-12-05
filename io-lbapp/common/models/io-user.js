@@ -36,7 +36,7 @@ module.exports = function(ioUser) {
     ioUser.findOne(
       {where: where}
     ).then(userDetails => {
-      if (userDetails.active) return next();
+      if (!userDetails || userDetails.active) return next();
       next({
         name: "Utilisateur désactivé",
         status: 403,

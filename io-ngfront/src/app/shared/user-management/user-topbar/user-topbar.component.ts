@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LbUserManagerService } from '../lb-user-manager.service';
+import { UserManagerService } from '../user-manager.service';
 import { IoUser, IoUserInterface } from '../../sdk/models';
 
 @Component({
@@ -24,7 +24,7 @@ export class UserTopbarComponent implements OnInit {
   }
 
   constructor(
-    private lbdata: LbUserManagerService
+    private lbdata: UserManagerService
   ) {
     this.resetCrtUser();
   }

@@ -1,3 +1,46 @@
-<p>
-  user connection component works !
-</p>
+<mat-card fxLayout="row nowrap" fxLayoutAlign="center stretch" fxLayoutGap="15px" class="full-size">
+  <mat-vertical-stepper linear="true" 
+    fxFlex="55%"
+    fxFlex.xs="100%"
+    (selectionChange)="stepperSelectionChange($event)">
+
+    <mat-step [stepControl]="userFormGroup">
+      <form [formGroup]="userFormGroup">
+        <ng-template matStepLabel>Email ou nom d'utilisateur</ng-template>
+        <mat-form-field class="full-size">
+          <input #username
+             matInput 
+             placeholder="Email ou nom d'utilisateur" 
+             formControlName="userCtrl"
+             required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="passwdFormGroup">
+      <form [formGroup]="passwdFormGroup">
+        <ng-template matStepLabel>Mot de passe</ng-template>
+        <mat-form-field class="full-size">
+          <input #passwd
+             matInput type="password"
+             placeholder="Mot de passe" 
+             formControlName="passwdCtrl"
+             required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Connexion</ng-template>
+      
+    </mat-step>
+
+  </mat-vertical-stepper>
+</mat-card>

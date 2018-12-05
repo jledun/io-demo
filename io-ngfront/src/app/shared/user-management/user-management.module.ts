@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserManagementRoutingModule } from './user-management-routing.module';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { 
-  MatButtonModule
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatStepperModule
 } from '@angular/material';
 
 import { UserConnectionComponent } from './user-connection/user-connection.component';
@@ -21,8 +27,15 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
     UserManagementRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule
   ],
   exports: [
     UserConnectionComponent,

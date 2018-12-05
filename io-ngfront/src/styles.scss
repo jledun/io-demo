@@ -68,6 +68,9 @@ html, body, app-root {
 .app-content {
   flex: 1 1 auto;
   overflow: auto;
+  width: 100%;
+  height: calc(100% - 64px);
+  margin: 0px;
 }
 
 .app-bottombar {
@@ -105,4 +108,10 @@ html, body, app-root {
   top: 0px;
   left: 0px;
   z-index: 10;
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
 }

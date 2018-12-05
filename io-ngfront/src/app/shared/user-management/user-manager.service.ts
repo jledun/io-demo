@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable({
   providedIn: 'root'
 })
-export class LbUserManagerService {
+export class UserManagerService {
 
   constructor(
     private userManagement: IoUserApi
@@ -28,7 +28,9 @@ export class LbUserManagerService {
   getCrtUser(): Observable<IoUserInterface> {
     return this.userManagement.getCurrent();
   }
-  userLogIn(cred: IoUserInterface) {}
+  userLogIn(credentials: IoUserInterface) {
+    return this.userManagement.login(credentials);
+  }
   userLogOut() {}
   getUsers() {}
   userRetrieve(id: number) {}
