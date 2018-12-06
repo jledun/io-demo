@@ -3,22 +3,30 @@
 declare var Object: any;
 export interface IoUserInterface {
   "active"?: boolean;
+  "uuid"?: string;
+  "lastConnection"?: Date;
   "realm"?: string;
   "username"?: string;
   "email": string;
   "emailVerified"?: boolean;
   "id"?: number;
+  "createdAt"?: Date;
+  "updatedAt"?: Date;
   "password"?: string;
   accessTokens?: any[];
 }
 
 export class IoUser implements IoUserInterface {
   "active": boolean;
+  "uuid": string;
+  "lastConnection": Date;
   "realm": string;
   "username": string;
   "email": string;
   "emailVerified": boolean;
   "id": number;
+  "createdAt": Date;
+  "updatedAt": Date;
   "password": string;
   accessTokens: any[];
   constructor(data?: IoUserInterface) {
@@ -59,6 +67,16 @@ export class IoUser implements IoUserInterface {
           type: 'boolean',
           default: true
         },
+        "uuid": {
+          name: 'uuid',
+          type: 'string',
+          default: ''
+        },
+        "lastConnection": {
+          name: 'lastConnection',
+          type: 'Date',
+          default: new Date(0)
+        },
         "realm": {
           name: 'realm',
           type: 'string'
@@ -78,6 +96,14 @@ export class IoUser implements IoUserInterface {
         "id": {
           name: 'id',
           type: 'number'
+        },
+        "createdAt": {
+          name: 'createdAt',
+          type: 'Date'
+        },
+        "updatedAt": {
+          name: 'updatedAt',
+          type: 'Date'
         },
         "password": {
           name: 'password',

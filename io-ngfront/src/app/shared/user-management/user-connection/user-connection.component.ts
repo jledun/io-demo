@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserManagerService } from '../user-manager.service';
@@ -13,12 +14,15 @@ export class UserConnectionComponent implements OnInit {
   timeBeforeFocus: number = 100;
   userFormGroup: FormGroup;
   passwdFormGroup: FormGroup;
+  credentialFormGroup: FormGroup;
   @ViewChild('username') usernameInput: ElementRef;
   @ViewChild('passwd') passwdInput: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userManager: UserManagerService
+    private userManager: UserManagerService,
+    public dialogRef: MatDialogRef<UserConnectionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
@@ -28,45 +32,41 @@ export class UserConnectionComponent implements OnInit {
     this.passwdFormGroup = this.formBuilder.group({
       passwdCtrl: ['', Validators.required]
     });
+    this.credentialFormGroup = this.formBuilder.group({
+      userCtrl: ['', Validators.required],
+      passwdCtrl: ['', Validators.required]
+    });
     setTimeout(() => {
       IoRunTimeDatasService.setDataLoading(false);
       this.usernameInput.nativeElement.focus();
     }, this.timeBeforeFocus);
   }
 
-  stepperSelectionChange(event) {
-    switch(event.selectedIndex) {
-      case 0:
-        setTimeout(() => {
-          this.usernameInput.nativeElement.focus();
-        }, this.timeBeforeFocus);
-        break;
-      case 1:
-        setTimeout(() => {
-          this.passwdInput.nativeElement.focus();
-        }, this.timeBeforeFocus);
-        break;
-      case 2:
-        IoRunTimeDatasService.setDataLoading(true);
-        // check validity
-        let username = this.userFormGroup.get('userCtrl').value;
-        username = (username.indexOf("@") > 0) ? 
-          {email: username} :
-          {username: username};
-        const credentials = {
-          ...username,
-          password: this.passwdFormGroup.get('passwdCtrl').value
-        }
-        this.userManager.userLogIn(credentials).subscribe(
-          data => console.log('success', data),
-          err => {
-            console.log('error', err);
-            IoRunTimeDatasService.setDataLoading(false);
-          },
-          () => IoRunTimeDatasService.setDataLoading(false)
-        );
-        break;
+  onSubmit() {
+    IoRunTimeDatasService.setDataLoading(true);
+    // check validity
+    let username = this.credentialFormGroup.get('userCtrl').value;
+    username = (username.indexOf("@") > 0) ? 
+      {email: username} :
+      {username: username};
+    const credentials = {
+      ...username,
+      password: this.credentialFormGroup.get('passwdCtrl').value
     }
+    this.userManager.userLogIn(credentials).subscribe(
+      data => {
+        console.log('success');
+        IoRunTimeDatasService.setDataLoading(false);
+        this.dialogRef.close(data);
+      }, err => {
+        console.log('error', err);
+        IoRunTimeDatasService.setDataLoading(false);
+      }, () => { }
+    );
+  }
+
+  cancel() {
+    this.dialogRef.close();
   }
 
 }

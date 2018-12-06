@@ -29,9 +29,11 @@ export class UserManagerService {
     return this.userManagement.getCurrent();
   }
   userLogIn(credentials: IoUserInterface) {
-    return this.userManagement.login(credentials);
+    return this.userManagement.login(credentials, 'ioUser');
   }
-  userLogOut() {}
+  userLogOut() {
+    return this.userManagement.logout();
+  }
   getUsers() {}
   userRetrieve(id: number) {}
   userCreate(user: IoUserInterface) {}

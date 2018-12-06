@@ -8,8 +8,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { 
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
+  MatDividerModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
+  MatMenuModule,
   MatStepperModule
 } from '@angular/material';
 
@@ -33,8 +37,12 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
     UserManagementRoutingModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatStepperModule
   ],
   exports: [

@@ -1,8 +1,8 @@
-<mat-progress-bar mode="indeterminate" *ngIf="isClientloading()" class="progress-bar"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="loading" class="progress-bar"></mat-progress-bar>
 <div class="container">
   <app-topbar></app-topbar>
   <div class="app-content" cdk-scrollable>
     <router-outlet></router-outlet>
   </div>
-  <!-- <app-bottombar></app-bottombar> -->
+  <app-bottombar></app-bottombar>
 </div>

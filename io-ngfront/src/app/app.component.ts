@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IoRunTimeDatasService } from './shared/lib';
 import { LoopBackConfig, LoopBackAuth } from './shared/sdk';
 import { User } from './shared/sdk/models/User';
@@ -10,13 +10,19 @@ import { environment } from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   datetime: string = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
   datetime_interval;
   loading: boolean = false;
+  timerLoading;
 
-  isClientloading() {
-    return IoRunTimeDatasService.getDataLoading();
+  runTimerLoading() {
+    this.timerLoading = setInterval(() => {
+      this.loading = IoRunTimeDatasService.getDataLoading();
+    }, 1000);
+  }
+  resetTimerLoading() {
+    if (this.timerLoading) clearInterval(this.timerLoading);
   }
 
   constructor(
@@ -27,6 +33,11 @@ export class AppComponent implements OnDestroy {
     LoopBackConfig.setApiVersion( environment.lbApp.api );
   }
 
-  ngOnDestroy() { }
+  ngOnInit() { 
+    this.runTimerLoading();
+  }
+  ngOnDestroy() {
+    this.resetTimerLoading();
+  }
 
 }

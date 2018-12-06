@@ -7,6 +7,7 @@ import { SDKBrowserModule } from './shared/sdk/index';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { 
   MatButtonModule,
+  MatCardModule,
   MatIconModule,
   MatMenuModule,
   MatProgressBarModule,
@@ -49,6 +50,7 @@ import { NomenclatureModule } from './shared/nomenclature/nomenclature.module';
 
     // Angular Material
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatMenuModule,
     MatProgressBarModule,

@@ -1,6 +1,28 @@
 <ng-container *ngIf="crtUser.realm && crtUser.realm.length > 0">
-  {{crtUser.realm}}
+  <mat-menu #appMenu="matMenu">
+    <ng-template matMenuContent>
+      <button mat-menu-item>
+        <mat-icon>face</mat-icon>
+        <span>Profil</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Paramètres</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Se déconnecter</span>
+      </button>
+    </ng-template>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>account_circle</mat-icon>
+    {{crtUser.realm}}
+  </button>
 </ng-container>
 <ng-container *ngIf="!crtUser.realm || crtUser.realm.length <= 0">
-  <button mat-button routerLink="/login-user" routerLinkActive="active">Se connecter</button>
+  <!-- <button mat-button routerLink="/login-user" routerLinkActive="active">Se connecter</button> -->
+  <button mat-button (click)="openConnectionDialog()">Se connecter</button>
 </ng-container>
