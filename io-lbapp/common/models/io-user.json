@@ -13,34 +13,41 @@
   "properties": {
     "active": {
       "type": "boolean",
-      "default": true,
-      "required": false
+      "required": false,
+      "default": true
     },
     "uuid": {
       "type": "string",
-      "default": "",
-      "required": false
+      "required": false,
+      "default": ""
     },
     "lastConnection": {
       "type": "date",
-      "default": null,
-      "required": false
+      "required": false,
+      "default": null
     }
   },
   "validations": [],
   "relations": {},
   "acls": [
-  {
-    "accessType": "*",
-    "principalType": "$unauthenticated",
-    "permission": "DENY"
-  },
-  {
-    "accessType": "*",
-    "principalType": "ROLE",
-    "principalId": "admin",
-    "permission": "ALLOW"
-  }
-],
+    {
+      "accessType": "*",
+      "principalType": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "userExists"
+    }
+  ],
   "methods": {}
 }

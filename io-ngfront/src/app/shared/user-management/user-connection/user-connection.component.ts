@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -22,7 +23,8 @@ export class UserConnectionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userManager: UserManagerService,
     public dialogRef: MatDialogRef<UserConnectionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,10 @@ export class UserConnectionComponent implements OnInit {
 
   rememberMeChange(event) {
     this.rememberMe = event.checked;
+  }
+  createUser() {
+    this.router.navigate(['/create-user']);
+    this.dialogRef.close();
   }
 
   onSubmit() {

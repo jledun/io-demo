@@ -517,6 +517,38 @@ export class IoUserApi extends BaseLoopBackApi {
   }
 
   /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param {object} data Request data.
+   *
+   *  - `username` – `{string}` - 
+   *
+   *  - `email` – `{string}` - 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `userExists` – `{boolean}` - 
+   */
+  public userExists(username: any = {}, email: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/ioUsers/userExists";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof username !== 'undefined' && username !== null) _urlParams.username = username;
+    if (typeof email !== 'undefined' && email !== null) _urlParams.email = email;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
    * Crée une instance dans accessTokens de ce modèle.
    *
    * @param {any} id ioUser id

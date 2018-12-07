@@ -49,7 +49,7 @@ export class UserTopbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.hasOwnProperty('user')) this.crtUser = result.user;
+      if (result && result.hasOwnProperty('user')) this.crtUser = result.user;
     });
   }
 

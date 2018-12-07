@@ -60,4 +60,29 @@ module.exports = function(ioUser) {
     });
   });
 
+  ioUser.userExists = (username = null, email = null) => {
+    return new Promise((resolve, reject) => {
+      if (!username && !email) return reject({
+        name: "Erreur de paramétrage",
+        status: 400,
+        message: "Vous devez renseigner un nom d'utilisateur ou une adresse email."
+      });
+      let where = {};
+      if (username && !email) where = {username: username};
+      if (!username && email) where = {email: email};
+      if (username && email) where = {or: [{username: username}, {email: email}]};
+      ioUser.find({where: where})
+        .then(data => resolve(data.length > 0))
+        .catch(err => reject(err));
+    });
+  }
+
+  ioUser.remoteMethod('userExists', {
+    accepts: [
+      {arg: "username", required: false, type: "string"},
+      {arg: "email", required: false, type: "string"}
+    ], 
+    returns: {arg: 'userExists', type: "boolean"}
+  });
+
 };

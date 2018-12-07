@@ -1,11 +1,11 @@
 <div fxLayout="column nowrap" fxLayoutAlign="center center" fxLayoutGap="25px" class="full-screen">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Informations de connexion</mat-card-title>
-      <mat-card-subtitle>Veuillez saisir vos identifiants pour vous connecter.</mat-card-subtitle>
-      <img mat-card-avatar src="./assets/img/iosystems.png">
-    </mat-card-header>
-    <form [formGroup]="credentialFormGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="credentialFormGroup" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Informations de connexion</mat-card-title>
+        <mat-card-subtitle>Veuillez saisir vos identifiants pour vous connecter.</mat-card-subtitle>
+        <img mat-card-avatar src="./assets/img/iosystems.png">
+      </mat-card-header>
       <mat-card-content>
         <p class="mat-body-strong color-warn">{{errorMsg}}</p>
         <mat-form-field class="full-size">
@@ -26,13 +26,18 @@
             required>
         </mat-form-field>
 
-        <mat-checkbox [checked]="rememberMe" (change)="rememberMeChange($event)">Se souvenir de moi</mat-checkbox>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="25px">
+          <mat-checkbox [checked]="rememberMe" (change)="rememberMeChange($event)">Se souvenir de moi</mat-checkbox>
+          <button type="button" mat-button (click)="createUser()">Nouvel utilisateur ?</button>
+        </div>
+
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button type="submit" [disabled]="!credentialFormGroup.valid">Se connecter</button>
-        <span class="fill-space"></span>
-        <button mat-button (click)="cancel()">Annuler</button>
+        <div fxLayout="row nowrap" fxLayoutAlign="space-between center" fxLayoutGap="25px">
+          <button mat-button type="button" (click)="cancel()">Annuler</button>
+          <button mat-button type="submit" [disabled]="!credentialFormGroup.valid">Se connecter</button>
+        </div>
       </mat-card-actions>
-    </form>
-  </mat-card>
+    </mat-card>
+  </form>
 </div>

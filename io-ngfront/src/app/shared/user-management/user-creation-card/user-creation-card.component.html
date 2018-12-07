@@ -1,0 +1,92 @@
+<form [formGroup]="createUserForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Créer un nouvel utilisateur</mat-card-title>
+      <mat-card-subtitle>Veuilller renseigner tous les champs pour créer un nouvel utilisateur</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="15px">
+      <div class="full-width" fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+        <p class="mat-body-strong color-warn" fxFlex="1 1 auto">{{errorMsg}}</p>
+      </div>
+      <div class="full-width" fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+        <mat-form-field fxFlex="1 1 auto">
+          <input #firstName
+            matInput 
+            placeholder="Prénom" 
+            formControlName="firstName"
+            required>
+          <mat-error *ngIf="createUserForm.get('firstName').hasError('required')">
+            Champ obligatoire
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="1 1 auto">
+          <input #lastName
+            matInput 
+            placeholder="Nom" 
+            formControlName="lastName"
+            required>
+          <mat-error *ngIf="createUserForm.get('lastName').hasError('required')">
+            Champ obligatoire
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="full-width" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="15px">
+        <mat-form-field fxFlex="1 1 auto">
+          <input #email
+            matInput 
+            placeholder="Adresse email" 
+            formControlName="email"
+            required>
+          <mat-error *ngIf="createUserForm.get('email').hasError('required') && !createUserForm.get('email').hasError('email')">
+            Champ obligatoire
+          </mat-error>
+          <mat-error *ngIf="createUserForm.get('email').hasError('email')">
+            Adresse non valide
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="full-width" fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+        <mat-form-field fxFlex="1 1 auto">
+          <input #passwd
+            matInput 
+            placeholder="Mot de passe" 
+            formControlName="passwd"
+            type="password"
+            required>
+          <mat-error *ngIf="createUserForm.get('passwd').hasError('required') && !createUserForm.get('passwd').hasError('minlength')">
+            Champ obligatoire
+          </mat-error>
+          <mat-error *ngIf="createUserForm.get('passwd').hasError('minlength')">
+            Le mot de passe doit contenir au moins 6 caractères.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="1 1 auto">
+          <input #passwdConfirm
+            matInput 
+            placeholder="Confirmer le mot de passe" 
+            formControlName="passwdConfirm"
+            type="password"
+            required>
+          <mat-error *ngIf="createUserForm.get('passwdConfirm').hasError('required') && !createUserForm.get('passwdConfirm').hasError('minlength')">
+            Champ obligatoire
+          </mat-error>
+          <mat-error *ngIf="createUserForm.get('passwdConfirm').hasError('minlength')">
+            Le mot de passe doit contenir au moins 6 caractères.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+        <button mat-button type="button" routerLink="/exemple-web" routerLinkActive="active">Annuler</button>
+        <span class="fill-space"></span>
+        <button mat-raised-button type="submit" color="primary">Suivant</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</form>
+

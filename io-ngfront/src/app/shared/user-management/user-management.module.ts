@@ -15,20 +15,25 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatStepperModule
+  MatSnackBarModule,
+  MatStepperModule,
+  MatTableModule,
+  MatToolbarModule
 } from '@angular/material';
 
 import { UserConnectionComponent } from './user-connection/user-connection.component';
 import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserTopbarComponent } from './user-topbar/user-topbar.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
+import { UserCreationCardComponent } from './user-creation-card/user-creation-card.component';
 
 @NgModule({
   declarations: [
     UserConnectionComponent,
     UserCreationComponent,
     UserTopbarComponent,
-    UserEditorComponent
+    UserEditorComponent,
+    UserCreationCardComponent
   ],
   imports: [
     CommonModule,
@@ -45,13 +50,17 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
     MatIconModule,
     MatInputModule,
     MatMenuModule,
-    MatStepperModule
+    MatSnackBarModule,
+    MatStepperModule,
+    MatTableModule,
+    MatToolbarModule
   ],
   exports: [
     UserConnectionComponent,
     UserCreationComponent,
     UserTopbarComponent,
     UserEditorComponent
-  ]
+  ],
+  entryComponents: [UserConnectionComponent]
 })
 export class UserManagementModule { }

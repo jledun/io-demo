@@ -8,9 +8,8 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
 // import { UserTopbarComponent } from './components/user-topbar/user-topbar.component';
 
 const routes: Routes = [
-  {path: 'login-user', component: UserConnectionComponent},
-  {path: 'new-user', component: UserCreationComponent},
-  {path: 'edit-users', component: UserEditorComponent},
+  {path: 'create-user', component: UserCreationComponent},
+  {path: 'edit-user', component: UserEditorComponent},
 ];
 
 @NgModule({

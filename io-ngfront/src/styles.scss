@@ -122,6 +122,10 @@ html, body, app-root {
   margin: 0px;
 }
 
+.full-width {
+  width: 100%;
+}
+
 .active {
   color: white;
   background-color:  mat-color($app-accent);

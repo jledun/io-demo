@@ -8,7 +8,7 @@ import {
   IoUserApi
 } from '../sdk/services';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +34,22 @@ export class UserManagerService {
   userLogOut() {
     return this.userManagement.logout();
   }
+  userExists(searchUser: string = null): Observable<any> {
+    let username: string = '';
+    let email: string = '';
+    if (!searchUser) return throwError(new Error('Vous devez saisir un paramètre de recherche'));
+    if (searchUser.indexOf('@') > 0) {
+      email = searchUser;
+    }else{
+      username = searchUser;
+    }
+    return this.userManagement.userExists(username, email);
+  }
   getUsers() {}
   userRetrieve(id: number) {}
-  userCreate(user: IoUserInterface) {}
+  userCreate(user: IoUserInterface): Observable<IoUserInterface> {
+    return this.userManagement.create(user);
+  }
   userUpdate(user: IoUserInterface) {}
   userDelete(user: IoUserInterface) {}
   /*
