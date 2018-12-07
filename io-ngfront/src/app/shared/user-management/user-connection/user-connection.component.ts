@@ -12,9 +12,9 @@ import { IoRunTimeDatasService } from '../../lib/io-run-time-datas.service';
 })
 export class UserConnectionComponent implements OnInit {
   timeBeforeFocus: number = 100;
-  userFormGroup: FormGroup;
-  passwdFormGroup: FormGroup;
   credentialFormGroup: FormGroup;
+  rememberMe: boolean = true;
+  errorMsg: string = '';
   @ViewChild('username') usernameInput: ElementRef;
   @ViewChild('passwd') passwdInput: ElementRef;
 
@@ -26,12 +26,6 @@ export class UserConnectionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userFormGroup = this.formBuilder.group({
-      userCtrl: ['', Validators.required]
-    });
-    this.passwdFormGroup = this.formBuilder.group({
-      passwdCtrl: ['', Validators.required]
-    });
     this.credentialFormGroup = this.formBuilder.group({
       userCtrl: ['', Validators.required],
       passwdCtrl: ['', Validators.required]
@@ -42,9 +36,22 @@ export class UserConnectionComponent implements OnInit {
     }, this.timeBeforeFocus);
   }
 
+  rememberMeChange(event) {
+    this.rememberMe = event.checked;
+  }
+
   onSubmit() {
-    IoRunTimeDatasService.setDataLoading(true);
     // check validity
+    if (!this.credentialFormGroup.valid) {
+      const username = this.credentialFormGroup.get('userCtrl').valid;
+      const passwd = this.credentialFormGroup.get('passwdCtrl').valid;
+      if (!username && !passwd) return this.errorMsg = "Vous devez saisir tous les champs.";
+      if (username && !passwd) return this.errorMsg = "Vous devez saisir le mot de passe.";
+      if (!username && passwd) return this.errorMsg = "Vous devez saisir votre nom d'utilisateur ou votre email.";
+    }
+    this.errorMsg = "";
+
+    IoRunTimeDatasService.setDataLoading(true);
     let username = this.credentialFormGroup.get('userCtrl').value;
     username = (username.indexOf("@") > 0) ? 
       {email: username} :
@@ -53,13 +60,14 @@ export class UserConnectionComponent implements OnInit {
       ...username,
       password: this.credentialFormGroup.get('passwdCtrl').value
     }
-    this.userManager.userLogIn(credentials).subscribe(
+    this.userManager.userLogIn(credentials, this.rememberMe).subscribe(
       data => {
-        console.log('success');
         IoRunTimeDatasService.setDataLoading(false);
         this.dialogRef.close(data);
       }, err => {
-        console.log('error', err);
+        this.errorMsg = "Nom d'utilisateur, email ou mot de passe incorrect.";
+        this.passwdInput.nativeElement.value = null;
+        this.credentialFormGroup.get('passwdCtrl').reset();
         IoRunTimeDatasService.setDataLoading(false);
       }, () => { }
     );

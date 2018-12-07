@@ -8,15 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { 
   MatButtonModule,
   MatCardModule,
+  MatDividerModule,
   MatIconModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
-import { LayoutModule } from '@angular/cdk/layout';
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
-import { ChartsModule } from 'ng2-charts';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // main application
 import { AppComponent } from './app.component';
@@ -51,17 +50,14 @@ import { NomenclatureModule } from './shared/nomenclature/nomenclature.module';
     // Angular Material
     MatButtonModule,
     MatCardModule,
+    MatDividerModule,
     MatIconModule,
     MatMenuModule,
     MatProgressBarModule,
     MatToolbarModule,
 
     // Angular cdk
-    LayoutModule,
-    ScrollDispatchModule,
-
-    // charts
-    ChartsModule,
+    FlexLayoutModule,
 
     // local modules
     AppRoutingModule,

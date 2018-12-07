@@ -15,7 +15,7 @@ export class UserTopbarComponent implements OnInit {
     return this._crtUser;
   }
   set crtUser(value: IoUserInterface) {
-    this._crtUser = Object.assign({}, value);
+    this._crtUser = new IoUser({...value});
   }
   resetCrtUser = (): void => {
     this.crtUser = new IoUser({
@@ -28,23 +28,15 @@ export class UserTopbarComponent implements OnInit {
   refreshCurrentUser() {
     this.lbdata.getCrtUser().subscribe(
       crtUser => this.crtUser = crtUser,
-      err => {
-        this.resetCrtUser();
-        if (err.statusCode !== 401) console.log(err)
-      }, () => console.log(this.crtUser)
+      err => this.resetCrtUser(),
+      () => console.log(this.crtUser)
     );
   }
 
   logout() {
     this.lbdata.userLogOut().subscribe(
-      data => {
-        console.log(data);
-        this.refreshCurrentUser();
-      },
-      err => {
-        console.log(err);
-        this.refreshCurrentUser();
-      },
+      data => this.refreshCurrentUser(),
+      err => this.refreshCurrentUser(),
       () => {}
     );
   }
@@ -57,8 +49,7 @@ export class UserTopbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+      if (result.hasOwnProperty('user')) this.crtUser = result.user;
     });
   }
 
@@ -74,3 +65,4 @@ export class UserTopbarComponent implements OnInit {
   }
 
 }
+

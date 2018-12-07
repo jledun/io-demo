@@ -28,8 +28,8 @@ export class UserManagerService {
   getCrtUser(): Observable<IoUserInterface> {
     return this.userManagement.getCurrent();
   }
-  userLogIn(credentials: IoUserInterface) {
-    return this.userManagement.login(credentials, 'ioUser');
+  userLogIn(credentials: IoUserInterface, rememberMe: boolean = true) {
+    return this.userManagement.login(credentials, 'user', rememberMe);
   }
   userLogOut() {
     return this.userManagement.logout();
