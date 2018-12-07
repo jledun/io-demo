@@ -1,0 +1,21 @@
+<mat-sidenav-container class="full-size">
+
+  <mat-sidenav mode="side" opened style="min-width: 220px;">
+    <mat-nav-list>
+      <a mat-list-item>
+        Profil
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item 
+         [routerLink]="['/settings/', {outlets: {settingsRouterOutlet: ['users']}}]">
+        Utilisateurs et droits
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet name="settingsRouterOutlet"></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+

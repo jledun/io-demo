@@ -28,6 +28,7 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { BottombarComponent } from './bottombar/bottombar.component';
 
 import { LibModule } from './shared/lib/lib.module';
+import { SettingsModule } from './shared/settings/settings.module';
 import { UserManagementModule } from './shared/user-management/user-management.module';
 import { DashboardModule } from './shared/dashboard/dashboard.module';
 import { HistoryModule } from './shared/history/history.module';
@@ -62,6 +63,7 @@ import { NomenclatureModule } from './shared/nomenclature/nomenclature.module';
     // local modules
     AppRoutingModule,
     LibModule,
+    SettingsModule,
     UserManagementModule,
     DashboardModule,
     HistoryModule,

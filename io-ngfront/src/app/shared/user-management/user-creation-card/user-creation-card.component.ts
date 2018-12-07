@@ -20,7 +20,7 @@ export class UserCreationCardComponent implements OnInit {
   @ViewChild('email') emailInput: ElementRef;
   @ViewChild('passwd') passwdInput: ElementRef;
   @ViewChild('passwdConfirm') passwdConfirmInput: ElementRef;
-  @ViewChild('formDirective') FD: ElementRef;
+  @ViewChild('formDirective') FD;
 
   constructor(
     private formBuilder: FormBuilder,
