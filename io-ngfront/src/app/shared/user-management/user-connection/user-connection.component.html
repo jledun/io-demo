@@ -1,6 +1,6 @@
 <div fxLayout="column nowrap" fxLayoutAlign="center center" fxLayoutGap="25px" class="full-screen">
   <form [formGroup]="credentialFormGroup" (ngSubmit)="onSubmit()">
-    <mat-card>
+    <mat-card class="connection-card">
       <mat-card-header>
         <mat-card-title>Informations de connexion</mat-card-title>
         <mat-card-subtitle>Veuillez saisir vos identifiants pour vous connecter.</mat-card-subtitle>
@@ -8,6 +8,11 @@
       </mat-card-header>
       <mat-card-content>
         <p class="mat-body-strong color-warn">{{errorMsg}}</p>
+        <div *ngIf="errorCode === 'LOGIN_FAILED_EMAIL_NOT_VERIFIED' && !checkIdentityRequestSent">
+          <button mat-button (click)="checkIdentify()">
+            Vérifier l'email
+          </button>
+        </div>
         <mat-form-field class="full-size">
           <input #username
             style="width: 100%;"

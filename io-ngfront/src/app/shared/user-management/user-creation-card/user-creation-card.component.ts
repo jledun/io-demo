@@ -66,7 +66,7 @@ export class UserCreationCardComponent implements OnInit {
     const newUser: IoUserInterface = new IoUser({
       username: this.createUserForm.get('email').value.split('@')[0],
       email: this.createUserForm.get('email').value,
-      realm: this.createUserForm.get('firstName').value.concat(' ', this.createUserForm.get('lastName').value),
+      realName: this.createUserForm.get('firstName').value.concat(' ', this.createUserForm.get('lastName').value),
       password: this.createUserForm.get('passwd').value,
       active: true
     });
@@ -85,7 +85,7 @@ export class UserCreationCardComponent implements OnInit {
           this.firstNameInput.nativeElement.focus();
           this.createUserForm.reset();
           this.FD.resetForm();
-          this.alert.open(`Utilisateur ${data.realm} enregistré`, 'Ok', {
+          this.alert.open(`Utilisateur ${data.realName} enregistré`, 'Ok', {
             duration: 4000
           });
         },

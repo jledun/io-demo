@@ -15,17 +15,24 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatListModule,
   MatSnackBarModule,
   MatStepperModule,
   MatTableModule,
+  MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
+import { LibModule } from '../lib/lib.module';
 
 import { UserConnectionComponent } from './user-connection/user-connection.component';
 import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserTopbarComponent } from './user-topbar/user-topbar.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
 import { UserCreationCardComponent } from './user-creation-card/user-creation-card.component';
+import { UserEditorUsersComponent } from './user-editor-users/user-editor-users.component';
+import { UserEditorRightsComponent } from './user-editor-rights/user-editor-rights.component';
+import { UserEditorUserComponent } from './user-editor-user/user-editor-user.component';
+import { UserCheckIdentityComponent } from './user-check-identity/user-check-identity.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +40,11 @@ import { UserCreationCardComponent } from './user-creation-card/user-creation-ca
     UserCreationComponent,
     UserTopbarComponent,
     UserEditorComponent,
-    UserCreationCardComponent
+    UserCreationCardComponent,
+    UserEditorUsersComponent,
+    UserEditorRightsComponent,
+    UserEditorUserComponent,
+    UserCheckIdentityComponent
   ],
   imports: [
     CommonModule,
@@ -49,17 +60,23 @@ import { UserCreationCardComponent } from './user-creation-card/user-creation-ca
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatMenuModule,
     MatSnackBarModule,
     MatStepperModule,
     MatTableModule,
-    MatToolbarModule
+    MatTabsModule,
+    MatToolbarModule,
+    LibModule
   ],
   exports: [
     UserConnectionComponent,
     UserCreationComponent,
     UserTopbarComponent,
-    UserEditorComponent
+    UserEditorComponent,
+    UserEditorUsersComponent,
+    UserEditorRightsComponent,
+    UserEditorUserComponent
   ],
   entryComponents: [UserConnectionComponent]
 })

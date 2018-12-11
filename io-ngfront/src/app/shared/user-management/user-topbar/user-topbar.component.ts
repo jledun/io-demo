@@ -20,7 +20,7 @@ export class UserTopbarComponent implements OnInit {
   resetCrtUser = (): void => {
     this.crtUser = new IoUser({
       email: "",
-      realm: "",
+      realName: "",
       username: "",
       active: false
     });
@@ -29,7 +29,7 @@ export class UserTopbarComponent implements OnInit {
     this.lbdata.getCrtUser().subscribe(
       crtUser => this.crtUser = crtUser,
       err => this.resetCrtUser(),
-      () => console.log(this.crtUser)
+      () => {}
     );
   }
 

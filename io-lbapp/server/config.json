@@ -1,6 +1,6 @@
 {
   "restApiRoot": "/api",
-  "host": "0.0.0.0",
+  "host": "localhost",
   "port": 3000,
   "remoting": {
     "context": false,
@@ -18,5 +18,8 @@
       "limit": "100kb"
     },
     "cors": false
+  },
+  "ui": {
+    "checkIdentityPath": "checkIdentity"
   }
 }

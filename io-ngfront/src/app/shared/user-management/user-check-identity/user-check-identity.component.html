@@ -1,0 +1,12 @@
+<mat-card class="full-size" fxLayout="column nowrap" fxLayoutAlign="center center">
+  <mat-card *ngIf="errorMessage.errorCode > 0">
+    <mat-toolbar color="warn">
+      <span>{{errorMessage.title}}</span>
+    </mat-toolbar>
+    <p>status: {{errorMessage.errorCode}}</p>
+    <p>{{errorMessage.message}}</p>
+    <p>Veuillez contacter un administrateur</p>
+  </mat-card>
+  <mat-card *ngIf="successMessage.errorCode > 0">
+  </mat-card>
+</mat-card>

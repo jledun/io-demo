@@ -1,0 +1,11 @@
+<div mat-dialog-title>{{data.title}}</div>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <input type="text" matInput [(ngModel)]="data.value">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <span class="fill-space"></span>
+  <button mat-button type="submit" [mat-dialog-close]="data">Ok</button>
+</div>

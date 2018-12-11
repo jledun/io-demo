@@ -49,10 +49,6 @@ html, body, app-root {
   z-index: 15;
 }
 
-.fill-space {
-  flex: 1 1 auto;
-}
-
 .container {
   position: absolute;
   top: 0px;
@@ -110,6 +106,11 @@ html, body, app-root {
   z-index: 10;
 }
 
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
 .full-size {
   width: 100%;
   height: 100%;
@@ -124,6 +125,16 @@ html, body, app-root {
 
 .full-width {
   width: 100%;
+}
+
+.full-height {
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.half-width {
+  max-width: 45%;
 }
 
 .active {

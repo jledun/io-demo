@@ -14,6 +14,7 @@ export * from './RecipeComponents';
 export * from './MaterialType';
 export * from './Material';
 export * from './IoUser';
+export * from './Email';
 export * from './RuntimeData';
 export * from './BaseModels';
 

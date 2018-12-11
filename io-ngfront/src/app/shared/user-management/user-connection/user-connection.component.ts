@@ -16,6 +16,8 @@ export class UserConnectionComponent implements OnInit {
   credentialFormGroup: FormGroup;
   rememberMe: boolean = true;
   errorMsg: string = '';
+  errorCode: string = '';
+  checkIdentityRequestSent: boolean = false;
   @ViewChild('username') usernameInput: ElementRef;
   @ViewChild('passwd') passwdInput: ElementRef;
 
@@ -45,6 +47,9 @@ export class UserConnectionComponent implements OnInit {
     this.router.navigate(['/create-user']);
     this.dialogRef.close();
   }
+  checkIdentity() {
+    this.checkIdentityRequestSent = true;
+  }
 
   onSubmit() {
     // check validity
@@ -71,7 +76,9 @@ export class UserConnectionComponent implements OnInit {
         IoRunTimeDatasService.setDataLoading(false);
         this.dialogRef.close(data);
       }, err => {
-        this.errorMsg = "Nom d'utilisateur, email ou mot de passe incorrect.";
+        console.log(err);
+        this.errorMsg = err.message;
+        this.errorCode = err.code;
         this.passwdInput.nativeElement.value = null;
         this.credentialFormGroup.get('passwdCtrl').reset();
         IoRunTimeDatasService.setDataLoading(false);

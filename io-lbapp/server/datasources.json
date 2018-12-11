@@ -2,5 +2,21 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "noimine.o2switch.net",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "support@iosystems.fr",
+          "pass": "R$Vt_ZbC1XQV"
+        }
+      }
+    ],
+    "connector": "mail"
   }
 }

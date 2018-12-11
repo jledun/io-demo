@@ -1,4 +1,4 @@
-<ng-container *ngIf="crtUser.realm && crtUser.realm.length > 0">
+<ng-container *ngIf="crtUser.realName && crtUser.realName.length > 0">
   <span fxShow="true" fxShow.lt-sm="false">
     <mat-menu #appMenu="matMenu">
       <ng-template matMenuContent>
@@ -20,7 +20,7 @@
 
     <button mat-button [matMenuTriggerFor]="appMenu">
       <mat-icon>account_circle</mat-icon>
-      {{crtUser.realm}}
+      {{crtUser.realName}}
     </button>
   </span>
   <span fxShow="false" fxShow.lt-sm="true">
@@ -39,7 +39,6 @@
     </button>
   </span>
 </ng-container>
-<ng-container *ngIf="!crtUser.realm || crtUser.realm.length <= 0">
-  <!-- <button mat-button routerLink="/login-user" routerLinkActive="active">Se connecter</button> -->
+<ng-container *ngIf="!crtUser.realName || crtUser.realName.length <= 0">
   <button mat-button (click)="openConnectionDialog()">Se connecter</button>
 </ng-container>

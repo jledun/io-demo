@@ -1,0 +1,69 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <span>Édition des utilisateurs</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+   <ng-container *ngIf="userList.length <= 0">
+     <p>Édition des utilisateurs interdite</p>
+   </ng-container>
+   <ng-container *ngIf="userList.length > 0">
+     <table mat-table [dataSource]="userList" class="full-width">
+
+       <!-- Real Name -->
+       <ng-container matColumnDef="realName">
+         <th mat-header-cell *matHeaderCellDef> Nom complet </th>
+         <td mat-cell *matCellDef="let element"> {{element.realName}} </td>
+       </ng-container>
+
+       <!-- username -->
+       <ng-container matColumnDef="username">
+         <th mat-header-cell *matHeaderCellDef> Nom d'utilisateur </th>
+         <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+       </ng-container>
+
+       <!-- email -->
+       <ng-container matColumnDef="email">
+         <th mat-header-cell *matHeaderCellDef> Adresse email </th>
+         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+       </ng-container>
+
+       <!-- createAt -->
+       <ng-container matColumnDef="createdAt">
+         <th mat-header-cell *matHeaderCellDef> Créé le </th>
+         <td mat-cell *matCellDef="let element"> {{element.createdAt | date:"dd-MM-yyyy HH:mm"}} </td>
+       </ng-container>
+
+       <!-- lastConnection -->
+       <ng-container matColumnDef="lastConnection">
+         <th mat-header-cell *matHeaderCellDef> Dernière connection </th>
+         <td mat-cell *matCellDef="let element"> {{element.lastConnection | date:"dd-MM-yy HH:mm"}} </td>
+       </ng-container>
+
+       <!-- active -->
+       <ng-container matColumnDef="active">
+         <th mat-header-cell *matHeaderCellDef> Actif </th>
+         <td mat-cell *matCellDef="let element">
+           <mat-checkbox [checked]="element.active" disabled></mat-checkbox>
+         </td>
+       </ng-container>
+
+       <!-- edit button -->
+       <ng-container matColumnDef="editButton">
+         <th mat-header-cell *matHeaderCellDef></th>
+         <td mat-cell *matCellDef="let element">
+           <button mat-icon-button
+             [routerLink]="['/settings/', {outlets: {settingsRouterOutlet: ['users', element.id]}}]">
+             <mat-icon>edit</mat-icon>
+           </button>
+         </td>
+       </ng-container>
+
+       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+     </table>
+   </ng-container>
+  </mat-card-content>
+</mat-card>

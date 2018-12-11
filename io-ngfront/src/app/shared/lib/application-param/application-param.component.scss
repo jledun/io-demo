@@ -1,0 +1,26 @@
+.mat-card {
+  border-radius: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.mat-card-without-link {
+  padding-right: calc(24px + 10px + 8px);
+}
+.mat-card-with-link {
+  padding-right: 8px;
+}
+.param-line-icon {
+  height: 34px;
+}
+
+.param-list {
+  max-width: 35%;
+  min-width: 600px;
+  min-height: 68px;
+}
+
+.nav-button {
+  height: 100%;
+  padding: 5px;
+  min-width: 32px;
+}

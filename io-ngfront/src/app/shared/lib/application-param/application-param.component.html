@@ -1,0 +1,46 @@
+<mat-card
+  class="param-list"
+  [ngClass]="(param.link) ? 'mat-card-with-link' : 'mat-card-without-link'"
+  fxLayout="row nowrap" fxLayoutAlign="start center" fxLayoutGap="15px">
+  <span *ngIf="param.icon"><img class="param-line-icon" src="{{param.icon}}"></span>
+  <span fxFlex="0 0 auto">
+    {{param.title}}
+    <ng-container *ngIf="param.subtitle">
+      <br>
+      <span class="mat-caption">{{param.subtitle}}</span>
+    </ng-container>
+  </span>
+  <span fxFlex="1 1 auto"></span>
+  <span fxFlex="0 0 auto" *ngIf="!param.editable">
+    <ng-container [ngSwitch]="param.type.toLowerCase()">
+      <ng-container *ngSwitchCase="'date'">
+        {{param.value | date:"dd-MM-yyyy hh:mm"}}
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        {{param.value}}
+      </ng-container>
+    </ng-container>
+    <button class="nav-button" mat-button *ngIf="param.link" (click)="valueClick(param)">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </span>
+  <span fxFlex="0 0 auto" *ngIf="param.editable">
+    <ng-container [ngSwitch]="param.type.toLowerCase()">
+      <mat-slide-toggle *ngSwitchCase="'boolean'" 
+        [checked]="param.value" (change)="valueChange($event)">
+      </mat-slide-toggle>
+      <mat-form-field *ngSwitchCase="'string'">
+        <input matInput type="text" [value]="param.value">
+      </mat-form-field>
+      <span *ngSwitchCase="'date'">
+        date {{param.value | date:"dd-MM-yyyy hh:mm"}}
+      </span>
+      <span *ngSwitchCase="'number'">
+        number {{param.value}}
+      </span>
+      <span *ngSwitchDefault>
+        default {{param.value}}
+      </span>
+    </ng-container>
+  </span>
+</mat-card>

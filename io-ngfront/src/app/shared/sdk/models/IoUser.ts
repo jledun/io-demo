@@ -2,6 +2,7 @@
 
 declare var Object: any;
 export interface IoUserInterface {
+  "realName"?: string;
   "active"?: boolean;
   "uuid"?: string;
   "lastConnection"?: Date;
@@ -17,6 +18,7 @@ export interface IoUserInterface {
 }
 
 export class IoUser implements IoUserInterface {
+  "realName": string;
   "active": boolean;
   "uuid": string;
   "lastConnection": Date;
@@ -62,6 +64,11 @@ export class IoUser implements IoUserInterface {
       path: 'IoUsers',
       idName: 'id',
       properties: {
+        "realName": {
+          name: 'realName',
+          type: 'string',
+          default: ''
+        },
         "active": {
           name: 'active',
           type: 'boolean',

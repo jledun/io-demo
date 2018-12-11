@@ -59,6 +59,7 @@ import { RecipeComponentsApi } from './services/custom/RecipeComponents';
 import { MaterialTypeApi } from './services/custom/MaterialType';
 import { MaterialApi } from './services/custom/Material';
 import { IoUserApi } from './services/custom/IoUser';
+import { EmailApi } from './services/custom/Email';
 import { RuntimeDataApi } from './services/custom/RuntimeData';
 /**
 * @module SDKBrowserModule
@@ -103,6 +104,7 @@ export class SDKBrowserModule {
         MaterialTypeApi,
         MaterialApi,
         IoUserApi,
+        EmailApi,
         RuntimeDataApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }

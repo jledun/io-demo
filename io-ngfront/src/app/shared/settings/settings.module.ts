@@ -8,8 +8,6 @@ import {
   MatSidenavModule
 } from '@angular/material';
 
-import { UserManagementModule } from '../user-management/user-management.module';
-
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
 
@@ -20,8 +18,7 @@ import { SettingsComponent } from './settings.component';
     SettingsRoutingModule,
     MatDividerModule,
     MatListModule,
-    MatSidenavModule,
-    UserManagementModule
+    MatSidenavModule
   ],
   exports: [
     SettingsComponent
