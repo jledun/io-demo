@@ -18,7 +18,7 @@
           [checked]="param.value" disabled>
         </mat-slide-toggle>
         <ng-container *ngSwitchCase="'date'">
-          {{param.value | date:"dd/MM/yyyy hh:mm"}}
+          {{param.value | date:"dd/MM/yyyy HH:mm"}}
         </ng-container>
         <ng-container *ngSwitchDefault>
           {{param.value}}
@@ -39,7 +39,7 @@
           <input matInput type="text" [value]="param.value">
         </mat-form-field>
         <span *ngSwitchCase="'date'">
-          date {{param.value | date:"dd/MM/yyyy hh:mm"}}
+          date {{param.value | date:"dd/MM/yyyy HH:mm"}}
         </span>
         <span *ngSwitchCase="'number'">
           number {{param.value}}

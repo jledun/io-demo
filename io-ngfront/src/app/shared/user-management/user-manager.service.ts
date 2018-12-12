@@ -9,7 +9,7 @@ import {
 } from '../sdk/services';
 import { environment } from '../../../environments/environment';
 import { LbdataService } from '../../lbdata.service';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -32,8 +32,9 @@ export class UserManagerService {
   getModelDescription(): any {
     return IoUser.getModelDefinition();
   }
-  getCrtUser(): Observable<IoUserInterface> {
-    return this.userManagement.getCurrent();
+  public crtUser: Subject<IoUserInterface> = new Subject();
+  getCrtUser(): void {
+    this.userManagement.getCurrent().subscribe((user: IoUserInterface) => this.crtUser.next(user));
   }
   userLogIn(credentials: IoUserInterface, rememberMe: boolean = true) {
     return this.userManagement.login(credentials, 'user', rememberMe);

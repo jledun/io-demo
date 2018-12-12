@@ -26,11 +26,7 @@ export class UserTopbarComponent implements OnInit {
     });
   }
   refreshCurrentUser() {
-    this.lbdata.getCrtUser().subscribe(
-      crtUser => this.crtUser = crtUser,
-      err => this.resetCrtUser(),
-      () => {}
-    );
+    this.lbdata.getCrtUser();
   }
 
   logout() {
@@ -58,6 +54,11 @@ export class UserTopbarComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.resetCrtUser();
+    this.lbdata.crtUser.subscribe(
+      crtUser => this.crtUser = crtUser,
+      err => this.resetCrtUser(),
+      () => {}
+    );
   }
 
   ngOnInit() {

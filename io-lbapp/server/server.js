@@ -9,25 +9,24 @@ const sslConfig = require('./ssl-config');
 
 const app = module.exports = loopback();
 
+app.use(ensureSecure);
 app.use(loopback.token());
 
-app.start = function(httpOnly) {
-  if (httpOnly === undefined) {
-    httpOnly = process.env.HTTP;
-  }
-  var server = null;
-  if (!httpOnly) {
-    var options = {
-      key: sslConfig.privateKey,
-      cert: sslConfig.certificate,
-    };
-    server = https.createServer(options, app);
-  } else {
-    server = http.createServer(app);
-  }
+function ensureSecure(req, res, next) {
+  if (req.secure) return next();
+  res.redirect(`https://${req.hostname}:${app.get('httpsPort')}${req.url}`);
+}
+app.start = function() {
+  const options = {
+    key: sslConfig.privateKey,
+    cert: sslConfig.certificate
+  };
+  const server = https.createServer(options, app);
+  const httpServer = http.createServer(app).listen(app.get('port'));;
+
   // start the web server
-  server.listen(app.get('port'), function() {
-    const baseUrl = (httpOnly ? 'http://' : 'https://') + app.get('host') + ':' + app.get('port');
+  server.listen(app.get('httpsPort'), function() {
+    const baseUrl = 'https://' + app.get('host') + ':' + app.get('httpsPort');
     app.emit('started', baseUrl);
     console.log('Web server listening at: %s%s', baseUrl, '/');
     if (app.get('loopback-component-explorer')) {
@@ -45,5 +44,5 @@ boot(app, __dirname, function(err) {
 
   // start the server if `$ node server.js`
   if (require.main === module)
-    app.start(true);
+    app.start();
 });

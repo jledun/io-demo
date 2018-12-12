@@ -26,8 +26,9 @@ export class UserEditorUserComponent implements OnInit {
     {field: 'username', title: "Nom d'utilisateur", editable: false, subtitle: "Identifiant de connexion", order: 1}, 
     {field: 'email', title: "Adresse email", editable: false, link: true, order: 2}, 
     {field: 'createdAt', title: "Crée le", editable: false, order: 3}, 
-    {field: 'updatedAt', title: "Dernière connexion le", editable: false, order: 4},
-    {field: 'active', title: 'activer / désactiver', editable: true, subtitle: `Un utilisateur désactivé ne peux plus se connecter`, order: 5}
+    {field: 'updatedAt', title: "Modifié le", editable: false, order: 4}, 
+    {field: 'lastConnection', title: "Dernière connexion le", editable: false, order: 5},
+    {field: 'active', title: 'activer / désactiver', editable: true, subtitle: `Un utilisateur désactivé ne peux plus se connecter`, order: 6}
   ];
   passwdChangeParams: ApplicationParamTemplate = {field: 'passwordChange', title: 'Changer le mot de passe', link: true, editable: false};
   deleteUserParam: ApplicationParamTemplate = {field: 'deleteUser', title: "supprimer l'utilisateur", link: true, editable: false};
@@ -117,7 +118,11 @@ export class UserEditorUserComponent implements OnInit {
         });
         return data;
       }),
-      concatMap((data: ApplicationParamTemplate): Observable<any> => this.refreshSequence())
+      concatMap((data: ApplicationParamTemplate): Observable<any> => this.refreshSequence()),
+      map(data => {
+        this.userManager.getCrtUser();
+        return data;
+      })
     );
   }
 

@@ -30,28 +30,28 @@ module.exports = function(ioUser) {
     next();
   });
 
-  ioUser.afterRemote('create', (ctx, user, next) => {
-    // envoi email de vérification de l'identité
-    const options = {
-      type: 'email',
-      to: user.email,
-      from: senderAddress,
-      subject: 'Merci pour votre enregistrement.',
-      template: path.resolve(__dirname, '../../server/views/verify.ejs'),
-      redirect: '/verified',
-      user: user,
-      //verifyHref: `http://${ioUser.app.get('host')}:${ioUser.app.get('port')}/${config.ui.checkIdentityPath || 'checkIdentity'}?uid=${user.id}`
-      verifyHref: `http://192.168.1.109:4200/${config.ui.checkIdentityPath || 'checkIdentity'}?uid=${user.id}`
-    };
-    user.verify(options, function(err, response) {
-      if (err) {
-        ioUser.deleteById(user.id);
-        return next(err);
-      }
-      console.log(JSON.stringify(response, null, 2));
-      ctx.res.json({status: 200, message: `Nouvel utilisateur ${user.username} enregistré, veuillez vérifier vos emails pour confirmer votre identité.`});
-    });
-  });
+  // ioUser.afterRemote('create', (ctx, user, next) => {
+  //   // envoi email de vérification de l'identité
+  //   const options = {
+  //     type: 'email',
+  //     to: user.email,
+  //     from: senderAddress,
+  //     subject: 'Merci pour votre enregistrement.',
+  //     template: path.resolve(__dirname, '../../server/views/verify.ejs'),
+  //     redirect: '/verified',
+  //     user: user,
+  //     //verifyHref: `http://${ioUser.app.get('host')}:${ioUser.app.get('port')}/${config.ui.checkIdentityPath || 'checkIdentity'}?uid=${user.id}`
+  //     verifyHref: `http://192.168.1.109:4200/${config.ui.checkIdentityPath || 'checkIdentity'}?uid=${user.id}`
+  //   };
+  //   user.verify(options, function(err, response) {
+  //     if (err) {
+  //       ioUser.deleteById(user.id);
+  //       return next(err);
+  //     }
+  //     console.log(JSON.stringify(response, null, 2));
+  //     ctx.res.json({status: 200, message: `Nouvel utilisateur ${user.username} enregistré, veuillez vérifier vos emails pour confirmer votre identité.`});
+  //   });
+  // });
 
   ioUser.beforeRemote('login', (ctx, instance, next) => {
     const cred = {
@@ -80,7 +80,7 @@ module.exports = function(ioUser) {
   ioUser.afterRemote('login', (ctx, instance, next) => {
     ioUser.upsert({
       id: instance.userId,
-      lastConnection: instance.created
+      lastConnection: Date.now()
     }).then(data => {
       next();
     }).catch(err => {
@@ -113,46 +113,46 @@ module.exports = function(ioUser) {
     returns: {arg: 'userExists', type: "boolean"}
   });
 
-  // Method to render
-  ioUser.afterRemote('prototype.verify', function(context, user, next) {
-    context.res.json({status: 200, message: `Nouvel utilisateur ${user.username} enregistré, veuillez vérifier vos emails pour confirmer votre identité.`});
-  });
+  // // Method to render
+  // ioUser.afterRemote('prototype.verify', function(context, user, next) {
+  //   context.res.json({status: 200, message: `Nouvel utilisateur ${user.username} enregistré, veuillez vérifier vos emails pour confirmer votre identité.`});
+  // });
 
-  //send password reset link when requested
-  ioUser.on('resetPasswordRequest', function(info) {
-    var url = 'http://' + config.host + ':' + config.port + '/reset-password';
-    var html = 'Click <a href="' + url + '?access_token=' +
-      info.accessToken.id + '">here</a> to reset your password';
+  // //send password reset link when requested
+  // ioUser.on('resetPasswordRequest', function(info) {
+  //   var url = 'http://' + config.host + ':' + config.port + '/reset-password';
+  //   var html = 'Click <a href="' + url + '?access_token=' +
+  //     info.accessToken.id + '">here</a> to reset your password';
 
-    ioUser.app.models.Email.send({
-      to: info.email,
-      from: senderAddress,
-      subject: 'Password reset',
-      html: html
-    }, function(err) {
-      if (err) return console.log('> error sending password reset email');
-      console.log('> sending password reset email to:', info.email);
-    });
-  });
+  //   ioUser.app.models.Email.send({
+  //     to: info.email,
+  //     from: senderAddress,
+  //     subject: 'Password reset',
+  //     html: html
+  //   }, function(err) {
+  //     if (err) return console.log('> error sending password reset email');
+  //     console.log('> sending password reset email to:', info.email);
+  //   });
+  // });
 
-  //render UI page after password change
-  ioUser.afterRemote('changePassword', function(context, user, next) {
-    context.res.render('response', {
-      title: 'Password changed successfully',
-      content: 'Please login again with new password',
-      redirectTo: '/',
-      redirectToLinkText: 'Log in'
-    });
-  });
+  // //render UI page after password change
+  // ioUser.afterRemote('changePassword', function(context, user, next) {
+  //   context.res.render('response', {
+  //     title: 'Password changed successfully',
+  //     content: 'Please login again with new password',
+  //     redirectTo: '/',
+  //     redirectToLinkText: 'Log in'
+  //   });
+  // });
 
-  //render UI page after password reset
-  ioUser.afterRemote('setPassword', function(context, user, next) {
-    context.res.render('response', {
-      title: 'Password reset success',
-      content: 'Your password has been reset successfully',
-      redirectTo: '/',
-      redirectToLinkText: 'Log in'
-    });
-  });
+  // //render UI page after password reset
+  // ioUser.afterRemote('setPassword', function(context, user, next) {
+  //   context.res.render('response', {
+  //     title: 'Password reset success',
+  //     content: 'Your password has been reset successfully',
+  //     redirectTo: '/',
+  //     redirectToLinkText: 'Log in'
+  //   });
+  // });
 
 };

@@ -13,16 +13,18 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private userManager: UserManagerService
-  ) { }
-
-  ngOnInit() {
-    this.userManager.getCrtUser().subscribe(
+  ) {
+    this.userManager.crtUser.subscribe(
       data => {
         this.crtUser = {...data};
         IoRunTimeDatasService.setDataLoading(false);
       }, err => IoRunTimeDatasService.setDataLoading(false),
       () => {}
     );
+  }
+
+  ngOnInit() {
+    this.userManager.getCrtUser();
   }
 
 }
