@@ -33,6 +33,8 @@ import { UserEditorUsersComponent } from './user-editor-users/user-editor-users.
 import { UserEditorRightsComponent } from './user-editor-rights/user-editor-rights.component';
 import { UserEditorUserComponent } from './user-editor-user/user-editor-user.component';
 import { UserCheckIdentityComponent } from './user-check-identity/user-check-identity.component';
+import { UserChangePasswordPopupComponent } from './user-change-password-popup/user-change-password-popup.component';
+import { UserDeletePopupComponent } from './user-delete-popup/user-delete-popup.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { UserCheckIdentityComponent } from './user-check-identity/user-check-ide
     UserEditorUsersComponent,
     UserEditorRightsComponent,
     UserEditorUserComponent,
-    UserCheckIdentityComponent
+    UserCheckIdentityComponent,
+    UserChangePasswordPopupComponent,
+    UserDeletePopupComponent
   ],
   imports: [
     CommonModule,
@@ -76,8 +80,14 @@ import { UserCheckIdentityComponent } from './user-check-identity/user-check-ide
     UserEditorComponent,
     UserEditorUsersComponent,
     UserEditorRightsComponent,
-    UserEditorUserComponent
+    UserEditorUserComponent,
+    UserChangePasswordPopupComponent,
+    UserDeletePopupComponent
   ],
-  entryComponents: [UserConnectionComponent]
+  entryComponents: [
+    UserConnectionComponent,
+    UserChangePasswordPopupComponent,
+    UserDeletePopupComponent
+  ]
 })
 export class UserManagementModule { }

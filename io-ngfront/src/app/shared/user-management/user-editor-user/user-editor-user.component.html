@@ -12,19 +12,25 @@
         [param]="param" (change)="paramChange($event)" (editValue)="paramClick($event)">
       </app-application-param>
 
+      <app-application-param 
+        [param]="passwdChangeParams" (editValue)="passwdChangeClick($event)">
+      </app-application-param>
+
+      <app-application-param
+        [param]="deleteUserParam" (change)="paramChange($event)" (editValue)="deleteUserClick($event)">
+      </app-application-param>
+
     </mat-card-content>
 
-    <mat-card-actions>
+    <!--mat-card-actions>
       <button mat-flat-button (click)="editRealm()" fxFlex="0 0 auto">
         <span>Changer le mot de passe</span>
-      </button>
-      <button mat-flat-button (click)="editRealm()" fxFlex="0 0 auto">
-        <span>Désactiver l'utilisateur</span>
       </button>
       <button mat-flat-button color="warn" (click)="editRealm()" fxFlex="0 0 auto">
         <span>Supprimer l'utilisateur</span>
       </button>
-    </mat-card-actions>
+    </mat-card-actions-->
 
   </mat-card>
 </div>
+

@@ -1,11 +1,17 @@
 <div mat-dialog-title>{{data.title}}</div>
 <div mat-dialog-content>
   <mat-form-field class="full-width">
-    <input type="text" matInput [(ngModel)]="data.value">
+    <input type="text" matInput [formControl]="fieldCtrl">
+    <mat-error *ngIf="fieldCtrl.hasError('email') && !fieldCtrl.hasError('required')">
+      Veuillez saisir une adresse email valide.
+    </mat-error>
+    <mat-error *ngIf="fieldCtrl.hasError('required')">
+      Le champ ne doit pas être vide.
+    </mat-error>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuler</button>
   <span class="fill-space"></span>
-  <button mat-button type="submit" [mat-dialog-close]="data">Ok</button>
+  <button mat-button type="submit" [mat-dialog-close]="data" [disabled]="fieldCtrl.invalid">Ok</button>
 </div>

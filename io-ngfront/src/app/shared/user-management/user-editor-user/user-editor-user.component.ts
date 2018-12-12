@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { LoopBackFilter } from '../../sdk';
 import { IoUser, IoUserInterface } from '../../sdk/models';
 import { UserManagerService } from '../user-manager.service';
 import { IoRunTimeDatasService, ApplicationParamTemplate } from '../../lib';
 import { ApplicationParamPopupComponent } from '../../lib/application-param-popup/application-param-popup.component';
-import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { UserChangePasswordPopupComponent } from '../user-change-password-popup/user-change-password-popup.component';
+import { UserDeletePopupComponent } from '../user-delete-popup/user-delete-popup.component';
+import { Observable, of } from 'rxjs';
+import { switchMap, map, concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-editor-user',
@@ -27,12 +29,15 @@ export class UserEditorUserComponent implements OnInit {
     {field: 'updatedAt', title: "Dernière connexion le", editable: false, order: 4},
     {field: 'active', title: 'activer / désactiver', editable: true, subtitle: `Un utilisateur désactivé ne peux plus se connecter`, order: 5}
   ];
+  passwdChangeParams: ApplicationParamTemplate = {field: 'passwordChange', title: 'Changer le mot de passe', link: true, editable: false};
+  deleteUserParam: ApplicationParamTemplate = {field: 'deleteUser', title: "supprimer l'utilisateur", link: true, editable: false};
 
   constructor(
     private userManager: UserManagerService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -47,13 +52,29 @@ export class UserEditorUserComponent implements OnInit {
     });
   }
 
-  refresh() {
-    IoRunTimeDatasService.setDataLoading(true);
+  passwdChangeClick() {
+    const passwdDialog = this.dialog.open(UserChangePasswordPopupComponent, {
+      data: {...this.user},
+      minWidth: "600px"
+    });
+
+    passwdDialog.afterClosed().subscribe(data => console.log(data));
+  }
+  deleteUserClick() {
+    const deleteDialog = this.dialog.open(UserDeletePopupComponent, {
+      data: {...this.user},
+      minWidth: "600px"
+    });
+
+    deleteDialog.afterClosed().subscribe(data => console.log(data));
+  }
+
+  refreshSequence(): Observable<any> {
     const propertiesDef = this.userManager.getModelDescription().properties;
-    this.getUser.pipe(
+    return this.getUser.pipe(
       map(userData => this.user = {...userData}),
-      map(
-        userData => Object.keys(userData).map(
+      map(userData => Object.keys(userData)
+        .map(
           key => Object.assign(
             {}, 
             propertiesDef[key],
@@ -63,10 +84,15 @@ export class UserEditorUserComponent implements OnInit {
         ).filter(
           toEdit => this._paramsToEdit.findIndex(param => param.field === toEdit.field) >= 0
         ).sort((a, b) => a.order - b.order)
+      ), map(
+        paramsToEdit => this.paramsToEdit = [].concat(paramsToEdit)
       )
-    ).subscribe(
+    );
+  }
+  refresh(): void {
+    IoRunTimeDatasService.setDataLoading(true);
+    this.refreshSequence().subscribe(
       (data: Array<any>) => {
-        this.paramsToEdit = [].concat(data);
         IoRunTimeDatasService.setDataLoading(false);
       },
       err => {
@@ -74,6 +100,24 @@ export class UserEditorUserComponent implements OnInit {
         IoRunTimeDatasService.setDataLoading(false);
       },
       () => {}
+    );
+  }
+  updateFieldSequence(data: ApplicationParamTemplate): Observable<any> {
+    return of(data).pipe(
+      concatMap((data: ApplicationParamTemplate): Observable<any> => {
+        if (!data) return of(data);
+        const where = {uuid: this.user.uuid};
+        const toUpdate = {[data.field]: data.value};
+        return this.userManager.userUpdate(where, toUpdate);
+      }),
+      map((data: any): any => {
+        if (!data) return of(data);
+        this.snackBar.open(`${data.count} ligne(s) mises à jour.`, 'Ok', {
+          duration: 3000
+        });
+        return data;
+      }),
+      concatMap((data: ApplicationParamTemplate): Observable<any> => this.refreshSequence())
     );
   }
 
@@ -84,13 +128,41 @@ export class UserEditorUserComponent implements OnInit {
       minWidth: "600px"
     });
 
-    editDialog.afterClosed().subscribe(
-      data => console.log(data)
+    editDialog.afterClosed()
+    .pipe(
+      map((data: ApplicationParamTemplate): ApplicationParamTemplate => {
+        if (!data || !data.hasOwnProperty('value') || data.value === param.value) return null;
+        IoRunTimeDatasService.setDataLoading(true);
+        return data;
+      }),
+      concatMap((data: ApplicationParamTemplate): Observable<any> => this.updateFieldSequence(data))
+    ).subscribe(
+      data => IoRunTimeDatasService.setDataLoading(false),
+      err => {
+        this.snackBar.open(`${err.message}.`, 'Ok', {
+          duration: 3000
+        });
+        console.log(err);
+        IoRunTimeDatasService.setDataLoading(false);
+      },
+      () => {}
     );
   }
 
-  paramChange(event): void {
-    console.log('change', event);
+  paramChange(data: ApplicationParamTemplate): void {
+    if (data.value === this.user[data.field]) return;
+    IoRunTimeDatasService.setDataLoading(true);
+    this.updateFieldSequence(data).subscribe(
+      data => IoRunTimeDatasService.setDataLoading(false),
+      err => {
+        this.snackBar.open(`${err.message}.`, 'Ok', {
+          duration: 3000
+        });
+        console.log(err);
+        IoRunTimeDatasService.setDataLoading(false);
+      },
+      () => {}
+    );
   }
 
   goBackToUsers() {

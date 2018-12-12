@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'settings', component: SettingsComponent, children: [
     {path: "users", component: UserEditorComponent, outlet: 'settingsRouterOutlet'},
     {path: "users/:id", component: UserEditorUserComponent, outlet: 'settingsRouterOutlet'},
+    {path: "profile/:id", component: UserEditorUserComponent, outlet: 'settingsRouterOutlet'},
   ]}
 ];
 

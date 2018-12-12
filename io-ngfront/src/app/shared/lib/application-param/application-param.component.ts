@@ -19,8 +19,8 @@ export class ApplicationParamComponent {
     value: ''
   };
   @Output() change: EventEmitter<any> = new EventEmitter();
-  valueChange(value) {
-    this.change.emit(value);
+  booleanValueChange(value) {
+    this.change.emit(Object.assign({}, this.param, {value: value.checked}));
   }
   @Output() editValue: EventEmitter<any> = new EventEmitter();
   valueClick(value) {

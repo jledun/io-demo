@@ -23,6 +23,7 @@ export class UserManagerService {
   ) {
     LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
     LoopBackConfig.setApiVersion( environment.lbApp.api );
+    LoopBackConfig.whereOnUrl();
   }  
 
   /*
@@ -65,7 +66,9 @@ export class UserManagerService {
   userConfirmIdentity(id: number = 0, token: string = ''): Observable<any> {
     return this.userManagement.confirm(id, token, null);
   }
-  userUpdate(user: IoUserInterface) {}
+  userUpdate(where: any = {}, field: any = {}): Observable<{count: 'number'}> {
+    return this.userManagement.updateAll(where, field);
+  }
   userDelete(user: IoUserInterface) {}
   /*
    * USER MANAGEMENT

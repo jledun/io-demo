@@ -12,12 +12,17 @@
   </span>
   <span fxFlex="1 1 auto"></span>
   <span fxFlex="0 0 auto" *ngIf="!param.editable">
-    <ng-container [ngSwitch]="param.type.toLowerCase()">
-      <ng-container *ngSwitchCase="'date'">
-        {{param.value | date:"dd-MM-yyyy hh:mm"}}
-      </ng-container>
-      <ng-container *ngSwitchDefault>
-        {{param.value}}
+    <ng-container *ngIf="param.hasOwnProperty('type') && param.type">
+      <ng-container [ngSwitch]="param.type.toLowerCase()">
+        <mat-slide-toggle *ngSwitchCase="'boolean'" 
+          [checked]="param.value" disabled>
+        </mat-slide-toggle>
+        <ng-container *ngSwitchCase="'date'">
+          {{param.value | date:"dd/MM/yyyy hh:mm"}}
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          {{param.value}}
+        </ng-container>
       </ng-container>
     </ng-container>
     <button class="nav-button" mat-button *ngIf="param.link" (click)="valueClick(param)">
@@ -25,22 +30,24 @@
     </button>
   </span>
   <span fxFlex="0 0 auto" *ngIf="param.editable">
-    <ng-container [ngSwitch]="param.type.toLowerCase()">
-      <mat-slide-toggle *ngSwitchCase="'boolean'" 
-        [checked]="param.value" (change)="valueChange($event)">
-      </mat-slide-toggle>
-      <mat-form-field *ngSwitchCase="'string'">
-        <input matInput type="text" [value]="param.value">
-      </mat-form-field>
-      <span *ngSwitchCase="'date'">
-        date {{param.value | date:"dd-MM-yyyy hh:mm"}}
-      </span>
-      <span *ngSwitchCase="'number'">
-        number {{param.value}}
-      </span>
-      <span *ngSwitchDefault>
-        default {{param.value}}
-      </span>
+    <ng-container *ngIf="param.type">
+      <ng-container [ngSwitch]="param.type.toLowerCase()">
+        <mat-slide-toggle *ngSwitchCase="'boolean'" 
+          [checked]="param.value" (change)="booleanValueChange($event)">
+        </mat-slide-toggle>
+        <mat-form-field *ngSwitchCase="'string'">
+          <input matInput type="text" [value]="param.value">
+        </mat-form-field>
+        <span *ngSwitchCase="'date'">
+          date {{param.value | date:"dd/MM/yyyy hh:mm"}}
+        </span>
+        <span *ngSwitchCase="'number'">
+          number {{param.value}}
+        </span>
+        <span *ngSwitchDefault>
+          default {{param.value}}
+        </span>
+      </ng-container>
     </ng-container>
   </span>
 </mat-card>
