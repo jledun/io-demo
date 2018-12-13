@@ -239,9 +239,9 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "stationList"
+      "property": "stationlist"
     }
   ],
   "methods": {}
