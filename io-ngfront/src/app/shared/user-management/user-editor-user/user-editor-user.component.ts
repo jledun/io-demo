@@ -8,8 +8,13 @@ import { IoRunTimeDatasService, ApplicationParamTemplate } from '../../lib';
 import { ApplicationParamPopupComponent } from '../../lib/application-param-popup/application-param-popup.component';
 import { UserChangePasswordPopupComponent } from '../user-change-password-popup/user-change-password-popup.component';
 import { UserDeletePopupComponent } from '../user-delete-popup/user-delete-popup.component';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { switchMap, map, concatMap } from 'rxjs/operators';
+
+interface passwdChangeInterface {
+  oldPasswd: string
+  newPasswd: string
+}
 
 @Component({
   selector: 'app-user-editor-user',
@@ -18,20 +23,65 @@ import { switchMap, map, concatMap } from 'rxjs/operators';
 })
 export class UserEditorUserComponent implements OnInit {
   user: IoUserInterface = new IoUser();
+  connectedUser: IoUserInterface = new IoUser();
   getUser: Observable<IoUserInterface>;
 
   paramsToEdit: Array<ApplicationParamTemplate> = [];
   _paramsToEdit: Array<ApplicationParamTemplate> = [
-    {field: 'realName', title: 'Nom complet', editable: false, link: true, order: 0}, 
-    {field: 'username', title: "Nom d'utilisateur", editable: false, subtitle: "Identifiant de connexion", order: 1}, 
-    {field: 'email', title: "Adresse email", editable: false, link: true, order: 2}, 
-    {field: 'createdAt', title: "Crée le", editable: false, order: 3}, 
-    {field: 'updatedAt', title: "Modifié le", editable: false, order: 4}, 
-    {field: 'lastConnection', title: "Dernière connexion le", editable: false, order: 5},
-    {field: 'active', title: 'activer / désactiver', editable: true, subtitle: `Un utilisateur désactivé ne peux plus se connecter`, order: 6}
+    {
+      field: 'realName', 
+      title: 'Nom complet', 
+      editable: false, 
+      link: true, 
+      order: 0
+    }, {
+      field: 'username', 
+      title: "Nom d'utilisateur", 
+      editable: false, 
+      subtitle: "Identifiant de connexion", 
+      order: 1
+    }, {
+      field: 'email', 
+      title: "Adresse email", 
+      editable: false, 
+      link: true, 
+      order: 2
+    }, {
+      field: 'createdAt', 
+      title: "Crée le", 
+      editable: false, 
+      order: 3
+    }, {
+      field: 'updatedAt', 
+      title: "Modifié le", 
+      editable: false, 
+      order: 4
+    }, {
+      field: 'lastConnection', 
+      title: "Dernière connexion le", 
+      editable: false, 
+      order: 5
+    }, {
+      field: 'active', 
+      title: 'activer / désactiver', 
+      editable: true, 
+      subtitle: `Un utilisateur désactivé ne peux plus se connecter`, 
+      order: 6
+    }
   ];
-  passwdChangeParams: ApplicationParamTemplate = {field: 'passwordChange', title: 'Changer le mot de passe', link: true, editable: false};
-  deleteUserParam: ApplicationParamTemplate = {field: 'deleteUser', title: "supprimer l'utilisateur", link: true, editable: false};
+  passwdChangeParams: ApplicationParamTemplate = {
+    field: 'passwordChange', 
+    title: 'Changer le mot de passe', 
+    link: true, 
+    editable: false
+  };
+  deleteUserParam: ApplicationParamTemplate = {
+    field: 'deleteUser', 
+    title: "supprimer l'utilisateur", 
+    link: true, 
+    tooltip: `La suppression d'un utilisateur est définitive.`,
+    editable: false
+  };
 
   constructor(
     private userManager: UserManagerService,
@@ -46,34 +96,21 @@ export class UserEditorUserComponent implements OnInit {
       switchMap((params: ParamMap) =>
         this.userManager.userRetrieve(Number(params.get('id'))))
     );
+    this.userManager.crtUser.subscribe(crtUser => {
+      // backup connected user informations
+      this.connectedUser = crtUser;
+      // set options for change password button
+      this.setPasswdChangeDisableStatus();
+    });
     this.refresh();
-    const propertiesDef = this.userManager.getModelDescription().properties;
-    this.paramsToEdit.forEach(param => {
-      param = Object.assign({}, param, propertiesDef[param.field]);
-    });
-  }
-
-  passwdChangeClick() {
-    const passwdDialog = this.dialog.open(UserChangePasswordPopupComponent, {
-      data: {...this.user},
-      minWidth: "600px"
-    });
-
-    passwdDialog.afterClosed().subscribe(data => console.log(data));
-  }
-  deleteUserClick() {
-    const deleteDialog = this.dialog.open(UserDeletePopupComponent, {
-      data: {...this.user},
-      minWidth: "600px"
-    });
-
-    deleteDialog.afterClosed().subscribe(data => console.log(data));
   }
 
   refreshSequence(): Observable<any> {
     const propertiesDef = this.userManager.getModelDescription().properties;
     return this.getUser.pipe(
+      // backup displayed user informations
       map(userData => this.user = {...userData}),
+      // create parameters for application param list
       map(userData => Object.keys(userData)
         .map(
           key => Object.assign(
@@ -85,9 +122,16 @@ export class UserEditorUserComponent implements OnInit {
         ).filter(
           toEdit => this._paramsToEdit.findIndex(param => param.field === toEdit.field) >= 0
         ).sort((a, b) => a.order - b.order)
-      ), map(
+      ), 
+      // backup parameters for application param list
+      map(
         paramsToEdit => this.paramsToEdit = [].concat(paramsToEdit)
-      )
+      ),
+      // refresh connected user info
+      map(params => {
+        this.userManager.refreshCrtUser();
+        return params;
+      })
     );
   }
   refresh(): void {
@@ -118,11 +162,7 @@ export class UserEditorUserComponent implements OnInit {
         });
         return data;
       }),
-      concatMap((data: ApplicationParamTemplate): Observable<any> => this.refreshSequence()),
-      map(data => {
-        this.userManager.getCrtUser();
-        return data;
-      })
+      concatMap((data: ApplicationParamTemplate): Observable<any> => this.refreshSequence())
     );
   }
 
@@ -168,6 +208,89 @@ export class UserEditorUserComponent implements OnInit {
       },
       () => {}
     );
+  }
+
+  setPasswdChangeDisableStatus() {
+    this.passwdChangeParams.linkDisable = this.user.uuid !== this.connectedUser.uuid;
+    this.passwdChangeParams.tooltip = 
+      (this.passwdChangeParams.linkDisable) ? 
+      `Seul l'utilisateur connecté peut changer son mot de passe.` :
+      `Changer le mot de passe de l'utilisateur connecté.`;
+  }
+  changePassWdSequence(data: passwdChangeInterface): Observable<any> {
+    return of(data).pipe(
+      concatMap((data: passwdChangeInterface) => {
+        // contrôle des données de paramétrage
+        if (!data) return throwError(new Error(`Données incomplètes`));
+        if (!data.hasOwnProperty('oldPasswd') || !data.hasOwnProperty('newPasswd'))
+          return throwError(new Error(`Vous devez renseigner l'ancien et le nouveau mot de passe`));
+        if (data.oldPasswd.length <= 0 || data.newPasswd.length <= 0)
+          return throwError(new Error(`Données incomplète, au moins un champ est vide`));
+        if (data.oldPasswd === data.newPasswd)
+          return throwError(new Error(`Les anciens et nouveaux mot de passe sont identiques`));
+        return of(data);
+      }),
+      concatMap(
+        (data: passwdChangeInterface) => this.userManager.changePassword(data.oldPasswd, data.newPasswd)
+      ),
+      concatMap((data: any) => this.refreshSequence())
+    );
+  }
+  passwdChangeClick() {
+    const passwdDialog = this.dialog.open(UserChangePasswordPopupComponent, {
+      data: {...this.user},
+      minWidth: "600px"
+    });
+
+    passwdDialog.afterClosed().pipe(
+      concatMap((data: passwdChangeInterface) => (data) ? this.changePassWdSequence(data) : of(null))
+    ).subscribe(data => {
+      if (data) {
+        this.snackBar.open(`Mot de passe mis à jour.`, 'Ok', {
+          duration: 3000
+        });
+        IoRunTimeDatasService.setDataLoading(false);
+      }
+    }, err => {
+      this.snackBar.open(`Abandon : ${err.message}. Veuillez recommencer.`, 'Ok', {
+        duration: 4000
+      });
+      IoRunTimeDatasService.setDataLoading(false);
+    }, () => {});
+  }
+  deleteUserSequence(data: IoUserInterface): Observable<any> {
+    return of(data).pipe(
+      concatMap((data: IoUserInterface): Observable<IoUserInterface> => {
+        if (!data.id) return throwError(new Error(`id utilisateur non renseigné`));
+        return of(data);
+      }),
+      concatMap((data: IoUserInterface): Observable<IoUserInterface> => this.userManager.userDelete(data))
+    );
+  }
+  deleteUserClick() {
+    const deleteDialog = this.dialog.open(UserDeletePopupComponent, {
+      data: {...this.user},
+      minWidth: "600px"
+    });
+
+    deleteDialog.afterClosed().pipe(
+      concatMap((data: IoUserInterface): Observable<IoUserInterface> => 
+        (data) ? this.deleteUserSequence(data) : of(null)
+      )
+    ).subscribe(data => {
+      if (data) {
+        this.snackBar.open(`Utilisateur supprimé.`, 'Ok', {
+          duration: 3000
+        });
+        IoRunTimeDatasService.setDataLoading(false);
+        this.router.navigate(['/settings/', {outlets: {settingsRouterOutlet: ['users']}}]);
+      }
+    }, err => {
+      this.snackBar.open(`Abandon : ${err.message}. Veuillez recommencer.`, 'Ok', {
+        duration: 4000
+      });
+      IoRunTimeDatasService.setDataLoading(false);
+    }, () => {});
   }
 
   goBackToUsers() {

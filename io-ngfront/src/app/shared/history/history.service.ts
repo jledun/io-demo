@@ -21,8 +21,8 @@ export class HistoryService {
     private eventhistoryApi: EventhistoryApi,
     private logRefroidisseurApi: LogRefroidisseurApi
    ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
+    LoopBackConfig.setBaseURL(environment.lbApp.ip);
+    LoopBackConfig.setApiVersion(environment.lbApp.api);
   }
 
   /* 

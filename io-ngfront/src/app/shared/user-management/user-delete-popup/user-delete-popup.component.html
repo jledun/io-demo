@@ -1,9 +1,15 @@
-<div mat-dialog-title>Supprimer un utilisateur</div>
+<div mat-dialog-title>Supprimer l'utilisateur {{data.username}}</div>
 <div mat-dialog-content>
+
+  <app-application-param 
+    [param]="deleteUserParam" (change)="deleteConfirmation($event)">
+  </app-application-param>
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuler</button>
   <span class="fill-space"></span>
-  <button mat-button type="submit" [mat-dialog-close]="data">Ok</button>
+  <button mat-button type="submit" [mat-dialog-close]="data"
+    [disabled]="confirmation < 1">Ok</button>
 </div>
 

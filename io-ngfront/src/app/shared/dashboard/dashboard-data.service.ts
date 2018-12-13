@@ -14,7 +14,7 @@ export class DashboardDataService {
   constructor(
     public rtService: RuntimeDataApi
    ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
+    LoopBackConfig.setBaseURL(environment.lbApp.ip);
+    LoopBackConfig.setApiVersion(environment.lbApp.api);
   }
 }

@@ -35,6 +35,7 @@ import { UserEditorUserComponent } from './user-editor-user/user-editor-user.com
 import { UserCheckIdentityComponent } from './user-check-identity/user-check-identity.component';
 import { UserChangePasswordPopupComponent } from './user-change-password-popup/user-change-password-popup.component';
 import { UserDeletePopupComponent } from './user-delete-popup/user-delete-popup.component';
+import { UserAddComponent } from './user-add/user-add.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { UserDeletePopupComponent } from './user-delete-popup/user-delete-popup.
     UserEditorUserComponent,
     UserCheckIdentityComponent,
     UserChangePasswordPopupComponent,
-    UserDeletePopupComponent
+    UserDeletePopupComponent,
+    UserAddComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +84,8 @@ import { UserDeletePopupComponent } from './user-delete-popup/user-delete-popup.
     UserEditorRightsComponent,
     UserEditorUserComponent,
     UserChangePasswordPopupComponent,
-    UserDeletePopupComponent
+    UserDeletePopupComponent,
+    UserAddComponent
   ],
   entryComponents: [
     UserConnectionComponent,

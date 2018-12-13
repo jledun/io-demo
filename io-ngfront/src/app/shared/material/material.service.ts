@@ -22,8 +22,8 @@ export class MaterialService {
     public materialApi: MaterialApi,
     private materialTypeApi: MaterialTypeApi
    ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
+    LoopBackConfig.setBaseURL(environment.lbApp.ip);
+    LoopBackConfig.setApiVersion(environment.lbApp.api);
   }
 
   /* 

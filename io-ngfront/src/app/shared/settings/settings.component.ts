@@ -24,7 +24,7 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userManager.getCrtUser();
+    this.userManager.refreshCrtUser();
   }
 
 }

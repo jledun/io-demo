@@ -25,12 +25,26 @@
         </ng-container>
       </ng-container>
     </ng-container>
-    <button class="nav-button" mat-button *ngIf="param.link" (click)="valueClick(param)">
+    <button class="nav-button" mat-button 
+      [disabled]="param.linkDisable"
+      [matTooltip]="param.tooltip"
+      *ngIf="param.link" (click)="valueClick(param)">
       <mat-icon>navigate_next</mat-icon>
     </button>
   </span>
   <span fxFlex="0 0 auto" *ngIf="param.editable">
-    <ng-container *ngIf="param.type">
+    <ng-container *ngIf="param.choices && param.choices.length > 0">
+      <mat-form-field>
+        <mat-select 
+          [placeholder]="param.choicesPlaceHolder || 'Votre choix'" 
+          (selectionChange)="selectValueChange($event)">
+          <mat-option *ngFor="let choice of param.choices" [value]="choice.value">
+            {{choice.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngIf="param.type && (!param.choices || param.choices.length <= 0)">
       <ng-container [ngSwitch]="param.type.toLowerCase()">
         <mat-slide-toggle *ngSwitchCase="'boolean'" 
           [checked]="param.value" (change)="booleanValueChange($event)">

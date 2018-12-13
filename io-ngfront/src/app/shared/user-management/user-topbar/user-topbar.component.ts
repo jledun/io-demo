@@ -26,7 +26,7 @@ export class UserTopbarComponent implements OnInit {
     });
   }
   refreshCurrentUser() {
-    this.lbdata.getCrtUser();
+    this.lbdata.refreshCrtUser();
   }
 
   logout() {

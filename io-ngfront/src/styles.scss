@@ -137,6 +137,12 @@ html, body, app-root {
   max-width: 45%;
 }
 
+.param-list {
+  max-width: 35%;
+  min-width: 600px;
+  min-height: 68px;
+}
+
 .active {
   color: white;
   background-color:  mat-color($app-accent);

@@ -1,0 +1,13 @@
+<div class="user-add-main-card">
+  <mat-card class="param-list">
+    <span fxLayout="row nowrap" fxLayoutAlign="start center" fxLayoutGap="15px">
+      <button mat-icon-button (click)="goBackToUsers()">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <span class="mat-title">Ajouter un utilisateur</span>
+    </span>
+    <app-user-creation-card 
+      [cancelButtonRouterLink]="['/settings/', {outlets: {settingsRouterOutlet: ['users']}}]">
+    </app-user-creation-card>
+  </mat-card>
+</div>

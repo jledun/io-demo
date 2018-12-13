@@ -16,8 +16,8 @@ export class NomenclatureService {
     public recipeApi: RecipeApi,
     private recipeComponentApi: RecipeComponentsApi
    ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
+    LoopBackConfig.setBaseURL(environment.lbApp.ip);
+    LoopBackConfig.setApiVersion(environment.lbApp.api);
   }
 
   /* 

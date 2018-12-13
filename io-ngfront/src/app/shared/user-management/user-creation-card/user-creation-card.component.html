@@ -82,7 +82,7 @@
     </mat-card-content>
     <mat-card-actions>
       <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="15px">
-        <button mat-button type="button" routerLink="/exemple-web" routerLinkActive="active">Annuler</button>
+        <button mat-button type="button" [routerLink]="cancelButtonRouterLink" routerLinkActive="active">Annuler</button>
         <span class="fill-space"></span>
         <button mat-raised-button type="submit" color="primary">Suivant</button>
       </div>

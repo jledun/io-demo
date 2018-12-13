@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ApplicationParamTemplate } from '../../lib';
 
 @Component({
   selector: 'app-user-delete-popup',
@@ -8,6 +8,24 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./user-delete-popup.component.scss']
 })
 export class UserDeletePopupComponent implements OnInit {
+  confirmation: number = -1;
+  deleteUserParam: ApplicationParamTemplate = {
+    field: 'deleteUser', 
+    title: `La suppression d'un utilisateur est définitive.`
+  };
+  refreshParams() {
+    this.deleteUserParam = {
+      field: 'deleteUser', 
+      title: `La suppression d'un utilisateur est définitive.`,
+      tooltip: `La suppression d'un utilisateur est définitive.`,
+      editable: true,
+      choicesPlaceHolder: "Confirmation",
+      choices: [
+        {viewValue: 'Non', value: 0},
+        {viewValue: 'Oui', value: 1}
+      ]
+    };
+  }
 
   constructor(
     public dialogRef: MatDialogRef<UserDeletePopupComponent>,
@@ -15,6 +33,11 @@ export class UserDeletePopupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.refreshParams();
+  }
+
+  deleteConfirmation(value) {
+    this.confirmation = value;
   }
 
   onNoClick() {

@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
 })
 export class UserChangePasswordPopupComponent implements OnInit {
   fGroup: FormGroup;
-  result: any = {};
 
   constructor(
     public dialogRef: MatDialogRef<UserChangePasswordPopupComponent>,
@@ -23,11 +22,6 @@ export class UserChangePasswordPopupComponent implements OnInit {
       oldPasswd: ['', Validators.required],
       newPasswd: ['', Validators.required]
     });
-    this.result = {...this.data};
-    this.fGroup.valueChanges.pipe(
-      map(data => Object.assign({}, this.data, data)),
-      map(data => this.result = data)
-    ).subscribe(data => console.log(data));
   }
 
   onNoClick() {

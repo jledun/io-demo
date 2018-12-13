@@ -8,7 +8,9 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatSlideToggleModule
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -33,7 +35,9 @@ import { ApplicationParamPopupComponent } from './application-param-popup/applic
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
     MatSlideToggleModule,
+    MatTooltipModule,
     FlexLayoutModule
   ],
   exports: [

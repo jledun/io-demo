@@ -16,13 +16,14 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserManagerService {
+  _crtUser: IoUserInterface = new IoUser();
 
   constructor(
     private userManagement: IoUserApi,
     private appService: LbdataService
   ) {
-    LoopBackConfig.setBaseURL( `http://${environment.lbApp.ip}` );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
+    LoopBackConfig.setBaseURL(environment.lbApp.ip);
+    LoopBackConfig.setApiVersion(environment.lbApp.api);
     LoopBackConfig.whereOnUrl();
   }  
 
@@ -33,8 +34,17 @@ export class UserManagerService {
     return IoUser.getModelDefinition();
   }
   public crtUser: Subject<IoUserInterface> = new Subject();
-  getCrtUser(): void {
-    this.userManagement.getCurrent().subscribe((user: IoUserInterface) => this.crtUser.next(user));
+  refreshCrtUser(): void {
+    this.userManagement.getCurrent().subscribe(
+      (user: IoUserInterface) => {
+        this._crtUser = {...user};
+        this.crtUser.next(this._crtUser);
+      },
+      err => {
+        this._crtUser = new IoUser();
+        this.crtUser.next(this._crtUser);
+      }, () => {}
+    );
   }
   userLogIn(credentials: IoUserInterface, rememberMe: boolean = true) {
     return this.userManagement.login(credentials, 'user', rememberMe);
@@ -70,7 +80,12 @@ export class UserManagerService {
   userUpdate(where: any = {}, field: any = {}): Observable<{count: 'number'}> {
     return this.userManagement.updateAll(where, field);
   }
-  userDelete(user: IoUserInterface) {}
+  userDelete(user: IoUserInterface): Observable<IoUserInterface> {
+    return this.userManagement.deleteById(user.id);
+  }
+  changePassword(oldPass: string = '', newPass: string = ''): Observable<any> {
+    return this.userManagement.changePassword(oldPass, newPass);
+  }
   /*
    * USER MANAGEMENT
    * */

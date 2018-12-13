@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { IoUser, IoUserInterface } from '../../sdk/models';
 import { IoRunTimeDatasService } from '../../lib/io-run-time-datas.service';
 import { UserManagerService } from '../user-manager.service';
+import { LbdataService } from '../../../lbdata.service';
 import { Observable, of, throwError } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 
@@ -13,6 +14,7 @@ import { concatMap } from 'rxjs/operators';
   styleUrls: ['./user-creation-card.component.scss']
 })
 export class UserCreationCardComponent implements OnInit {
+  @Input() cancelButtonRouterLink: string = '';
   createUserForm: FormGroup;
   errorMsg: string = "";
   @ViewChild('firstName') firstNameInput: ElementRef;
@@ -25,8 +27,11 @@ export class UserCreationCardComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userManager: UserManagerService,
-    private alert: MatSnackBar
-  ) { }
+    private alert: MatSnackBar,
+    private appData: LbdataService
+  ) {
+    this.cancelButtonRouterLink = this.appData.defaultPath;
+  }
 
   ngOnInit() {
     this.createUserForm = this.formBuilder.group({

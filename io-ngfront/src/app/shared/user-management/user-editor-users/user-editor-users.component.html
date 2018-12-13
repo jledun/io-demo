@@ -1,8 +1,14 @@
 <mat-card>
-  <mat-card-header>
+  <mat-card-header fxLayout="row nowrap" fxLayoutAlign="center center">
     <mat-card-title>
       <span>Édition des utilisateurs</span>
     </mat-card-title>
+    <span class="fill-space"></span>
+    <button mat-raised-button color="primary"
+      [routerLink]="['/settings/', {outlets: {settingsRouterOutlet: ['add-user']}}]">
+      <mat-icon>add</mat-icon>
+      <span> Ajouter</span>
+    </button>
   </mat-card-header>
   <mat-card-content>
    <ng-container *ngIf="userList.length <= 0">
