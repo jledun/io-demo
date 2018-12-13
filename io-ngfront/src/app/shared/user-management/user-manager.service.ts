@@ -30,16 +30,19 @@ export class UserManagerService {
   }
   public crtUser: Subject<IoUserInterface> = new Subject();
   refreshCrtUser(): void {
+    if (!this.userManagement.isAuthenticated()) return this.resetUser();
     this.userManagement.getCurrent().subscribe(
       (user: IoUserInterface) => {
         this._crtUser = {...user};
         this.crtUser.next(this._crtUser);
       },
-      err => {
-        this._crtUser = new IoUser();
-        this.crtUser.next(this._crtUser);
-      }, () => {}
+      err => this.resetUser(),
+      () => {}
     );
+  }
+  resetUser() {
+    this._crtUser = new IoUser();
+    this.crtUser.next(this._crtUser);
   }
   userLogIn(credentials: IoUserInterface, rememberMe: boolean = true) {
     return this.userManagement.login(credentials, 'user', rememberMe);

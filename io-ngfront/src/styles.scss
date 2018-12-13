@@ -74,6 +74,10 @@ html, body, app-root {
   height: 0.6em;
 }
 
+.user-connection-dialog .mat-dialog-container {
+  border-radius: 0;
+}
+
 .filter-card, .info-card {
   padding: 25px;
 }

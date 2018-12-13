@@ -41,7 +41,8 @@ export class UserTopbarComponent implements OnInit {
     const dialogRef = this.dialog.open(UserConnectionComponent, {
       minWidth: "100vw",
       minHeight: "100vh",
-      data: {}
+      data: {},
+      panelClass: "user-connection-dialog"
     });
 
     dialogRef.afterClosed().subscribe(result => {
