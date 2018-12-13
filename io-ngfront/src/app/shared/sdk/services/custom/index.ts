@@ -1,5 +1,5 @@
 /* tslint:disable */
-export * from './User';
+export * from './Role';
 export * from './Uom';
 export * from './UomCateg';
 export * from './Comment';

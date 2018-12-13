@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../sdk';
+import { LoopBackFilter } from '../sdk';
 import {
   RecipeApi,
   RecipeComponentsApi
@@ -15,15 +15,12 @@ export class NomenclatureService {
   constructor(
     public recipeApi: RecipeApi,
     private recipeComponentApi: RecipeComponentsApi
-   ) {
-    LoopBackConfig.setBaseURL(environment.lbApp.ip);
-    LoopBackConfig.setApiVersion(environment.lbApp.api);
-  }
+   ) { }
 
   /* 
    * RECIPE / NOMENCLATURE / COMPONENTS API
    * */
-  getRecipeList(filter) {
+  getRecipeList(filter: LoopBackFilter) {
     return this.recipeApi.find(filter);
   }
   deleteRecipeById(id) {

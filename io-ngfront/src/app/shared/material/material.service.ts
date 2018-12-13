@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../../shared/sdk';
+import { LoopBackFilter } from '../../shared/sdk';
 import {
   MaterialInterface,
   MaterialTypeInterface
@@ -10,7 +10,6 @@ import {
   RecipeApi,
   RecipeComponentsApi
 } from '../../shared/sdk/services';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable({
@@ -21,10 +20,7 @@ export class MaterialService {
   constructor(
     public materialApi: MaterialApi,
     private materialTypeApi: MaterialTypeApi
-   ) {
-    LoopBackConfig.setBaseURL(environment.lbApp.ip);
-    LoopBackConfig.setApiVersion(environment.lbApp.api);
-  }
+   ) { }
 
   /* 
    * MATERIAL & MATERIAL TYPE API API

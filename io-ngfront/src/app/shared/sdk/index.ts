@@ -44,7 +44,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
-import { UserApi } from './services/custom/User';
+import { RoleApi } from './services/custom/Role';
 import { UomApi } from './services/custom/Uom';
 import { UomCategApi } from './services/custom/UomCateg';
 import { CommentApi } from './services/custom/Comment';
@@ -89,7 +89,7 @@ export class SDKBrowserModule {
         LoopBackAuth,
         LoggerService,
         SDKModels,
-        UserApi,
+        RoleApi,
         UomApi,
         UomCategApi,
         CommentApi,

@@ -1,9 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IoRunTimeDatasService } from './shared/lib';
-import { LoopBackConfig, LoopBackAuth } from './shared/sdk';
-import { User } from './shared/sdk/models/User';
-import { UserApi } from './shared/sdk/services/custom/User';
-import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private datasService: IoRunTimeDatasService,
-    private userApi: UserApi
-  ) {
-    LoopBackConfig.setBaseURL( environment.lbApp.ip );
-    LoopBackConfig.setApiVersion( environment.lbApp.api );
-  }
+    private datasService: IoRunTimeDatasService
+  ) { }
 
   ngOnInit() { 
     this.runTimerLoading();

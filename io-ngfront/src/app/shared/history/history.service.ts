@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../sdk';
+import { LoopBackFilter } from '../sdk';
 import {
   LogRefroidisseurInterface
 } from '../sdk/models';
@@ -8,7 +8,6 @@ import {
   EventhistoryApi,
   LogRefroidisseurApi
 } from '../sdk/services';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable({
@@ -20,10 +19,7 @@ export class HistoryService {
     private alarmhistoryApi: AlarmhistoryApi,
     private eventhistoryApi: EventhistoryApi,
     private logRefroidisseurApi: LogRefroidisseurApi
-   ) {
-    LoopBackConfig.setBaseURL(environment.lbApp.ip);
-    LoopBackConfig.setApiVersion(environment.lbApp.api);
-  }
+   ) { }
 
   /* 
    * ALARM HISTORY API

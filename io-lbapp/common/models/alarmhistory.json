@@ -240,7 +240,8 @@
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
-      "permission": "ALLOW"
+      "permission": "ALLOW",
+      "property": "stationList"
     }
   ],
   "methods": {}

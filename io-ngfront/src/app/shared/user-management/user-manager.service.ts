@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoopBackConfig, LoopBackAuth, LoopBackFilter } from '../sdk';
+import { LoopBackFilter } from '../sdk';
 import {
   IoUser,
   IoUserInterface
@@ -7,7 +7,6 @@ import {
 import { 
   IoUserApi
 } from '../sdk/services';
-import { environment } from '../../../environments/environment';
 import { LbdataService } from '../../lbdata.service';
 import { Observable, throwError, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,11 +20,7 @@ export class UserManagerService {
   constructor(
     private userManagement: IoUserApi,
     private appService: LbdataService
-  ) {
-    LoopBackConfig.setBaseURL(environment.lbApp.ip);
-    LoopBackConfig.setApiVersion(environment.lbApp.api);
-    LoopBackConfig.whereOnUrl();
-  }  
+  ) { }  
 
   /*
    * USER MANAGEMENT
