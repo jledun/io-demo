@@ -15,6 +15,7 @@ import {
   MatTableModule
 } from '@angular/material';
 import { ChartsModule } from 'ng2-charts';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 import { HistoryRoutingModule } from './history-routing.module';
 
@@ -42,7 +43,8 @@ import { ProcesshistoryComponent } from './processhistory/processhistory.compone
     MatNativeDateModule,
     MatSelectModule, 
     MatTableModule,
-    ChartsModule
+    ChartsModule,
+    ScrollDispatchModule 
   ], exports: [
     AlarmhistoryComponent,
     EventhistoryComponent,

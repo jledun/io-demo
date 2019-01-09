@@ -16,6 +16,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 // main application
 import { AppComponent } from './app.component';
@@ -58,6 +59,9 @@ import { NomenclatureModule } from './shared/nomenclature/nomenclature.module';
     MatToolbarModule,
 
     // Angular cdk
+    ScrollDispatchModule,
+
+    // Angular Flex Layout
     FlexLayoutModule,
 
     // local modules

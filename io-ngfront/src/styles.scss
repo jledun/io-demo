@@ -89,12 +89,16 @@ html, body, app-root {
 .table-container, .canvas-container {
   flex: 1 1 auto;
   overflow: auto;
+  width: 100%;
 }
 .canvas-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+.mat-table {
+  width: 100%;
 }
 
 .no-full-screen-width {
