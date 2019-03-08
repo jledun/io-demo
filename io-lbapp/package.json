@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "start": "node .",
     "start109": "HOST=192.168.1.109 nodemon .",
+    "start230": "HOST=192.168.1.230 nodemon .",
     "posttest": "npm run lint && nsp check",
     "build:sdk": "./node_modules/.bin/lb-sdk server/server ../io-ngfront/src/app/shared/sdk -d ng2web -i disabled -w -v"
   },
