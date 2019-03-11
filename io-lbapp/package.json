@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node .",
+    "start": "nodemon .",
     "start109": "HOST=192.168.1.109 nodemon .",
     "start230": "HOST=192.168.1.230 nodemon .",
     "posttest": "npm run lint && nsp check",

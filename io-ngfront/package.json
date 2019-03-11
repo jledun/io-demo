@@ -7,8 +7,8 @@
     "start": "ng serve",
     "start109": "ng serve --host 192.168.1.109",
     "start230": "ng serve --host 192.168.1.230",
-    "build:prod": "ng build --prod --aot --outputHashing=none && rsync -a --delete ./dist/ ../io-lbapp/client/",
-    "build:dev": "ng build --dev --aot --outputHashing=none && rsync -a --delete ./dist/ ../io-lbapp/client/",
+    "build:prod": "ng build --prod --aot --outputHashing=none && rm -r ../io-lbapp/client/* && cp -a ./dist/* ../io-lbapp/client/",
+    "build:dev": "ng build --dev --aot --outputHashing=none && rm -r ../io-lbapp/client/* && cp -a ./dist/* ../io-lbapp/client/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -11,7 +11,17 @@ const app = module.exports = loopback();
 
 app.all('*', (req, res, next) => {
   if (req.protocol === 'https') return next();
-  res.redirect(`https://${req.hostname}:${app.get('httpsPort')}${req.url}`);
+  const port = req.headers.host.split(':')[1];
+  switch (port) {
+    case app.get('httpPort'):
+      res.redirect(`https://${req.hostname}:${app.get('httpsPort')}${req.url}`);
+      break;
+
+    case undefined:
+    default:
+      res.redirect(`https://${req.hostname}:${app.get('httpsPort')}${req.url}`);
+      break;
+  }
 });
 app.use(loopback.token());
 
