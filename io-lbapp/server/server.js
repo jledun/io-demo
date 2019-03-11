@@ -19,7 +19,7 @@ app.all('*', (req, res, next) => {
 
     case undefined:
     default:
-      res.redirect(`https://${req.hostname}:${app.get('httpsPort')}${req.url}`);
+      res.redirect(`https://${req.hostname}${req.url}`);
       break;
   }
 });
