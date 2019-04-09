@@ -5,37 +5,37 @@ const fs = require('fs');
 module.exports = function(app, cb) {
   const files = [
     {
-      input: './common/files/alarmhistory.json',
+      input: '../../common/files/alarmhistory.json',
       model: 'Alarmhistory',
       id: 'alStartTime',
     },
     {
-      input: './common/files/eventhistory.json',
+      input: '../../common/files/eventhistory.json',
       model: 'Eventhistory',
       id: 'bias',
     },
     {
-      input: './common/files/processdatas.json',
+      input: '../../common/files/processdatas.json',
       model: 'LogRefroidisseur',
       id: '',
     },
     {
-      input: './common/files/materialtype.json',
+      input: '../../common/files/materialtype.json',
       model: 'MaterialType',
       id: '',
     },
     {
-      input: './common/files/material.json',
+      input: '../../common/files/material.json',
       model: 'Material',
       id: '',
     },
     {
-      input: './common/files/recipe.json',
+      input: '../../common/files/recipe.json',
       model: 'Recipe',
       id: '',
     },
     {
-      input: './common/files/recipeComponents.json',
+      input: '../../common/files/recipeComponents.json',
       model: 'RecipeComponents',
       id: '',
     },

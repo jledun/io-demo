@@ -18,5 +18,10 @@
       }
     ],
     "connector": "mail"
+  },
+  "redisDB": {
+    "name": "redisDB",
+    "connector": "sqlite3",
+    "file": "/tmp/lbdata.db"
   }
 }

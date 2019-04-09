@@ -22,11 +22,11 @@
   },
   "nodered": {
     "settings": {
-      "httpAdminRoot" : "/red",
-      "httpNodeRoot" : "/redapi",
-      "userDir" : "../nodered/",
-      "nodesDir" : "../nodered/nodes/",
-      "flowFile" : "node-red-flows.json",
+      "httpAdminRoot": "/red",
+      "httpNodeRoot": "/redapi",
+      "userDir": "../nodered/",
+      "nodesDir": "../nodered/nodes/",
+      "flowFile": "node-red-flows.json",
       "adminAuthPath": "../nodered/user-authentication.js",
       "credentialSecret": "eb2fcea5e43daf6db4d34bde803ec6cdd12b4b2a54e0d6856a2455590469b474",
       "editorTheme": {

@@ -38,55 +38,55 @@
     "public": true
   },
   "Uom": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "UomCateg": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "Comment": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "Event": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "Topic": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "EventType": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "Alarmhistory": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "Eventhistory": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "LogRefroidisseur": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "Recipe": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "RecipeComponents": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "MaterialType": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "Material": {
-    "dataSource": "db",
+    "dataSource": "redisDB",
     "public": true
   },
   "ioUser": {

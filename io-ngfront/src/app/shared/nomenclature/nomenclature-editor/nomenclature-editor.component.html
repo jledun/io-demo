@@ -71,6 +71,7 @@
     </mat-card>
   </mat-card-content>
   <!-- RECIPE CARDS -->
+
   <!-- RECIPE EDIT -->
   <mat-card-content *ngIf="runtime && (displayMode >= 1 && displayMode <= 2)">
     <!-- GENERAL INFORMATIONS -->
@@ -94,10 +95,10 @@
             <span class="mat-subheading-2">Description</span>
           </mat-card-title>
           <mat-card-content>
-            <mat-form-field style="width: 100%;">
+            <!-- <mat-form-field style="width: 100%;"> -->
               <textarea matInput
                 [(ngModel)]="editedRecipe.description">{{editedRecipe.description}}</textarea>
-            </mat-form-field>
+            <!-- </mat-form-field> -->
           </mat-card-content>
         </mat-card>
         <mat-card>
@@ -114,6 +115,7 @@
       </mat-card-content>
     </mat-card>
     <!-- GENERAL INFORMATIONS -->
+
     <!-- TAB GROUP -->
     <mat-card class="edit-components">
       <mat-tab-group>
@@ -141,9 +143,9 @@
                 <span class="mat-subheading-2">Quantity</span>
               </mat-card-title>
               <mat-card-content>
-                <mat-form-field style="width: 100%;">
+                <!-- <mat-form-field style="width: 100%;"> -->
                   <input matInput [(ngModel)]="component.quantity">
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </mat-card-content>
             </mat-card>
             <mat-card class="edit-component-card">
@@ -151,9 +153,9 @@
                 <span class="mat-subheading-2">Unit</span>
               </mat-card-title>
               <mat-card-content>
-                <mat-form-field style="width: 100%;">
+                <!-- <mat-form-field style="width: 100%;"> -->
                   <input matInput [(ngModel)]="component.unit">
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </mat-card-content>
             </mat-card>
             <mat-card class="edit-component-card">
@@ -161,9 +163,9 @@
                 <span class="mat-subheading-2">Order</span>
               </mat-card-title>
               <mat-card-content>
-                <mat-form-field style="width: 100%;">
+                <!-- <mat-form-field style="width: 100%;"> -->
                   <input matInput [(ngModel)]="component.order">
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </mat-card-content>
             </mat-card>
           </mat-card-content>
@@ -192,9 +194,9 @@
                 <span class="mat-subheading-2">Quantity</span>
               </mat-card-title>
               <mat-card-content>
-                <mat-form-field style="width: 100%;">
+                <!-- <mat-form-field style="width: 100%;"> -->
                   <input matInput [(ngModel)]="newComponent.quantity">
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </mat-card-content>
             </mat-card>
             <mat-card class="edit-component-card">
@@ -202,9 +204,9 @@
                 <span class="mat-subheading-2">Unit</span>
               </mat-card-title>
               <mat-card-content>
-                <mat-form-field style="width: 100%;">
+                <!-- <mat-form-field style="width: 100%;"> -->
                   <input matInput [(ngModel)]="newComponent.unit">
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </mat-card-content>
             </mat-card>
             <mat-card class="edit-component-card">
@@ -212,9 +214,9 @@
                 <span class="mat-subheading-2">Order</span>
               </mat-card-title>
               <mat-card-content>
-                <mat-form-field style="width: 100%;">
+                <!-- <mat-form-field style="width: 100%;"> -->
                   <input matInput [(ngModel)]="newComponent.order">
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </mat-card-content>
             </mat-card>
           </mat-card-content>
