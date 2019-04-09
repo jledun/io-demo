@@ -3,7 +3,7 @@
 module.exports = function createDefaultUserAndRoles(app, next) {
   let tmpUsers = []; let tmpRoles = []
   app.models.ioUser.create([
-    {realName: "Administrateur", username: "admin", email: "admin@iosystems.fr", password: "test"},
+    {realName: "Administrateur", username: "admin", email: "admin@iosystems.fr", password: "test", "nodeRedAdmin": "*"},
     {realName: "Arthur H", username: "arthurH", email: "arthurH@iosystems.fr", password: "test"},
     {realName: "JosephB", username: "JosephB", email: "JosephB@iosystems.fr", password: "test"}
   ]).then(users => {

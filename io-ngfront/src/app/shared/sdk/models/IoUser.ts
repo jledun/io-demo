@@ -6,6 +6,7 @@ export interface IoUserInterface {
   "active"?: boolean;
   "uuid"?: string;
   "lastConnection"?: Date;
+  "nodeRedAdmin"?: string;
   "realm"?: string;
   "username"?: string;
   "email": string;
@@ -22,6 +23,7 @@ export class IoUser implements IoUserInterface {
   "active": boolean;
   "uuid": string;
   "lastConnection": Date;
+  "nodeRedAdmin": string;
   "realm": string;
   "username": string;
   "email": string;
@@ -83,6 +85,11 @@ export class IoUser implements IoUserInterface {
           name: 'lastConnection',
           type: 'Date',
           default: new Date(0)
+        },
+        "nodeRedAdmin": {
+          name: 'nodeRedAdmin',
+          type: 'string',
+          default: 'read'
         },
         "realm": {
           name: 'realm',

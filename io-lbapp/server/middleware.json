@@ -6,6 +6,7 @@
   },
   "initial": {
     "compression": {},
+    "./middleware/https-redirection.js": {},
     "cors": {
       "params": {
         "origin": "*",

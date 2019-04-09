@@ -2,6 +2,7 @@
 
 const loopback = require('loopback');
 const boot = require('loopback-boot');
+const redApp = require('./node-red-app.js');
 
 const http = require('http');
 const https = require('https');
@@ -9,20 +10,6 @@ const sslConfig = require('./ssl-config');
 
 const app = module.exports = loopback();
 
-app.all('*', (req, res, next) => {
-  if (req.protocol === 'https') return next();
-  const port = req.headers.host.split(':')[1];
-  switch (port) {
-    case app.get('httpPort'):
-      res.redirect(`https://${req.hostname}:${app.get('httpsPort')}${req.url}`);
-      break;
-
-    case undefined:
-    default:
-      res.redirect(`https://${req.hostname}${req.url}`);
-      break;
-  }
-});
 app.use(loopback.token());
 
 app.start = function() {
@@ -33,6 +20,9 @@ app.start = function() {
   const httpsServer = https.createServer(options, app);
   const httpServer = http.createServer(app).listen(app.get('httpPort'));
 
+  // node red settings
+  redApp.init({...app.get('nodered').settings}, httpsServer, app);
+
   // start the web server
   httpsServer.listen(app.get('httpsPort'), function() {
     const baseUrl = 'https://' + app.get('host') + ':' + app.get('httpsPort');
@@ -42,6 +32,7 @@ app.start = function() {
       const explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
+    redApp.start();
   });
   return httpsServer;
 };
@@ -54,3 +45,4 @@ boot(app, __dirname, function(err) {
   // start the server if `$ node server.js`
   if (require.main === module) app.start();
 });
+
