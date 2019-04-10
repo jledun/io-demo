@@ -1,0 +1,15 @@
+<mat-card style="border: none; box-shadow: none; background-color: rgba(253, 253, 253, 0.8)">
+  <mat-card-header fxLayout="row nowrap" fxLayoutAlign="start center">
+    <mat-card-title>{{name}}</mat-card-title>
+    <span class="fill-space"></span>
+    <span>{{value}}  / {{maxValue}} {{unit}}</span>
+  </mat-card-header>
+  <mat-card-content>
+    <canvas baseChart 
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [options]="doughnutChartOptions"
+      [chartType]="doughnutChartType">
+    </canvas>
+  </mat-card-content>
+</mat-card>

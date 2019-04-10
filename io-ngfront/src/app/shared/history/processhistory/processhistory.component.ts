@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 import { IoRunTimeDatasService } from '../../lib/io-run-time-datas.service';
 import { LoopBackFilter } from '../../sdk';
-import { LogRefroidisseurInterface } from '../../sdk/models';
+import { LogProcessInterface } from '../../sdk/models';
 import { HistoryService } from '../history.service';
 
 enum clientsize {
@@ -26,46 +28,29 @@ export class ProcesshistoryComponent implements OnInit, OnDestroy {
   interval_status: number = 0;
   client: clientsize = clientsize.web;
   load: boolean = false;
-  tmpFilter: userFilter = {
-    showdate: new Date(),
-    process: 'BD'
-  };
   lbFilter: LoopBackFilter = {
     where: {},
-    order: "id ASC"
+    order: "id DESC",
+    limit: 50
   }
   
   setClient( size: clientsize, result ) {
     if ( result.matches ) this.client = size;
     this.lineChartOptions.responsive = this.client === clientsize.handset || this.client === clientsize.tablet;
   }
-  
-  getUserDisplayedDate() {
-    return `${new Date( this.tmpFilter.showdate ).toLocaleDateString()}`;
-  }
 
   getData() {
     this.load = true;
     IoRunTimeDatasService.setDataLoading( true );
-    this.lbFilter.where = this.parseFilter( this.tmpFilter );
     this.lbdata.getLogData( this.lbFilter ).subscribe(
-      ( data: LogRefroidisseurInterface[] ) => {
+      ( data: LogProcessInterface[] ) => {
         if ( !data ) return;
         if ( data.length <= 0 ) return;
-        let _lineChartData = [
-          {data: [], label: 'Température T1'},
-          {data: [], label: 'Température T2'},
-          {data: [], label: 'Température T3'}
-        ];
-        let _lineChartLabels = [];
-        data.forEach( ( log ) => {
-          _lineChartData[0].data.push( log.t1 );
-          _lineChartData[1].data.push( log.t2 );
-          _lineChartData[2].data.push( log.t3 );
-          _lineChartLabels.push( new Date( log.timestamp ).toLocaleTimeString() );
-        });
-        this.lineChartData = _lineChartData;
-        this.lineChartLabels = _lineChartLabels;
+        this.lineChartData.find(d => d.label === 'Flour flow').data = data.map(d => d.flour).reverse();
+        this.lineChartData.find(d => d.label === 'Eggs flow').data = data.map(d => d.eggs).reverse();
+        this.lineChartData.find(d => d.label === 'Sugar flow').data = data.map(d => d.sugar).reverse();
+        this.lineChartData.find(d => d.label === 'Butter flow').data = data.map(d => d.butter).reverse();
+        this.lineChartLabels = data.map(d => new Date(d.timestamp).toLocaleTimeString()).reverse();
       },
       ( err ) => {
         console.log( err );
@@ -77,84 +62,53 @@ export class ProcesshistoryComponent implements OnInit, OnDestroy {
     );
   }
 
-  // filter management
-  resetFilter() {
-    this.tmpFilter = {
-      showdate: new Date('2017-06-02'),
-      process: 'BD'
-    }
-    this.getData();
-  }
-  parseFilter( tmp: userFilter ) {
-    let whereConditions = []
-    if ( tmp.showdate ) whereConditions.push( { and: [ { timestamp: this.getDateFilter( tmp.showdate )[0] }, { timestamp: this.getDateFilter( tmp.showdate )[1] } ] } );
-    if ( tmp.process ) whereConditions.push( { reference: tmp.process } );
-    switch( whereConditions.length ) {
-      case 0:
-      return {};
-      case 1:
-      return whereConditions[0];
-      default:
-      return { and: whereConditions };
-    }
-  }
-  getDateFilter( selecteddate: Date ) {
-    return [
-      {'gte': new Date( new Date( selecteddate ).getFullYear(), new Date( selecteddate ).getMonth(), new Date( selecteddate ).getDate(), 0, 0, 0 )},
-      {'lte': new Date( new Date( selecteddate ).getFullYear(), new Date( selecteddate ).getMonth(), new Date( selecteddate ).getDate(), 23, 59, 59 )}
-    ]
-  }
-  dayBefore() { this.tmpFilter.showdate = new Date( this.tmpFilter.showdate.getFullYear(), this.tmpFilter.showdate.getMonth(), this.tmpFilter.showdate.getDate() - 1, 0, 0, 0 ) };
-  dayAfter() { this.tmpFilter.showdate = new Date( this.tmpFilter.showdate.getFullYear(), this.tmpFilter.showdate.getMonth(), this.tmpFilter.showdate.getDate() + 1, 0, 0, 0 ) };
-
   // lineChart
   public lineChartData:Array<any> = [
-    {data: [], label: 'Température T1'},
-    {data: [], label: 'Température T2'},
-    {data: [], label: 'Température T3'}
+    {data: [], label: 'Flour flow'},
+    {data: [], label: 'Eggs flow'},
+    {data: [], label: 'Sugar flow'},
+    {data: [], label: 'Butter flow'}
   ];
-  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions:any = {
+  public lineChartLabels:Array<any> = [];
+  public lineChartOptions: ChartOptions = {
     responsive: true
   };
   public lineChartColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+    { // flour
+      backgroundColor: 'rgba(230, 230, 0, 0.1)',
+      borderColor: 'rgba(230, 230, 0,1)',
+      pointBackgroundColor: 'rgba(230, 230, 0,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(230, 230, 0,0.8)'
     },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
+    { // eggs
+      backgroundColor: 'rgba(255, 128, 128, 0.1)',
+      borderColor: 'rgba(255, 128, 128,1)',
+      pointBackgroundColor: 'rgba(255, 128, 128,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
+      pointHoverBorderColor: 'rgba(255, 128, 128,1)'
     },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+    { // sugar
+      backgroundColor: 'rgba(102, 217, 255, 0.1)',
+      borderColor: 'rgba(102, 217, 255,1)',
+      pointBackgroundColor: 'rgba(102, 217, 255,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(102, 217, 255,0.8)'
+    },
+    { // butter
+      backgroundColor: 'rgba(173, 173, 133, 0.1)',
+      borderColor: 'rgba(173, 173, 133,1)',
+      pointBackgroundColor: 'rgba(173, 173, 133,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(173, 173, 133,1)'
     }
   ];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
 
   constructor(
     private lbdata: HistoryService,
@@ -170,7 +124,7 @@ export class ProcesshistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.resetFilter();
+    this.getData();
     this.startInterval();
   }
   ngOnDestroy() {

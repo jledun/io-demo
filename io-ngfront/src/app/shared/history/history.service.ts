@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { LoopBackFilter } from '../sdk';
-import {
-  LogRefroidisseurInterface
-} from '../sdk/models';
 import { 
   AlarmhistoryApi,
   EventhistoryApi,
-  LogRefroidisseurApi
+  LogProcessApi
 } from '../sdk/services';
 import { Observable } from 'rxjs/Observable';
 
@@ -18,7 +15,7 @@ export class HistoryService {
   constructor(
     private alarmhistoryApi: AlarmhistoryApi,
     private eventhistoryApi: EventhistoryApi,
-    private logRefroidisseurApi: LogRefroidisseurApi
+    private logProcessApi: LogProcessApi
    ) { }
 
   /* 
@@ -48,7 +45,7 @@ export class HistoryService {
    * DATA CURVES API
    * */
   getLogData(filter) {
-    return this.logRefroidisseurApi.find(filter);
+    return this.logProcessApi.find(filter);
   }
   /* 
   * DATA CURVES API

@@ -15,6 +15,7 @@ export * from './MaterialType';
 export * from './Material';
 export * from './IoUser';
 export * from './Email';
+export * from './LogProcess';
 export * from './RuntimeData';
 export * from './BaseModels';
 

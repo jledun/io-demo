@@ -8,32 +8,42 @@ import {
   MatButtonModule, 
   MatCardModule, 
   MatDividerModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule, 
-  MatListModule
+  MatListModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LibModule } from '../lib/lib.module';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ExempleWebComponent } from './exemple-web/exemple-web.component';
 import { ExempleFullscreenComponent } from './exemple-fullscreen/exemple-fullscreen.component';
+import { ComponentComponent } from './component/component.component';
 
 @NgModule({
   declarations: [
     ExempleWebComponent,
-    ExempleFullscreenComponent
+    ExempleFullscreenComponent,
+    ComponentComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    FlexLayoutModule,
+    LibModule,
     DashboardRoutingModule,
     MatButtonModule, 
     MatCardModule, 
     MatDividerModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule, 
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ExempleWebComponent,

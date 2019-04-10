@@ -8,33 +8,41 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatProgressBarModule,
   MatSelectModule,
   MatSlideToggleModule,
   MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChartsModule } from 'ng2-charts';
 
 import { LoaderComponent } from './loader/loader.component';
 import { DataRefresher } from './class/dataRefresher.class';
 import { ApplicationParamComponent } from './application-param/application-param.component';
 import { ApplicationParamPopupComponent } from './application-param-popup/application-param-popup.component';
+import { RoundIndicatorComponent } from './round-indicator/round-indicator.component';
+import { HorizontalBarIndicatorComponent } from './horizontal-bar-indicator/horizontal-bar-indicator.component';
 
 @NgModule({
   declarations: [
     LoaderComponent,
     ApplicationParamComponent,
-    ApplicationParamPopupComponent
+    ApplicationParamPopupComponent,
+    RoundIndicatorComponent,
+    HorizontalBarIndicatorComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ChartsModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatProgressBarModule,
     MatSelectModule,
     MatSlideToggleModule,
     MatTooltipModule,
@@ -43,7 +51,9 @@ import { ApplicationParamPopupComponent } from './application-param-popup/applic
   exports: [
     LoaderComponent,
     ApplicationParamComponent,
-    ApplicationParamPopupComponent
+    ApplicationParamPopupComponent,
+    RoundIndicatorComponent,
+    HorizontalBarIndicatorComponent
   ],
   entryComponents: [
     ApplicationParamPopupComponent

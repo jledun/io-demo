@@ -22,6 +22,6 @@
   "redisDB": {
     "name": "redisDB",
     "connector": "sqlite3",
-    "file": "/tmp/lbdata.db"
+    "file": "./common/data/lbdata.db"
   }
 }

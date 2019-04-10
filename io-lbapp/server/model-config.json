@@ -95,5 +95,9 @@
   },
   "Email": {
     "dataSource": "emailDs"
+  },
+  "logProcess": {
+    "dataSource": "redisDB",
+    "public": true
   }
 }

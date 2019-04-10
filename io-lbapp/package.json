@@ -28,6 +28,7 @@
     "node-red": "^0.20.3",
     "node-red-embedded-start": "^1.0.1",
     "serve-favicon": "^2.5.0",
+    "stately": "^0.1.2",
     "strong-error-handler": "^2.3.2"
   },
   "devDependencies": {

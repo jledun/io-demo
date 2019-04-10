@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{component.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-round-indicator [name]="component.runtime.flow.name"
+                         [value]="component.runtime.flow.value"
+                         [maxValue]="component.runtime.flow.maxValue"
+                         [unit]="component.runtime.flow.unit"></app-round-indicator>
+    <div fxLayout="row wrap" fxLayoutAlign="start start">
+      <app-horizontal-bar-indicator *ngFor="let cust of component.runtime.custom"
+                           fxFlex="1 1 100%"
+                           [name]="cust.name"
+                           [value]="cust.value"
+                           [maxValue]="cust.maxValue"
+                           [unit]="cust.unit"></app-horizontal-bar-indicator>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <button mat-button *ngIf="!(component.runtime.flow.alarms.low || component.runtime.flow.alarms.high || component.runtime.flow.fault.low || component.runtime.flow.high)" color="primary">
+      <mat-icon>check</mat-icon> No alarm, no fault.
+    </button>
+    <button mat-button *ngIf="(component.runtime.flow.alarms.low || component.runtime.flow.alarms.high) && !(component.runtime.flow.fault.low || component.runtime.flow.high)" color="accent">
+      <mat-icon>warning</mat-icon> {{(component.runtime.flow.alarms.low) ? 'low level' : 'high level'}} flow alarm
+    </button>
+    <button mat-button *ngIf="component.runtime.flow.fault.low || component.runtime.flow.high" color="warn">
+      <mat-icon>build</mat-icon> {{(component.runtime.flow.fault.low) ? 'low level' : 'high level'}} flow fault
+    </button>
+  </mat-card-footer>
+</mat-card>

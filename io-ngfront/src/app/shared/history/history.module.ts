@@ -16,6 +16,7 @@ import {
 } from '@angular/material';
 import { ChartsModule } from 'ng2-charts';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HistoryRoutingModule } from './history-routing.module';
 
@@ -32,6 +33,7 @@ import { ProcesshistoryComponent } from './processhistory/processhistory.compone
   imports: [
     FormsModule,
     CommonModule,
+    FlexLayoutModule,
     HistoryRoutingModule,
     MatButtonModule, 
     MatCardModule, 

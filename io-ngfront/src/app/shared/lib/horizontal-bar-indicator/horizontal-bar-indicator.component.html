@@ -1,0 +1,10 @@
+<mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" style="border: none; box-shadow: none;">
+  <div fxLayout="row nowrap" fxLayoutAlign="start center">
+    <span>{{name}}</span>
+    <span class="fill-space"></span>
+    <span>{{value}}  / {{maxValue}} {{unit}}</span>
+  </div>
+  <div>
+    <mat-progress-bar mode="determinate" [value]="scaledValue" color="accent"></mat-progress-bar>
+  </div>
+</mat-card>

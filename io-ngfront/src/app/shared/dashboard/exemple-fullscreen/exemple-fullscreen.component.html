@@ -55,7 +55,11 @@
     <mat-card *ngFor="let comp of runtime.production.components" [class]="getClassName(comp)">
       <mat-card-title>{{comp.name}}</mat-card-title>
       <mat-card-content>
-        <mat-list>
+        <app-round-indicator [name]="comp.runtime.flow.name"
+                         [value]="comp.runtime.flow.value"
+                         [maxValue]="comp.runtime.flow.maxValue"
+                         [unit]="comp.runtime.flow.unit"></app-round-indicator>
+        <!-- <mat-list>
           <mat-list-item>
             <strong>Flow</strong><span class="fill-space"></span>
             {{comp.runtime.flow.value}} {{comp.runtime.flow.unit}}
@@ -64,7 +68,7 @@
             <mat-divider></mat-divider>
             <mat-list-item><strong>{{cust.name}}</strong><span class="fill-space"></span>{{cust.value}} {{cust.unit}}</mat-list-item>
           </span>
-        </mat-list>
+        </mat-list> -->
       </mat-card-content>
     </mat-card>
   </div>

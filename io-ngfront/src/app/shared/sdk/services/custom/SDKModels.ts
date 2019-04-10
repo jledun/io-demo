@@ -16,6 +16,7 @@ import { MaterialType } from '../../models/MaterialType';
 import { Material } from '../../models/Material';
 import { IoUser } from '../../models/IoUser';
 import { Email } from '../../models/Email';
+import { LogProcess } from '../../models/LogProcess';
 import { RuntimeData } from '../../models/RuntimeData';
 
 export interface Models { [name: string]: any }
@@ -40,6 +41,7 @@ export class SDKModels {
     Material: Material,
     IoUser: IoUser,
     Email: Email,
+    LogProcess: LogProcess,
     RuntimeData: RuntimeData,
     
   };
