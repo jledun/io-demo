@@ -10,7 +10,7 @@
   top: 0px;
   left: 0px;
 }
-.content-recipe, .content-status, .content-flour, .content-eggs, .content-sugarcane, .content-butter {
+.content-recipe, .content-status, .content-farine, .content-oeufs, .content-sucre, .content-beurre {
   width: 250px;
   max-height: 450px;
   margin: 5px;
@@ -18,7 +18,7 @@
   position: absolute;
 }
 
-.content-flour, .content-eggs, .content-sugarcane, .content-butter {
+.content-farine, .content-oeufs, .content-sucre, .content-beurre {
   border:1px grey solid;
   box-shadow: 2px 2px 10px 2px grey;
   background-color: rgba(253, 253, 253, 0.8);
@@ -32,19 +32,19 @@
   top: 205px;
   left: 5px;
 }
-.content-flour {
+.content-farine {
   top: 5px;
   left: 325px;
 }
-.content-eggs {
+.content-oeufs {
   top: 450px;
   left: 325px;
 }
-.content-sugarcane {
+.content-sucre {
   top: 150px;
   left: 900px;
 }
-.content-butter {
+.content-beurre {
   top: 510px;
   left: 900px;
 }

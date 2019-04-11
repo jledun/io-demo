@@ -1,9 +1,9 @@
-<mat-card>
+<mat-card style="height: calc(100vh - 64px - 51px - 2 * 16px);">
   <mat-card-header>
     <mat-card-title>Process history</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <canvas baseChart width="1200" height="600"
+  <mat-card-content fxLayout="row nowrap" fxLayoutAlign="center center">
+    <canvas baseChart width="1200px" height="600px"
               [datasets]="lineChartData"
               [labels]="lineChartLabels"
               [options]="lineChartOptions"

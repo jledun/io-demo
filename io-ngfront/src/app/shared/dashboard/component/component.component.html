@@ -6,6 +6,7 @@
     <app-round-indicator [name]="component.runtime.flow.name"
                          [value]="component.runtime.flow.value"
                          [maxValue]="component.runtime.flow.maxValue"
+                         [setpoint]="component.runtime.setpoint.value"
                          [unit]="component.runtime.flow.unit"></app-round-indicator>
     <div fxLayout="row wrap" fxLayoutAlign="start start">
       <app-horizontal-bar-indicator *ngFor="let cust of component.runtime.custom"

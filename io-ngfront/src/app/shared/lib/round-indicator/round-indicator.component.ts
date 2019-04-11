@@ -12,6 +12,7 @@ export class RoundIndicatorComponent implements OnInit, OnChanges {
   @Input() unit: string = '';
   @Input() value: number = 0;
   @Input() maxValue: number = 0;
+  @Input() setpoint: number = 0;
 
   public doughnutChartLabels: Label[] = ['', 'Réserve'];
   public doughnutChartData: SingleDataSet = [];

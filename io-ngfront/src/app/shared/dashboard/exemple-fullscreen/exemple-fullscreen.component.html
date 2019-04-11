@@ -58,17 +58,8 @@
         <app-round-indicator [name]="comp.runtime.flow.name"
                          [value]="comp.runtime.flow.value"
                          [maxValue]="comp.runtime.flow.maxValue"
-                         [unit]="comp.runtime.flow.unit"></app-round-indicator>
-        <!-- <mat-list>
-          <mat-list-item>
-            <strong>Flow</strong><span class="fill-space"></span>
-            {{comp.runtime.flow.value}} {{comp.runtime.flow.unit}}
-          </mat-list-item>
-          <span *ngFor="let cust of comp.runtime.custom">
-            <mat-divider></mat-divider>
-            <mat-list-item><strong>{{cust.name}}</strong><span class="fill-space"></span>{{cust.value}} {{cust.unit}}</mat-list-item>
-          </span>
-        </mat-list> -->
+                         [setpoint]="comp.runtime.setpoint.value"
+                         [unit]="comp.runtime.setpoint.unit"></app-round-indicator>
       </mat-card-content>
     </mat-card>
   </div>

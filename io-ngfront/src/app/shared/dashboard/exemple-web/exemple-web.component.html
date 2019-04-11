@@ -28,9 +28,9 @@
               <mat-list-item>
                 <strong>Fabrication status:</strong><span class="fill-space"></span>
                 <button mat-button>
-                  <mat-icon *ngIf="runtime.production.status.fabrication === 'in operation'" color='primary'>directions_run</mat-icon>
-                  <mat-icon *ngIf="runtime.production.status.fabrication !== 'in operation'" color='warn'>pause</mat-icon>
-                  <span color="">{{runtime.production.status.production}}</span>
+                  <mat-icon *ngIf="runtime.production.status.fabrication !== 'stopped'" color='primary'>directions_run</mat-icon>
+                  <mat-icon *ngIf="runtime.production.status.fabrication === 'stopped'" color='warn'>pause</mat-icon>
+                  <span color="">{{runtime.production.status.fabrication}}</span>
                 </button>
               </mat-list-item>
             </mat-list>

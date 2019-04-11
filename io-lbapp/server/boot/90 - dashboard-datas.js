@@ -6,27 +6,31 @@ module.exports = function(app, cb) {
   let speedRate = 0;
   let machineStatus = {state: "beforeStart"};
   let productionEventTime = 4 * 60 * 1000;
-  let datas = {
+  const alarmLevel = 4;
+  const faultLevel = 4.5;
+  const unitWeight = "kg";
+  const unitFlow = "kg/h";
+  let machineData = {
     production: {
-      name: "Julien's Specials",
-      lotnr: 'yogourt cake',
+      name: "Spécialité locale",
+      lotnr: 'Gâteau au yahourt',
       status: {
         production: 'in operation',
         fabrication: 'in operation',
         mainFlow: {
           setpoint: {
             value: 1000,
-            unit: 'lb/h',
+            unit: unitFlow,
           },
           real: {
             value: 1000,
-            unit: 'lb/h',
+            unit: unitFlow,
           },
         },
       },
       components: [
         {
-          name: 'Flour',
+          name: 'Farine',
           partnber: '123456',
           proportion: {
             setpoint: {
@@ -44,11 +48,11 @@ module.exports = function(app, cb) {
               order: 1,
               erpStock: {
                 value: 453.54,
-                unit: 'lb',
+                unit: unitWeight,
               },
               realStock: {
                 value: 452.54,
-                unit: 'lb',
+                unit: unitWeight,
               },
             },
             {
@@ -56,11 +60,11 @@ module.exports = function(app, cb) {
               order: 2,
               erpStock: {
                 value: 43.52,
-                unit: 'lb',
+                unit: unitWeight,
               },
               realStock: {
                 value: 4.54,
-                unit: 'lb',
+                unit: unitWeight,
               },
             },
           ],
@@ -68,22 +72,22 @@ module.exports = function(app, cb) {
             flow: {
               name: "Débit",
               value: 250,
-              unit: 'lb/h',
+              unit: unitFlow,
               maxValue: 400,
               alarms: {
-                setpoint: 2,
+                setpoint: alarmLevel,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 4,
+                setpoint: faultLevel,
                 low: false,
                 high: false,
               },
             },
             setpoint: {
               value: 250,
-              unit: 'lb/h',
+              unit: unitFlow,
             },
             custom: [
               {
@@ -96,14 +100,14 @@ module.exports = function(app, cb) {
                 name: 'weight',
                 value: 165.42,
                 maxValue: 245,
-                unit: 'lb',
+                unit: unitWeight,
                 maxValue: 165,
               },
             ],
           },
         },
         {
-          name: 'Eggs',
+          name: 'Oeufs',
           partnber: '6543121',
           proportion: {
             setpoint: {
@@ -145,22 +149,22 @@ module.exports = function(app, cb) {
             flow: {
               name: "Débit",
               value: 250,
-              unit: 'unit/h',
+              unit: unitFlow,
               maxValue: 400,
               alarms: {
-                setpoint: 4,
+                setpoint: alarmLevel,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 4,
+                setpoint: faultLevel,
                 low: false,
                 high: false,
               },
             },
             setpoint: {
               value: 250,
-              unit: 'unit/h',
+              unit: unitFlow,
             },
             custom: [
               {
@@ -179,7 +183,7 @@ module.exports = function(app, cb) {
           },
         },
         {
-          name: 'Sugar cane',
+          name: 'Sucre',
           partnber: '98741',
           proportion: {
             setpoint: {
@@ -197,11 +201,11 @@ module.exports = function(app, cb) {
               order: 1,
               erpStock: {
                 value: 0.21,
-                unit: 'lb',
+                unit: unitWeight,
               },
               realStock: {
                 value: 125.3,
-                unit: 'lb',
+                unit: unitWeight,
               },
             },
           ],
@@ -209,22 +213,22 @@ module.exports = function(app, cb) {
             flow: {
               name: "Débit",
               value: 250,
-              unit: 'unit/h',
+              unit: unitFlow,
               maxValue: 640,
               alarms: {
-                setpoint: 2,
+                setpoint: alarmLevel,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 4,
+                setpoint: faultLevel,
                 low: false,
                 high: false,
               },
             },
             setpoint: {
               value: 250,
-              unit: 'unit/h',
+              unit: unitFlow,
             },
             custom: [
               {
@@ -237,7 +241,7 @@ module.exports = function(app, cb) {
           },
         },
         {
-          name: 'Butter',
+          name: 'Beurre',
           partnber: '7412',
           proportion: {
             setpoint: {
@@ -255,11 +259,11 @@ module.exports = function(app, cb) {
               order: 1,
               erpStock: {
                 value: 7.01,
-                unit: 'lb',
+                unit: unitWeight,
               },
               realStock: {
                 value: 6.98,
-                unit: 'lb',
+                unit: unitWeight,
               },
             },
             {
@@ -267,11 +271,11 @@ module.exports = function(app, cb) {
               order: 2,
               erpStock: {
                 value: 10.21,
-                unit: 'lb',
+                unit: unitWeight,
               },
               realStock: {
                 value: 10.21,
-                unit: 'lb',
+                unit: unitWeight,
               },
             },
             {
@@ -279,11 +283,11 @@ module.exports = function(app, cb) {
               order: 3,
               erpStock: {
                 value: 10.21,
-                unit: 'lb',
+                unit: unitWeight,
               },
               realStock: {
                 value: 10.21,
-                unit: 'lb',
+                unit: unitWeight,
               },
             },
             {
@@ -291,11 +295,11 @@ module.exports = function(app, cb) {
               order: 4,
               erpStock: {
                 value: 10.21,
-                unit: 'lb',
+                unit: unitWeight,
               },
               realStock: {
                 value: 10.21,
-                unit: 'lb',
+                unit: unitWeight,
               },
             },
           ],
@@ -303,22 +307,22 @@ module.exports = function(app, cb) {
             flow: {
               name: "Débit",
               value: 250,
-              unit: 'unit/h',
+              unit: unitFlow,
               maxValue: 340,
               alarms: {
-                setpoint: 2,
+                setpoint: alarmLevel,
                 low: false,
                 high: false,
               },
               fault: {
-                setpoint: 4,
+                setpoint: faultLevel,
                 low: false,
                 high: false,
               },
             },
             setpoint: {
               value: 250,
-              unit: 'unit/h',
+              unit: unitFlow,
             },
             custom: [
               {
@@ -339,9 +343,10 @@ module.exports = function(app, cb) {
       ],
     },
   };
+  let oldMachineData = {production: JSON.parse(JSON.stringify(machineData.production))};
 
-  const generateFlowAlarmMessage = (old, comp) => {
-    let message = {
+  const generateFlowAlarmMessage = () => {
+    const messageTemplate = {
       alStartTime: Date.now(),
       alStartTimeMs: 0,
       alTag: "",
@@ -369,59 +374,55 @@ module.exports = function(app, cb) {
       lastUpdate: Date.now(),
       lastUpdateMs: null
     }
-    let recordMessage = false;
-    console.log(comp.fault.low, old.fault.low, comp.fault.low && !old.fault.low);
-    console.log(comp.fault.high, old.fault.high, comp.fault.high && !old.fault.high);
-    console.log(comp.alarms.low, old.alarms.low, comp.alarms.low && !old.alarms.low);
-    console.log(comp.alarms.high, old.alarms.high, comp.alarms.high && !old.alarms.high);
-    if (comp.fault.low && !old.fault.low) {
-      message.alMessage = `Défaut niveau bas débit ${comp.name}`;
-      recordMessage = true;
-    }
-    if (comp.alarms.low && !old.alarms.low) {
-      message.alMessage = `Alarme niveau bas débit ${comp.name}`;
-      recordMessage = true;
-    }
-    if (comp.fault.high && !old.fault.high) {
-      message.alMessage = `Défaut niveau haut débit ${comp.name}`;
-      recordMessage = true;
-    }
-    if (comp.alarms.high && !old.alarms.high) {
-      message.alMessage = `Alarme niveau bas débit ${comp.name}`;
-      recordMessage = true;
-    }
-    if (!comp.fault.low && old.fault.low) {
-      message.alMessage = `Défaut niveau bas débit ${comp.name}`;
-      message.alNormTime = Date.now();
-      recordMessage = true;
-    }
-    if (!comp.alarms.low && old.alarms.low) {
-      message.alMessage = `Alarme niveau bas débit ${comp.name}`;
-      message.alNormTime = Date.now();
-      recordMessage = true;
-    }
-    if (!comp.fault.high && old.fault.high) {
-      message.alMessage = `Défaut niveau haut débit ${comp.name}`;
-      message.alNormTime = Date.now();
-      recordMessage = true;
-    }
-    if (!comp.alarms.high && old.alarms.high) {
-      message.alMessage = `Alarme niveau bas débit ${comp.name}`;
-      message.alNormTime = Date.now();
-      recordMessage = true;
-    }
-    if (recordMessage) {
-      console.log(message.alMessage);
-      app.models.Alarmhistory.create(message)
+    let recordMessage = [];
+    machineData.production.components.forEach(comp => {
+      const old = oldMachineData.production.components.find(c => c.name === comp.name);
+      if (comp.runtime.flow.fault.low && !old.runtime.flow.fault.low) {
+        recordMessage.push(Object.assign({}, messageTemplate, {alMessage: `Défaut niveau bas débit ${comp.name}`}));
+      }
+      if (comp.runtime.flow.alarms.low && !old.runtime.flow.alarms.low) {
+        recordMessage.push(Object.assign({}, messageTemplate, {alMessage: `Alarme niveau bas débit ${comp.name}`}));
+      }
+      if (comp.runtime.flow.fault.high && !old.runtime.flow.fault.high) {
+        recordMessage.push(Object.assign({}, messageTemplate, {alMessage: `Défaut niveau haut débit ${comp.name}`}));
+      }
+      if (comp.runtime.flow.alarms.high && !old.runtime.flow.alarms.high) {
+        recordMessage.push(Object.assign({}, messageTemplate, {alMessage: `Alarme niveau haut débit ${comp.name}`}));
+      }
+      if (!comp.runtime.flow.fault.low && old.runtime.flow.fault.low) {
+        recordMessage.push(Object.assign({}, messageTemplate, {
+          alMessage: `Défaut niveau bas débit ${comp.name}`,
+          alNormTime: Date.now()
+        }));
+      }
+      if (!comp.runtime.flow.alarms.low && old.runtime.flow.alarms.low) {
+        recordMessage.push(Object.assign({}, messageTemplate, {
+          alMessage: `Alarme niveau bas débit ${comp.name}`,
+          alNormTime: Date.now()
+        }));
+      }
+      if (!comp.runtime.flow.fault.high && old.runtime.flow.fault.high) {
+        recordMessage.push(Object.assign({}, messageTemplate, {
+          alMessage: `Défaut niveau haut débit ${comp.name}`,
+          alNormTime: Date.now()
+        }));
+      }
+      if (!comp.runtime.flow.alarms.high && old.runtime.flow.alarms.high) {
+        recordMessage.push(Object.assign({}, messageTemplate, {
+          alMessage: `Alarme niveau haut débit ${comp.name}`,
+          alNormTime: Date.now()
+        }));
+      }
+    });
+    if (recordMessage.length > 0) {
+      app.models.Alarmhistory.create(recordMessage)
     }
   }
   const updateDB = () => {
-    runtimeData.upsertWithWhere({id: 1}, datas, (err, d) => {
-      if (err) console.log(err);
-    });
+    return runtimeData.upsertWithWhere({id: 1}, machineData);
   }
   const resetFlows = () => {
-    datas.production.components.forEach(comp => {
+    machineData.production.components.forEach(comp => {
       comp.value = 0;
       comp.runtime.flow.fault.low = false;
       comp.runtime.flow.alarms.low = false;
@@ -431,85 +432,101 @@ module.exports = function(app, cb) {
         cust.value = 0;
       });
     });
-    datas.production.status.mainFlow.real.value = 0;
+    machineData.production.status.mainFlow.real.value = 0;
     updateDB();
   }
   const startFlows = () => {
-    datas.production.components.forEach(comp => {
+    machineData.production.components.forEach(comp => {
       const rnd = Math.random();
       const sign = (Math.random() > 0.5) ? 1 : -1;
-      comp.runtime.flow.value = comp.runtime.setpoint.value * speedRate;
+      comp.runtime.flow.value = Math.round(comp.runtime.setpoint.value * speedRate * 100) / 100;
       comp.runtime.custom.forEach(cust => {
         cust.value = Math.round((cust.maxValue / 2 + rnd * 5 * sign) * 100) / 100;
         if (cust.value < 0) cust.value = cust.value * -1;
       });
     });
-    datas.production.status.mainFlow.real.value = datas.production.components.reduce((acc, value) => {
+    machineData.production.status.mainFlow.real.value = machineData.production.components.reduce((acc, value) => {
       return acc + value.runtime.flow.value;
     }, 0);
     updateDB();
   }
   const stopFlows = () => {
-    datas.production.components.forEach(comp => {
+    machineData.production.components.forEach(comp => {
       comp.runtime.flow.value = comp.runtime.flow.value - comp.runtime.flow.value * speedRate;
       comp.runtime.custom.forEach(cust => {
         cust.value = 0;
       });
     });
-    datas.production.status.mainFlow.real.value = datas.production.components.reduce((acc, value) => {
+    machineData.production.status.mainFlow.real.value = machineData.production.components.reduce((acc, value) => {
       return acc + value.runtime.flow.value;
     }, 0);
     updateDB();
   }
   const refreshSetpoints = () => {
-    datas.production.components.forEach(comp => {
-      comp.runtime.setpoint.value = datas.production.status.mainFlow.setpoint.value * comp.proportion.setpoint.value / 100;
+    machineData.production.components.forEach(comp => {
+      comp.runtime.setpoint.value = Math.round(machineData.production.status.mainFlow.setpoint.value * comp.proportion.setpoint.value) / 100;
     });
-    updateDB();
   }
   const refreshFlows = () => {
     refreshSetpoints();
-    datas.production.components.forEach((comp) => {
+    machineData.production.status.mainFlow.real.value = 0;
+    machineData.production.components.forEach((comp) => {
       const rnd = Math.random();
       const sign = (Math.random() > 0.5) ? 1 : -1;
+      // flow
       comp.runtime.flow.value = Math.round((comp.runtime.setpoint.value + rnd * 5 * sign) * 100) / 100;
-      const old = Object.assign({}, comp.runtime.flow);
+      // main machine flow
+      machineData.production.status.mainFlow.real.value = machineData.production.status.mainFlow.real.value + comp.runtime.flow.value;
+      // faulst & alarms
       comp.runtime.flow.fault.low = comp.runtime.flow.value < (comp.runtime.setpoint.value - comp.runtime.flow.fault.setpoint);
       comp.runtime.flow.alarms.low = comp.runtime.flow.value < (comp.runtime.setpoint.value - comp.runtime.flow.alarms.setpoint) && !comp.runtime.flow.fault.low;
       comp.runtime.flow.fault.high = comp.runtime.flow.value > (comp.runtime.setpoint.value + comp.runtime.flow.fault.setpoint);
       comp.runtime.flow.alarms.high = comp.runtime.flow.value > (comp.runtime.setpoint.value + comp.runtime.flow.alarms.setpoint) && !comp.runtime.flow.fault.high;
-      generateFlowAlarmMessage(old, Object.assign({}, comp.runtime.flow));
+      // custom fields
       comp.runtime.custom.forEach(cust => {
         cust.value = Math.round((cust.value + rnd * 5 * sign) * 100) / 100;
         if (cust.value < 0) cust.value = cust.value * -1;
+        if (cust.value > cust.maxValue) cust.value = cust.maxValue;
       });
     });
-    datas.production.status.mainFlow.real.value = datas.production.components.reduce((acc, value) => {
-      return acc + value.runtime.flow.value;
-    }, 0);
-    updateDB();
+    // update main machine flow
+    machineData.production.status.mainFlow.real.value = Math.round(machineData.production.status.mainFlow.real.value * 100) / 100;
+    // save in database
+    return updateDB();
   };
-  const recordProcessLog = () => {
-    app.models.logProcess.find({where: {timestamp: {lt: Date.now() - 3600 * 24 * 30}}}).then(
-      data => {
-        if (data.length > 0) data.forEach(toDelete => app.models.logProcess.destroyById(toDelete.id));
-      }
-    );
+  const recordProcessLog = async () => {
+    try{
+      const findBefore = 3600 * 24 * 30 * 1000;
+      let toDelete = await app.models.logProcess.find({where: {timestamp: {lt: Date.now() - findBefore}}});
+      if (toDelete.length > 0) console.log(`${toDelete.length} logProcess to delete`);
+      let result = (toDelete.length > 0) ? await Promise.all(toDelete.map(d => app.models.logProcess.destroyById(d.id))) : null;
+      toDelete = await app.models.Eventhistory.find({where: {evTime: {lt: Date.now() - findBefore}}});
+      if (toDelete.length > 0) console.log(`${toDelete.length} Eventhistory to delete`);
+      result = (toDelete.length > 0) ? await Promise.all(toDelete.map(d => app.models.Eventhistory.destroyById(d.id))) : null;
+      toDelete = await app.models.Alarmhistory.find({where: {alStartTime: {lt: Date.now() - findBefore}}});
+      if (toDelete.length > 0) console.log(`${toDelete.length} Alarmhistory to delete`);
+      result = (toDelete.length > 0) ? await Promise.all(toDelete.map(d => app.models.Alarmhistory.destroyById(d.id))) : null;
+    }catch(e){
+      console.log(e);
+    }
     app.models.logProcess.create({
       timestamp: Date.now(),
-      flour: datas.production.components[0].runtime.flow.value,
-      eggs: datas.production.components[1].runtime.flow.value,
-      sugar: datas.production.components[2].runtime.flow.value,
-      butter: datas.production.components[3].runtime.flow.value
+      flour: machineData.production.components[0].runtime.flow.value,
+      eggs: machineData.production.components[1].runtime.flow.value,
+      sugar: machineData.production.components[2].runtime.flow.value,
+      butter: machineData.production.components[3].runtime.flow.value
     });
+    setTimeout(() => {
+      recordProcessLog();
+    }, 5000);
   }
   const stateMachine = Stately.define({
     "stopped": st => {
-      if (datas.production.status.mainFlow.real.value > 0) resetFlows();
+      if (machineData.production.status.mainFlow.real.value > 0) resetFlows();
     },
     "beforeStart": st => {
       speedRate = 0;
-      datas.production.status.mainFlow.setpoint.value = 1000;
+      machineData.production.status.mainFlow.setpoint.value = 1000;
       updateDB();
       app.models.Eventhistory.create({
         evType: 5,
@@ -518,7 +535,7 @@ module.exports = function(app, cb) {
         evInfo: '',
         evUser: 'operateur',
         evUserFull: 'Opérateur',
-        evMessage: `Démarrage recette ${datas.production.name} - numéro de lot : ${datas.production.lotnr}.`,
+        evMessage: `Démarrage recette ${machineData.production.name} - numéro de lot : ${machineData.production.lotnr}.`,
         evValue: '',
         evPrevValue: '',
         evStation: 'Cake Machine',
@@ -543,7 +560,7 @@ module.exports = function(app, cb) {
           evInfo: '',
           evUser: 'operateur',
           evUserFull: 'Opérateur',
-          evMessage: `Recette ${datas.production.name} démarrée - consigne : ${datas.production.status.mainFlow.setpoint.value} ${datas.production.status.mainFlow.setpoint.unit} - numéro de lot : ${datas.production.lotnr}.`,
+          evMessage: `Recette ${machineData.production.name} démarrée - consigne : ${machineData.production.status.mainFlow.setpoint.value} ${machineData.production.status.mainFlow.setpoint.unit} - numéro de lot : ${machineData.production.lotnr}.`,
           evValue: '',
           evPrevValue: '',
           evStation: 'Cake Machine',
@@ -558,7 +575,11 @@ module.exports = function(app, cb) {
       }
     },
     "running": st => {
-      refreshFlows();
+      refreshFlows()
+      .then(data => {
+        generateFlowAlarmMessage();
+        oldMachineData.production = JSON.parse(JSON.stringify(data.production));
+      }).catch(err => console.log(err));
     },
     "beforeStop": st => {
       speedRate = 0;
@@ -569,7 +590,7 @@ module.exports = function(app, cb) {
         evInfo: '',
         evUser: 'operateur',
         evUserFull: 'Opérateur',
-        evMessage: `Arrêt recette ${datas.production.name} - numéro de lot : ${datas.production.lotnr}.`,
+        evMessage: `Arrêt recette ${machineData.production.name} - numéro de lot : ${machineData.production.lotnr}.`,
         evValue: '',
         evPrevValue: '',
         evStation: 'Cake Machine',
@@ -588,6 +609,7 @@ module.exports = function(app, cb) {
         speedRate = speedRate + 0.1;
       }else{
         st.state = "stopped";
+        resetFlows();
         app.models.Eventhistory.create({
           evType: 5,
           evTime: Date.now(),
@@ -595,7 +617,7 @@ module.exports = function(app, cb) {
           evInfo: '',
           evUser: 'operateur',
           evUserFull: 'Opérateur',
-          evMessage: `Recette ${datas.production.name} arrêtée.`,
+          evMessage: `Recette ${machineData.production.name} arrêtée.`,
           evValue: '',
           evPrevValue: '',
           evStation: 'Cake Machine',
@@ -636,9 +658,9 @@ module.exports = function(app, cb) {
   const setpointChange = () => {
     const rnd = Math.random();
     const sign = (Math.random() > 0.5) ? 1 : -1;
-    datas.production.status.mainFlow.setpoint.value = datas.production.status.mainFlow.setpoint.value + 500 * rnd * sign;
-    if (datas.production.status.mainFlow.setpoint.value > 2000) datas.production.status.mainFlow.setpoint.value = 1000;
-    if (datas.production.status.mainFlow.setpoint.value < 0) datas.production.status.mainFlow.setpoint.value = 1000;
+    machineData.production.status.mainFlow.setpoint.value = machineData.production.status.mainFlow.setpoint.value + 500 * rnd * sign;
+    if (machineData.production.status.mainFlow.setpoint.value > 2000) machineData.production.status.mainFlow.setpoint.value = 1000;
+    if (machineData.production.status.mainFlow.setpoint.value < 0) machineData.production.status.mainFlow.setpoint.value = 1000;
     app.models.Eventhistory.create({
       evType: 5,
       evTime: Date.now(),
@@ -646,7 +668,7 @@ module.exports = function(app, cb) {
       evInfo: '',
       evUser: 'operateur',
       evUserFull: 'Opérateur',
-      evMessage: `Nouvelle consigne : ${Math.round(datas.production.status.mainFlow.setpoint.value)} ${datas.production.status.mainFlow.setpoint.unit}`,
+      evMessage: `Nouvelle consigne : ${Math.round(machineData.production.status.mainFlow.setpoint.value)} ${machineData.production.status.mainFlow.setpoint.unit}`,
       evValue: '',
       evPrevValue: '',
       evStation: 'Cake Machine',
@@ -663,9 +685,10 @@ module.exports = function(app, cb) {
   const runSimulator = () => {
     setInterval(() => {
       // manage state machine
+      machineData.production.status.fabrication = machineStatus.state;
       stateMachine.handle(machineStatus);
     }, 1000);
-    setInterval(() => {
+    setTimeout(() => {
       // record flows in DB
       recordProcessLog();
     }, 5000)
@@ -679,14 +702,14 @@ module.exports = function(app, cb) {
   const runtimeData = ds.createModel('runtimeData', {});
   if (ds.connected) {
     app.model(runtimeData);
-    app.models.runtimeData.create(datas, (err, result) => {
+    app.models.runtimeData.create(machineData, (err, result) => {
       runSimulator();
       return cb(err);
     });
   } else {
     ds.once('connected', function() {
       app.model(runtimeData);
-      app.models.runtimeData.create(datas, (err, result) => {
+      app.models.runtimeData.create(machineData, (err, result) => {
         runSimulator();
         return cb(err);
       });
