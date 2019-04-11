@@ -54,7 +54,7 @@ export class ExempleWebComponent implements OnInit, OnDestroy {
     breakpointObserver.observe( Breakpoints.Tablet ).subscribe( result => this.setClient( clientsize.tablet, result ) );
     breakpointObserver.observe( Breakpoints.Web ).subscribe( result => this.setClient( clientsize.web, result ) );
     
-    this.refresher = new DataRefresher(1000);
+    this.refresher = new DataRefresher(2000);
     this.refresher.dataService = this.lbdata.rtService;
     this.refresher.run();
     this.refresher.data.subscribe(data => {
