@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { ChartsModule } from 'ng2-charts';
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HistoryRoutingModule } from './history-routing.module';
@@ -43,7 +43,7 @@ import { ProcesshistoryComponent } from './processhistory/processhistory.compone
     MatSelectModule, 
     MatTableModule,
     ChartsModule,
-    ScrollDispatchModule 
+    ScrollingModule 
   ], exports: [
     AlarmhistoryComponent,
     EventhistoryComponent,
