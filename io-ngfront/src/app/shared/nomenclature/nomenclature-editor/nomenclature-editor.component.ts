@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { NomenclatureService } from '../nomenclature.service';
 import { Recipe, RecipeComponents, Material, MaterialInterface } from '../../sdk/models';

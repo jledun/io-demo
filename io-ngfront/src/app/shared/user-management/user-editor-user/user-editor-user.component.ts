@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoopBackFilter } from '../../sdk';
 import { IoUser, IoUserInterface } from '../../sdk/models';
 import { UserManagerService } from '../user-manager.service';

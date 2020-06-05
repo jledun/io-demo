@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IoUser, IoUserInterface } from '../../sdk/models';
 import { IoRunTimeDatasService } from '../../lib/io-run-time-datas.service';
 import { UserManagerService } from '../user-manager.service';
