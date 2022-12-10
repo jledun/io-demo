@@ -25,7 +25,7 @@
     "loopback-connector-mysql": "^5.3.1",
     "loopback-connector-sqlite3": "^3.0.0",
     "loopback-ds-timestamp-mixin": "^3.4.1",
-    "node-red": "^0.20.3",
+    "node-red": "^3.0.2",
     "node-red-embedded-start": "^1.0.1",
     "serve-favicon": "^2.5.0",
     "stately": "^0.1.2",
